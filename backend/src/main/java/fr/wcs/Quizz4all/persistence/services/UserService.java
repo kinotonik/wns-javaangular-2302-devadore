@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserService {
-
+    private static final String USER_NOT_FOUND = "Utilisateur introuvable avec l'identifiant";
     @Autowired
     private UserRepository userRepository;
 
@@ -24,10 +24,10 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         List<User> userList = userRepository.findAll();
-        return userList.stream().map(user -> convertToDto(user)).collect(Collectors.toList());
+        return userList.stream().map(this::convertToDto).toList();
     }
     public UserDTO getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException(USER_NOT_FOUND + id));
         return convertToDto(user);
     }
 
@@ -40,7 +40,7 @@ public class UserService {
     }
 
     public UserDTO updateUser(Long id, UserDTO userDto) {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException(USER_NOT_FOUND + id));
         User updatedUser = convertToEntity(userDto);
         updatedUser.setId(existingUser.getId());
         updatedUser.setRole(existingUser.getRole());
@@ -49,7 +49,7 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException(USER_NOT_FOUND + id));
         userRepository.delete(user);
     }
 
@@ -60,6 +60,7 @@ public class UserService {
         userDto.setLastname(user.getLastname());
         userDto.setBirthdate(user.getBirthdate());
         userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
         userDto.setAvatar(user.getAvatar());
         userDto.setScore(user.getScore());
         userDto.setRole(convertToDto(user.getRole()));
