@@ -1,0 +1,72 @@
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import {User} from "../../../models/user.model";
+import {UserService} from "../../../services/user.service";
+import {AuthService} from "../../../services/auth.service";
+
+@Component({
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss']
+})
+export class UserListComponent implements OnInit {
+  users: User[] = [];
+
+  constructor(private userService: UserService, private router: Router,private authService: AuthService,) { }
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+  loadUsers(): void {
+    const jwtToken = this.authService.getToken();
+
+    if (jwtToken) {
+      this.userService.getUsers().subscribe(users => {
+          this.users = users;
+          console.log('userlist: ', users)
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      console.error('Pas de jeton JWT trouvé.');
+    }
+  }
+/*  loadUsers(): void {
+    this.userService.getUsers().subscribe(
+      users => {
+        this.users = users;
+        console.log('userlist: ', users);
+      },
+      error => {
+        console.error('Error loading users:', error);
+        // Handle the error, e.g., show an error message or redirect the user to the login page
+      }
+    );
+  }*/
+  updateUser(user: User): void {
+    this.userService.updateUser(user).subscribe(() => {
+      this.loadUsers();
+    });
+  }
+  editUser(userId: number): void {
+    this.router.navigate(['/user-detail', userId]);
+  }
+  addUser(user: User): void {
+    this.userService.createUser(user).subscribe(() => {
+      this.loadUsers();
+    });
+  }
+
+  deleteUser(userId: number): void {
+    this.userService.deleteUser(userId).subscribe(() => {
+      this.loadUsers();
+    });
+  }
+
+  sendMessage(userId: number, message: string): void {
+    // Implémentez ici la fonction pour envoyer un message à l'utilisateur
+  }
+
+}
