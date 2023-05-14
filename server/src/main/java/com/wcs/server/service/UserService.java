@@ -67,12 +67,12 @@ public UserDTO updateUser(Long id, UserDTO userDTO) {
         return null;
     }
 
-    // Map the basic fields
+
     modelMapper.typeMap(UserDTO.class, User.class)
             .addMappings(mapper -> mapper.skip(User::setRoles))
             .map(userDTO, user);
 
-    // Handle roles separately
+
     if(userDTO.getRoles() != null) {
         List<Role> roles = userDTO.getRoles().stream()
                 .map(roleDto -> roleRepository.findById(roleDto.getId())
@@ -91,20 +91,19 @@ public UserDTO updateUser(Long id, UserDTO userDTO) {
     }
 
     public User registerUser(UserRegistrationRequest registrationRequest) {
-        // Check if the user already exists
+
         if (userRepository.findByUsername(registrationRequest.getUsername()) != null) {
             return null;
         }
 
-        // Create a new user object
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
         user.setEmail(registrationRequest.getEmail());
-        // Set any other fields needed for registration
+
         Role userRole = roleRepository.findByName("USER");
         user.getRoles().add(userRole);
-        // Save the user object to the database
+
         return userRepository.save(user);
     }
 

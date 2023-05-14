@@ -1,41 +1,4 @@
-<!--
-<p>registerForm</p>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" formControlName="username" id="username">
-&lt;!&ndash;    <div *ngIf="registerForm.controls.username.invalid && (registerForm.controls.username.dirty || registerForm.controls.username.touched)">
-      <p>Username is required.</p>
-    </div>&ndash;&gt;
-  </div>
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" formControlName="email" id="email">
-&lt;!&ndash;    <div *ngIf="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">
-      <p *ngIf="registerForm.controls.email.errors.required">Email is required.</p>
-      <p *ngIf="registerForm.controls.email.errors.email">Invalid email.</p>
-    </div>&ndash;&gt;
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" formControlName="password" id="password">
-&lt;!&ndash;    <div *ngIf="registerForm.controls.password.invalid && (registerForm.controls.password.dirty || registerForm.controls.password.touched)">
-      <p *ngIf="registerForm.controls.password.errors.required">Password is required.</p>
-      <p *ngIf="registerForm.controls.password.errors.minlength">Password must be at least 6 characters.</p>
-    </div>&ndash;&gt;
-  </div>
-  <div>
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" formControlName="confirmPassword" id="confirmPassword">
-&lt;!&ndash;    <div *ngIf="registerForm.controls.confirmPassword.invalid && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">
-      <p *ngIf="registerForm.controls.confirmPassword.errors.required">Confirm Password is required.</p>
-      <p *ngIf="hasMustMatchError()">Passwords must match.</p>
-    </div>&ndash;&gt;
-  </div>
-  <button type="submit">Register</button>
-</form>
 
--->
 <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
   <div class="form-group">
     <label for="username">Username</label>
@@ -49,13 +12,6 @@
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
   </div>
-<!--  <div>
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" formControlName="confirmPassword" id="confirmPassword">
-      <div *ngIf="registerForm.controls.confirmPassword.invalid && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">
-    <p *ngIf="registerForm.controls.confirmPassword.errors.required">Confirm Password is required.</p>
-    <p *ngIf="hasMustMatchError()">Passwords must match.</p>
-  </div>
-  </div>-->
-  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+
+  <button mat-raised-button color="primary" type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
 </form>

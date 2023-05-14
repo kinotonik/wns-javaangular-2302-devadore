@@ -9,7 +9,6 @@ public class RoleDTO {
     public RoleDTO() {
     }
 
-    // getters and setters
 
     public Long getId() {
         return id;

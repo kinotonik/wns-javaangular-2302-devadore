@@ -7,8 +7,8 @@
     <label for="password">Password:</label>
     <input type="password" formControlName="password" id="password">
   </div>
-<!--  <button type="submit">Login</button>-->
-  <button (click)="isAuthenticated() ? logout() : onSubmit()">
+
+  <button mat-raised-button color="primary" (click)="isAuthenticated() ? logout() : onSubmit()">
     {{ isAuthenticated() ? 'Logout' : 'Login' }}
   </button>
 </form>

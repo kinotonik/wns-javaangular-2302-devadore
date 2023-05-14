@@ -10,9 +10,6 @@
     <label for="password">Password :</label>
     <input [(ngModel)]="user.password" id="password" name="password" type="password" required>
     <br>
-<!--    <label for="avatar">avatar :</label>
-    <input [(ngModel)]="user.avatar" id="avatar" name="avatar" type="file" required>
-    <br>-->
     <div *ngFor="let role of allRoles; let i = index">
       <label>
         <input type="checkbox"

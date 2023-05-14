@@ -4,9 +4,6 @@ public class UserRegistrationRequest {
     private String username;
     private String password;
     private String email;
-    // Add any other fields needed for registration
-
-    // Getters and setters
 
 
     public UserRegistrationRequest() {

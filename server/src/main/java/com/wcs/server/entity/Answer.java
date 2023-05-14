@@ -22,6 +22,6 @@ public class Answer {
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
-    // Getters, setters, and other methods
+
 }
 

@@ -58,7 +58,7 @@ public class SecurityConfig {
         return new ProviderManager(Arrays.asList(customAuthenticationProvider));
     }
 
-    // CORS configuration to allow access to Angular's default port (4200)
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -74,7 +74,7 @@ public class SecurityConfig {
         return source;
     }
 
-    // HTTP security configuration
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http

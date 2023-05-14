@@ -12,8 +12,8 @@ import {forkJoin} from "rxjs";
 })
 export class UserDetailComponent implements OnInit {
 
-  allRoles!: Role[]; // all available roles
-  userRoles!: Role[]; // roles of the user
+  allRoles!: Role[];
+  userRoles!: Role[];
 
   user: User = {
     id: 0,
@@ -55,10 +55,8 @@ export class UserDetailComponent implements OnInit {
     const roleIndex = this.userRoles.findIndex(userRole => userRole.id === role.id);
 
     if (roleIndex !== -1) {
-      // Role is already selected, remove it from the userRoles array
       this.userRoles.splice(roleIndex, 1);
     } else {
-      // Role is not selected, add it to the userRoles array
       this.userRoles.push(role);
     }
   }
@@ -78,7 +76,6 @@ export class UserDetailComponent implements OnInit {
     this.userService.deleteUser(userId).subscribe({
       next: () => {
         alert('Profil supprimé avec succès');
-        // Redirigez vers une autre page après la suppression du profil
       },
       error: (error) => {
         console.error('Erreur lors de la suppression du profil:', error);

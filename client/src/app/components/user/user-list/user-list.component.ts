@@ -11,6 +11,8 @@ import {AuthService} from "../../../services/auth.service";
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  displayedColumns: string[] = ['avatar', 'id', 'username', 'email', 'roles', 'actions'];
+
 
   constructor(private userService: UserService, private router: Router,private authService: AuthService,) { }
 
@@ -33,18 +35,7 @@ export class UserListComponent implements OnInit {
       console.error('Pas de jeton JWT trouvé.');
     }
   }
-/*  loadUsers(): void {
-    this.userService.getUsers().subscribe(
-      users => {
-        this.users = users;
-        console.log('userlist: ', users);
-      },
-      error => {
-        console.error('Error loading users:', error);
-        // Handle the error, e.g., show an error message or redirect the user to the login page
-      }
-    );
-  }*/
+
   updateUser(user: User): void {
     this.userService.updateUser(user).subscribe(() => {
       this.loadUsers();
@@ -65,8 +56,5 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  sendMessage(userId: number, message: string): void {
-    // Implémentez ici la fonction pour envoyer un message à l'utilisateur
-  }
 
 }

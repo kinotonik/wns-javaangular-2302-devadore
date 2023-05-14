@@ -29,10 +29,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  hasMustMatchError() {
-    const control = this.registerForm.get('confirmPassword');
-    return control?.errors?.['mustMatch'] ?? false;
-  }
 
   passwordMatchValidator(formGroup: FormGroup): void {
     const password = formGroup.get('password');
@@ -63,7 +59,6 @@ export class RegisterComponent implements OnInit {
           })
         )
         .subscribe(() => {
-          // Redirect to another page, e.g., home or login, or display a success message
           this.router.navigate(['/home']);
         });
     }

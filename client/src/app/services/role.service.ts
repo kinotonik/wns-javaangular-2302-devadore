@@ -21,7 +21,6 @@ export class RoleService {
       return this.http.get<Role[]>(`${this.baseUrl}`, { headers });
 
     } else {
-      // Handle the case where the JWT token is missing or null
       console.log('Pas de jeton JWT trouvé');
       return throwError('Pas de jeton JWT trouvé');
     }

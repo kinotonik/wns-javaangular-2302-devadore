@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService, private http: HttpClient, private router: Router) {
     this.loginForm = this.formBuilder.group({
-      // Define your form controls here
       username: [''],
       password: [''],
     });
@@ -41,7 +40,6 @@ export class LoginComponent implements OnInit {
         console.log('JWT stocké :', localStorage.getItem('jwt'));
         localStorage.setItem('refreshToken', response.refreshToken);
         this.router.navigate(['/home']).then(() => {
-          // This block of code will be executed when the navigation ends successfully.
           console.log('La navigation s\'est terminée avec succès');
         }).catch((error) => {
           console.error('Erreur de navigation:', error);

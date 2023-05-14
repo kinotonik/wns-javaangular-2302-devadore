@@ -63,14 +63,14 @@ public class JwtTokenProvider {
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(authToken);
-            // Check whether the token is invalidated
+
             if (isInvalidated(authToken)) {
                 System.out.println("Token is invalidated: " + authToken);
                 return false;
             }
             return true;
         } catch (io.jsonwebtoken.security.SignatureException | io.jsonwebtoken.security.WeakKeyException | io.jsonwebtoken.io.DecodingException | io.jsonwebtoken.MalformedJwtException | io.jsonwebtoken.ExpiredJwtException | io.jsonwebtoken.UnsupportedJwtException | io.jsonwebtoken.MissingClaimException | io.jsonwebtoken.IncorrectClaimException ex) {
-            // You can log the exception message here
+
             System.out.println("Token validation failed: " + ex.getMessage());
         }
         return false;

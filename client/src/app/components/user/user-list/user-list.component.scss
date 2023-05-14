@@ -1,3 +1,4 @@
+
 .user-list {
   border-collapse: collapse;
   margin: 20px;
@@ -10,7 +11,7 @@
 }
 
 .user-list th {
-  background-color: #df630c;
+  background-color: #180c02;
   color: white;
 }
 
@@ -19,7 +20,7 @@
 }
 
 .user-list tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #583939;
 }
 
 .user-list img {
@@ -28,3 +29,4 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
