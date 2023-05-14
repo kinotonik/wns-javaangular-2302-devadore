@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+    /***
+     * Gestionnaire global d'exceptions qui gère les exceptions IllegalArgumentException et RuntimeException pour toute l'application.
+     * @param e
+     * @return le message de l'exception et le statut HTTP BAD_REQUEST.
+     * @return le message de l'exception et le statut HTTP INTERNAL_SERVER_ERROR.
+     */
     @ExceptionHandler(value = {IllegalArgumentException.class})
     public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

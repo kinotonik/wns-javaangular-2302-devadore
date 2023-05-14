@@ -22,6 +22,16 @@ import java.util.List;
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
+    /***
+     * Charger les informations d'un utilisateur à partir d'une source de données et les présenter dans un format que Spring Security peut utiliser pour l'authentification et l'autorisation.
+     * Les opérations sont traitées comme une seule unité de travail, et donc soit toutes réussissent, soit toutes échouent.
+     * Méthode remplace une méthode de l'interface parente UserDetailsService.
+     * Objets GrantedAuthority représentent les rôles ou privilèges que l'utilisateur a dans l'application.
+     * @param username et renvoie un objet UserDetails.
+     * @return un nouvel objet User (qui est une implémentation de l'interface UserDetails) est créé avec le nom d'utilisateur, le mot de passe et les autorités de l'utilisateur.
+     * @throws UsernameNotFoundException Si l'utilisateur n'est pas trouvé
+     */
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

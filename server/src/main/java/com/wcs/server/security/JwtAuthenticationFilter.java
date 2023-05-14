@@ -23,6 +23,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+    /***
+     * Méthode extrait le token JWT de la requête, valide le token, extrait le nom d'utilisateur du token, charge les détails de l'utilisateur,
+     * crée un objet d'authentification, place l'authentification dans le SecurityContext, et passe la requête à la prochaine étape de la chaîne de filtres.
+     * Extrait le token JWT de la requête HTTP en utilisant une méthode de l'objet tokenProvider.
+     * Vérifie si le token JWT n'est pas null et s'il est valide.
+     * Extrait le nom d'utilisateur du token JWT.
+     * Charge les détails de l'utilisateur à partir du nom d'utilisateur extrait du token JWT.
+     * Vérifie si les détails de l'utilisateur ne sont pas null.
+     * Crée un nouvel objet UsernamePasswordAuthenticationToken qui représente l'authentification de l'utilisateur.
+     * Place l'authentification de l'utilisateur dans le SecurityContext, ce qui permet à Spring Security de reconnaître que l'utilisateur est authentifié pour cette requête.
+     * Passe la requête et la réponse à la prochaine étape de la chaîne de filtres de sécurité.
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -40,6 +57,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
+            logger.error("An error occurred during authentication:", e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("An error occurred during authentication. Please try again later.");
             throw e;
         }
 

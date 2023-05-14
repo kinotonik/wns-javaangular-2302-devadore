@@ -1,0 +1,31 @@
+En résumé, le processus d'authentification et d'autorisation commence par :
+1- la résolution et la validation du token,
+2- puis par le chargement des détails de l'utilisateur,
+3- la création de l'objet d'authentification,
+4- la vérification des autorités de l'utilisateur pour chaque requête,
+5- le traitement de la requête si l'utilisateur a les autorités nécessaires,
+6- et enfin la gestion des exceptions si elles sont lancées à n'importe quel moment du processus.
+
+Résolution du token : Lorsqu'une requête arrive, le JwtAuthenticationFilter extrait le token JWT de l'en-tête "Authorization" de la requête HTTP.
+Ceci est fait dans la méthode resolveToken.
+
+Validation du token : Une fois le token extrait, il est validé à l'aide de la méthode validateToken.
+Cette validation vérifie le format du token, sa date d'expiration, ainsi que sa signature.
+Si le token est invalide pour une raison quelconque, une exception est lancée.
+
+Extraction du nom d'utilisateur : Si le token est valide, le nom d'utilisateur est extrait du token à l'aide de la méthode getUsernameFromJWT.
+
+Chargement des détails de l'utilisateur : Une fois que le nom d'utilisateur a été extrait du token, les détails de l'utilisateur sont chargés à l'aide de la méthode loadUserByUsername du UserDetailsService.
+Cette méthode renvoie un objet UserDetails qui contient les détails de l'utilisateur, tels que le nom d'utilisateur, le mot de passe et les rôles.
+
+Création de l'objet Authentication : Si les détails de l'utilisateur sont valides, un nouvel objet UsernamePasswordAuthenticationToken est créé et mis dans le SecurityContext.
+Cet objet représente une authentification réussie et contient les détails de l'utilisateur et ses autorités.
+
+Autorisation : Une fois que l'utilisateur est authentifié, chaque requête qu'il fait est vérifiée pour s'assurer qu'il a les autorités nécessaires pour effectuer la requête.
+Ceci est fait à l'aide de la configuration de sécurité de Spring, qui spécifie quelles autorités sont nécessaires pour chaque URL.
+
+Traitement de la requête : Si l'utilisateur a les autorités nécessaires pour effectuer la requête, la requête est traitée normalement.
+Si l'utilisateur n'a pas les autorités nécessaires, une exception AccessDeniedException est lancée.
+
+Gestion des exceptions : Si une exception est lancée à n'importe quel moment du processus, elle est capturée et gérée par le GlobalExceptionHandler.
+Ce gestionnaire renvoie une réponse HTTP avec un message d'erreur et un code de statut approprié.
