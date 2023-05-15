@@ -20,7 +20,7 @@
 }
 
 .user-list tr:nth-child(even) {
-  background-color: #583939;
+  background-color: #4b0606;
 }
 
 .user-list img {
@@ -29,4 +29,7 @@
   border-radius: 50%;
   object-fit: cover;
 }
-
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 50%;
+}

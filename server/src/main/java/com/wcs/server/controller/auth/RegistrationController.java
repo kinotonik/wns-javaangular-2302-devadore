@@ -19,12 +19,12 @@ public class RegistrationController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationRequest registrationRequest) {
+    public ResponseEntity<String> registerUser(@RequestBody UserRegistrationRequest registrationRequest) {
         User registeredUser = userService.registerUser(registrationRequest);
         if (registeredUser != null) {
-            return ResponseEntity.ok().body("User registered successfully");
+            return ResponseEntity.ok().body("{\"message\": \"User registered successfully\"}");
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User registration failed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\": \"User registration failed\"}");
         }
     }
 }

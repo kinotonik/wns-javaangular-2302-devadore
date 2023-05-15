@@ -11,11 +11,11 @@ import {AuthService} from "../../services/auth.service";
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-
+  hide = true;
   constructor(private formBuilder: FormBuilder,private authService: AuthService, private http: HttpClient, private router: Router) {
     this.loginForm = this.formBuilder.group({
-      username: [''],
-      password: [''],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         console.log('JWT stocké :', localStorage.getItem('jwt'));
         localStorage.setItem('refreshToken', response.refreshToken);
         this.router.navigate(['/home']).then(() => {
-          console.log('La navigation s\'est terminée avec succès');
+          console.log('La navigation vers /home s\'est terminée avec succès');
         }).catch((error) => {
           console.error('Erreur de navigation:', error);
         });

@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import {User} from "../../../models/user.model";
 import {UserService} from "../../../services/user.service";
 import {AuthService} from "../../../services/auth.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {tap} from "rxjs/operators";
+import {catchError, of} from "rxjs";
 
 @Component({
   selector: 'app-user-list',
@@ -10,7 +13,8 @@ import {AuthService} from "../../../services/auth.service";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users: User[] = [];
+ /* users: User[] = [];*/
+  users!: MatTableDataSource<User>;
   displayedColumns: string[] = ['avatar', 'id', 'username', 'email', 'roles', 'actions'];
 
 
@@ -19,12 +23,12 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
   }
-  loadUsers(): void {
+/*  loadUsers(): void {
     const jwtToken = this.authService.getToken();
 
     if (jwtToken) {
       this.userService.getUsers().subscribe(users => {
-          this.users = users;
+          this.users = new MatTableDataSource(users);;
           console.log('userlist: ', users)
         },
         (error) => {
@@ -34,8 +38,25 @@ export class UserListComponent implements OnInit {
     } else {
       console.error('Pas de jeton JWT trouvé.');
     }
-  }
+  }*/
+  loadUsers(): void {
+    const jwtToken = this.authService.getToken();
 
+    if (jwtToken) {
+      this.userService.getUsers().pipe(
+        tap(users => {
+          this.users = new MatTableDataSource(users);
+          console.log('userlist: ', users);
+        }),
+        catchError(error => {
+          console.error(error);
+          return of([]);
+        })
+      ).subscribe();
+    } else {
+      console.error('Pas de jeton JWT trouvé.');
+    }
+  }
   updateUser(user: User): void {
     this.userService.updateUser(user).subscribe(() => {
       this.loadUsers();
@@ -55,6 +76,8 @@ export class UserListComponent implements OnInit {
       this.loadUsers();
     });
   }
-
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.users.filter = filterValue.trim().toLowerCase();
+  }
 }

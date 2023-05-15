@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, throwError} from "rxjs";
+import {catchError} from "rxjs";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   username!: string;
   password!: string;
   email!: string;
-
+  hide = true;
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
   }
 
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
           catchError((error) => {
             console.error('Error:', error);
             console.log('Error response:', error);
-            return throwError(error);
+            throw error;
           })
         )
         .subscribe(() => {

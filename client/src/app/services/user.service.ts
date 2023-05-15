@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import { User } from '../models/user.model';
 import {AuthService} from "./auth.service";
 import {Role} from "../models/role.model";
@@ -18,11 +18,16 @@ export class UserService {
     if (jwtToken) {
       console.log(`Bearer ${jwtToken}`);
       const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
-      return this.http.get<User[]>(`${this.baseUrl}`, { headers });
+      return this.http.get<User[]>(`${this.baseUrl}/list`, { headers }).pipe(
+        catchError((error) => {
+          console.error(error);
+          return of([]); // returning empty array as an error occurred
+        })
+      );
 
     } else {
       console.log('Pas de jeton JWT trouvé');
-      return throwError('Pas de jeton JWT trouvé');
+      return of([]); // returning empty array as no JWT token found
     }
   }
   getUserById(userId: number): Observable<User> {

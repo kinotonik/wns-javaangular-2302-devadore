@@ -8,6 +8,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import {FormsModule} from "@angular/forms";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -16,12 +17,13 @@ import {MatButtonModule} from "@angular/material/button";
     UserListComponent,
     UserDetailComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    FormsModule,
-    MatTableModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatInputModule
+    ]
 })
 export class UserModule { }

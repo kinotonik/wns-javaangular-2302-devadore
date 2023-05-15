@@ -65,7 +65,7 @@ public class SecurityConfig {
      * @throws Exception
      */
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(customAuthenticationProvider);
     }
 
@@ -78,7 +78,7 @@ public class SecurityConfig {
      * @throws Exception
      */
     @Bean
-    public AuthenticationManager customAuthenticationManager() throws Exception {
+    public AuthenticationManager customAuthenticationManager() {
         return new ProviderManager(Arrays.asList(customAuthenticationProvider));
     }
 
@@ -119,20 +119,20 @@ public class SecurityConfig {
      * @return la chaîne de filtres de sécurité configurée.
      * @throws Exception
      */
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .cors().and()
                 .csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/api/users/**" ).authenticated()
-                .anyRequest().authenticated().and()
-                .addFilterBefore(new JwtAuthenticationFilter(userDetailsService,jwtTokenProvider) , UsernamePasswordAuthenticationFilter.class);
-
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/users/**").hasAuthority("ADMIN")
+                        /*.requestMatchers("/api/users/**").authenticated()*/
+                        .anyRequest().authenticated())
+                .addFilterBefore(new JwtAuthenticationFilter(userDetailsService,jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
