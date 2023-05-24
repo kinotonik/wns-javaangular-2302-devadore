@@ -1,0 +1,27 @@
+<div class="user-detail">
+  <h2>Mise à jour du profil</h2>
+  <form (ngSubmit)="updateUser(user)">
+    <label for="username">Nom d'utilisateur :</label>
+    <input [(ngModel)]="user.username" id="username" name="username" required>
+    <br>
+    <label for="email">Email :</label>
+    <input [(ngModel)]="user.email" id="email" name="email" type="email" required>
+    <br>
+    <label for="password">Password :</label>
+    <input [(ngModel)]="user.password" id="password" name="password" type="password" required>
+    <br>
+    <div *ngFor="let role of allRoles; let i = index">
+      <label>
+        <input type="checkbox"
+               [checked]="isRoleSelected(role)"
+               (change)="toggleRoleSelection(role)"
+               [id]="'role-' + i">
+        {{ role.name }}
+      </label>
+    </div>
+    <br>
+    <button type="submit">Mettre à jour le profil</button>
+  </form>
+  <button (click)="deleteUser(user.id)">Supprimer le profil</button>
+</div>
+

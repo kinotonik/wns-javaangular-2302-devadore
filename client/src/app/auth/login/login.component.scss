@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust the height as needed */
+}
+.form-group mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+input.form-group-right-align::-webkit-outer-spin-button,
+input.form-group-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.form-group-right-align {
+  -moz-appearance: textfield;
+}
