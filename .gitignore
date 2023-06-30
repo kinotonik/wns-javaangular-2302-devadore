@@ -26,6 +26,9 @@
 .vscode/
 .idea/
 .vscode/settings.json
+<<<<<<< HEAD
 client/.prettierrc.json
 /node_modules/
 /.node_modules/
+=======
+>>>>>>> 26a1218 (Implementation swagger)
