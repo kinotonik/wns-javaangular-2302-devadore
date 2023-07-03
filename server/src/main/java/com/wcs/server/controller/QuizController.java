@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wcs.server.dto.QuizDTO;
+import com.wcs.server.entity.Quiz;
 import com.wcs.server.service.QuizService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,5 +28,12 @@ public class QuizController {
     public ResponseEntity<List<QuizDTO>> getAll() {
         List<QuizDTO> quizs = quizService.getAll();
         return ResponseEntity.ok(quizs);
+    }
+
+    @Operation(summary = "Retourne un quiz aléatoire")
+    @GetMapping("/quiz/random")
+    public ResponseEntity<QuizDTO> getRandomQuiz() {
+        QuizDTO randomQuiz = quizService.getQuizByRandomId();
+        return ResponseEntity.ok(randomQuiz);
     }
 }

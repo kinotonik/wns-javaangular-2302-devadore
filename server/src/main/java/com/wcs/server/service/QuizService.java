@@ -1,6 +1,8 @@
 package com.wcs.server.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -25,6 +27,20 @@ public class QuizService {
         return quizs.stream()
                 .map(this::convertQuizToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public QuizDTO getQuizByRandomId() {
+        List<Integer> ids = quizRepository.findAllIds();
+
+        // nextInt(n) genère un nombre aléatoire en 0 inclus et n exclus 
+        // Ce qui permet de récupérer un index aléatoire de la liste et retourner son id 
+        Random random = new Random();
+        int randomId = ids.get(random.nextInt(ids.size()));
+
+        Quiz quiz = quizRepository.findById(randomId)
+            .orElseThrow(() -> new NoSuchElementException("Le quiz avec l'id " + randomId + " n'existe pas ou n'est pas trouvé"));
+
+        return convertQuizToDTO(quiz);
     }
 
     private QuizDTO convertQuizToDTO(Quiz quiz) {
