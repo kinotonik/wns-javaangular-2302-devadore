@@ -1,4 +1,8 @@
 package com.wcs.server.repository;
 
-public interface QuestionRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.wcs.server.entity.Question;
+
+public interface QuestionRepository extends JpaRepository<Question, Long>{
 }
