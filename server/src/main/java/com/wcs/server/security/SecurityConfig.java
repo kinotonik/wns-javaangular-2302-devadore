@@ -124,6 +124,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**", "/api/images/**", "/api/users/register").permitAll()
                 .requestMatchers("/api/users/**").hasAuthority("ADMIN")
                 .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                .requestMatchers("/api/quiz/random").permitAll()
                 .anyRequest().authenticated())
             .addFilterBefore(new JwtAuthenticationFilter(userDetailsService, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
