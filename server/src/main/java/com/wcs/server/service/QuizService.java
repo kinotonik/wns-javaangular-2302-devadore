@@ -21,8 +21,8 @@ public class QuizService {
     private ModelMapper modelMapper;
 
     public List<QuizDTO> getAll() {
-        List<Quiz> quizzes = quizRepository.findAll();
-        return quizzes.stream()
+        List<Quiz> quizs = quizRepository.findAll();
+        return quizs.stream()
                 .map(this::convertQuizToDTO)
                 .collect(Collectors.toList());
     }

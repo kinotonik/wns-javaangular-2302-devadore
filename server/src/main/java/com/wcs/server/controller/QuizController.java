@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wcs.server.dto.QuizDTO;
 import com.wcs.server.service.QuizService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Quiz")
 public class QuizController {
 
     @Autowired
     private QuizService quizService;
 
+    @Operation(summary = "Retourne la liste de tous les quizs")
     @GetMapping("/quizs")
     public ResponseEntity<List<QuizDTO>> getAll() {
         List<QuizDTO> quizs = quizService.getAll();
