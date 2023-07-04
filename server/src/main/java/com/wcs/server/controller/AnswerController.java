@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class AnswerController {
 
     @Operation(summary = "Retourne la liste des réponses d'une question")
     @GetMapping("/answer/question/{id}")
-    public ResponseEntity<List<AnswerDTO>> getAllByQuiz(Long id) {
+    public ResponseEntity<List<AnswerDTO>> getAllByQuiz(@PathVariable Long id) {
         List<AnswerDTO> answers = answerService.getAllByQuestionId(id);
         return ResponseEntity.ok(answers);
     }

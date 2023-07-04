@@ -26,3 +26,4 @@
 .vscode/
 .idea/
 .vscode/settings.json
+client/.prettierrc.json
