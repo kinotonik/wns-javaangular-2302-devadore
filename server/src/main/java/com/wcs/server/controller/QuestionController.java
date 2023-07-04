@@ -28,4 +28,11 @@ public class QuestionController {
         List<QuestionDTO> questions = questionService.getAll();
         return ResponseEntity.ok(questions);
     }
+
+    @GetMapping("/question/quiz/{id}")
+    @Operation(summary = "Retourne la liste des questions d'un quiz")
+    public ResponseEntity<List<QuestionDTO>> getAllByQuizId(Long id) {
+        List<QuestionDTO> questions = questionService.getQuestionsByQuizId(id);
+        return ResponseEntity.ok(questions);
+    }
 }

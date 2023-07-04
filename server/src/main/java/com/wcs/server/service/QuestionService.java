@@ -27,6 +27,13 @@ public class QuestionService {
             .collect(Collectors.toList());
     }
 
+    public List<QuestionDTO> getQuestionsByQuizId(Long id){
+        List<Question> questions = questionRepository.findAllByQuizId(id);
+        return questions.stream()
+            .map(this::convertQuestionToDTO)
+            .collect(Collectors.toList());
+    }
+
     private QuestionDTO convertQuestionToDTO(Question question) {
         return modelMapper.map(question, QuestionDTO.class);
     }
