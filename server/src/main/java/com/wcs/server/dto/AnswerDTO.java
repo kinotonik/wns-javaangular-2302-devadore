@@ -6,7 +6,7 @@ public class AnswerDTO {
     
     private Long id;
     private String text;
-    private Boolean isCorrect;
+    private boolean isCorrect;
     private Date createdAt;
     private Date updateAt; 
     private QuestionDTO question;
