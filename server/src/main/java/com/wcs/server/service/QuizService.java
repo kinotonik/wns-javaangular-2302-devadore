@@ -32,7 +32,7 @@ public class QuizService {
     public QuizDTO getQuizByRandomId() {
         List<Integer> ids = quizRepository.findAllIds();
 
-        // nextInt(n) genère un nombre aléatoire en 0 inclus et n exclus 
+        // nextInt(n) genère un nombre aléatoire entre 0 inclus et n exclus 
         // Ce qui permet de récupérer un index aléatoire de la liste et retourner son id 
         Random random = new Random();
         int randomId = ids.get(random.nextInt(ids.size()));
