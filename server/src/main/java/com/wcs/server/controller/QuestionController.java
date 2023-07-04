@@ -30,10 +30,10 @@ public class QuestionController {
         return ResponseEntity.ok(questions);
     }
 
-    @GetMapping("/question/quiz/{id}")
+    @GetMapping("/question/quiz/{quizId}")
     @Operation(summary = "Retourne la liste des questions d'un quiz")
-    public ResponseEntity<List<QuestionDTO>> getAllByQuizId(@PathVariable Long id) {
-        List<QuestionDTO> questions = questionService.getQuestionsByQuizId(id);
+    public ResponseEntity<List<QuestionDTO>> getAllByQuizId(@PathVariable Long quizId) {
+        List<QuestionDTO> questions = questionService.getQuestionsByQuizId(quizId);
         return ResponseEntity.ok(questions);
     }
 }

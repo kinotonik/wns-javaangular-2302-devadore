@@ -24,9 +24,9 @@ public class AnswerController {
     private AnswerService answerService;
 
     @Operation(summary = "Retourne la liste des réponses d'une question")
-    @GetMapping("/answer/question/{id}")
-    public ResponseEntity<List<AnswerDTO>> getAllByQuiz(@PathVariable Long id) {
-        List<AnswerDTO> answers = answerService.getAllByQuestionId(id);
+    @GetMapping("/answer/question/{questionId}")
+    public ResponseEntity<List<AnswerDTO>> getAllByQuiz(@PathVariable Long questionId) {
+        List<AnswerDTO> answers = answerService.getAllByQuestionId(questionId);
         return ResponseEntity.ok(answers);
     }
 }
