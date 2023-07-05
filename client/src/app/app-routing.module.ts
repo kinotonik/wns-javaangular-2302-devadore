@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: '', loadChildren: () => import('./components/user/user.module').then(m => m.UserModule) },
+  { path: 'quiz', loadChildren: () => import('./pages/quiz/quiz.module').then(m => m.QuizModule)},
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
