@@ -71,5 +71,4 @@ alter table question add constraint question_ibfk_1 foreign key (quiz_id) refere
 alter table answer add constraint answer_ibfk_1 foreign key (question_id) references question (id);
 alter table user_roles add constraint user_roles_ibfk_1 foreign key (user_id) references user (id) on update cascade;
 alter table user_roles add constraint user_roles_ibfk_2 foreign key (role_id) references role (id) on update cascade;
-alter table images add constraint FK_fccua10sh2240kfshte8bkbpt
-    foreign key (user_id) references user (id);   
+alter table images add constraint FK_fccua10sh2240kfshte8bkbpt foreign key (user_id) references user (id);   

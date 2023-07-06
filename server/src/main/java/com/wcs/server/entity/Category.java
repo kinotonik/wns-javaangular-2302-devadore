@@ -9,6 +9,8 @@ import java.util.Date;
 public class Category {
     public Category(String name2) {
     }
+    public Category() {
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
