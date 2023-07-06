@@ -24,7 +24,7 @@ public class QuizController {
     private QuizService quizService;
 
     @Operation(summary = "Retourne la liste de tous les quizs")
-    @GetMapping("/quizs")
+    @GetMapping("/quiz")
     public ResponseEntity<List<QuizDTO>> getAll() {
         List<QuizDTO> quizs = quizService.getAll();
         return ResponseEntity.ok(quizs);
