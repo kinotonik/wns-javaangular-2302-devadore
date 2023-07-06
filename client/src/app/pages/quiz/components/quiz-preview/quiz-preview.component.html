@@ -6,7 +6,9 @@
         <p class="text-gray-700 text-base">{{ randomQuiz.description }}</p>
       </div>
       <div class="px-6 py-4">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button 
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        [routerLink]="'/quiz/start'">
           Lancer le Quiz !
         </button>
       </div>
