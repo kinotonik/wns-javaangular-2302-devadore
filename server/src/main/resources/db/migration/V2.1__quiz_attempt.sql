@@ -1,13 +1,13 @@
 create table quiz_attempt
 (
-    attempt_id int auto_increment primary key,
+    id int auto_increment primary key,
     user_id    int not null,
     quiz_id    int not null,
     score_points      int default 0 not null,
     correct_answers int default 0 not null,
     incorrect_answers int default 0 not null,
-    start_time timestamp not null,
-    end_time timestamp,
+    start_time date not null,
+    end_time date,
     total_time_spent int
 );
 
