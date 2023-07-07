@@ -13,14 +13,32 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     image: [null]
-  });
+  }, {validator: this.matchPasswords});
   image: File | null = null;
   previewUrl: any = null;
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: UserService, private router: Router) { }
 
-  ngOnInit() { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: UserService, private router: Router) {
+  }
+
+  ngOnInit() {
+  }
+
+  matchPasswords(formGroup: FormGroup) {
+    const passwordControl = formGroup.get('password');
+    const confirmPasswordControl = formGroup.get('confirmPassword');
+
+    if (
+      passwordControl && confirmPasswordControl &&
+      passwordControl.value !== confirmPasswordControl.value
+    ) {
+      confirmPasswordControl.setErrors({matchPasswords: true});
+    } else {
+      confirmPasswordControl!.setErrors(null);
+    }
+  }
 
   onImageSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files;
@@ -29,6 +47,7 @@ export class RegisterComponent implements OnInit {
       this.previewImage(this.image);
     }
   }
+
   previewImage(file: File) {
     // show preview
     const reader = new FileReader();
@@ -37,6 +56,7 @@ export class RegisterComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
   registerUser() {
     const formData = new FormData();
     formData.append('username', this.registerForm.get('username')?.value);
