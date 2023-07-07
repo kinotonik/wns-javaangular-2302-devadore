@@ -6,8 +6,8 @@ create table quiz_attempt
     score_points      int default 0 not null,
     correct_answers int default 0 not null,
     incorrect_answers int default 0 not null,
-    start_time timestamp not null,
-    end_time timestamp,
+    start_time date not null,
+    end_time date,
     total_time_spent int
 );
 
