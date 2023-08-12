@@ -11,13 +11,13 @@
     </h1>
     <div class="flex gap-4">
       <button
-        class="mt-4 rounded-full border-2 border-white px-11 py-2 text-lg"
+        class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current uppercase transform transition-transform duration-200 hover:scale-105"
         [routerLink]="'/quiz/preview'"
       >
         aléatoire
       </button>
       <button
-        class="mt-4 rounded-full border-2 border-white px-11 py-2 text-lg"
+        class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current uppercase transform transition-transform duration-200 hover:scale-105"
       >
         voir tout
       </button>
@@ -32,7 +32,7 @@
       />
       <!-- Afficher l'image de l'utilisateur connecté -->
       <div *ngIf="isLoggedIn && userImage" class="w-16 h-16 rounded-full overflow-hidden">
-        <img [src]="userImage" alt="User Image" class="w-full h-full"
+        <img [src]="userImage" alt="User Image" class="w-full h-full rounded-full border-4 border-amber-500"
              (mouseenter)="showDropdown()"
              (mouseleave)="hideDropdown()">
       </div>
@@ -46,11 +46,14 @@
 
       <div #dropdownMenu class="dropdown-menu" [class.show]="isDropdownVisible" (mouseenter)="showDropdown()"
            (mouseleave)="hideDropdown()">
-        <button class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current" (click)="handleButtonClick()">
+        <button
+          class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current transform transition-transform duration-200 hover:scale-105"
+          (click)="handleButtonClick()">
           {{ isAuthenticated() ? 'Logout' : 'Login' }}
         </button>
         <br>
-        <button *ngIf="isAdmin" class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current"
+        <button *ngIf="isAdmin"
+                class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current transform transition-transform duration-200 hover:scale-105"
                 routerLink="/user-list">User List
         </button>
       </div>
