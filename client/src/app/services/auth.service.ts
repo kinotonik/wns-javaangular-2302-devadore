@@ -1,9 +1,10 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import jwt_decode from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +16,14 @@ export class AuthService {
 
   private isAdminSubject = new BehaviorSubject<boolean>(false);
   public isAdmin$ = this.isAdminSubject.asObservable();
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router) {
+  }
+
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
+
   authenticateUser(username: string, password: string): Observable<any> {
     const loginData = {
       username: username,
@@ -27,7 +32,7 @@ export class AuthService {
 
     return this.http.post<any>(`${this.apiUrl}/authenticate`, loginData).pipe(
       tap((response) => {
-        console.log('authservice:',response)
+        console.log('authservice:', response)
         const token = response.token;
         const roles = response.roles;
         this.saveToken(token);
@@ -35,6 +40,7 @@ export class AuthService {
       })
     );
   }
+
   setAuthenticationState(isAuthenticated: boolean): void {
     this.isAuthenticatedSubject.next(isAuthenticated);
   }
@@ -42,9 +48,11 @@ export class AuthService {
   setAdminState(isAdmin: boolean): void {
     this.isAdminSubject.next(isAdmin);
   }
+
   private saveRoles(roles: string[]): void {
     this.roles = roles;
   }
+
   saveToken(token: string): void {
     localStorage.setItem('jwtToken', token);
   }
@@ -52,11 +60,11 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
+
   decodeToken(token: string): any {
-    try{
+    try {
       return jwt_decode(token);
-    }
-    catch(Error){
+    } catch (Error) {
       return null;
     }
   }
@@ -65,7 +73,7 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.post(`${this.apiUrl}/logout`, {}, { headers: headers })
+      return this.http.post(`${this.apiUrl}/logout`, {}, {headers: headers})
         .pipe(
           tap(() => {
             console.log('Removing tokens...');
@@ -76,6 +84,19 @@ export class AuthService {
         );
     }
     throw new Error("User is not logged in");
+  }
+
+  checkAdminStatus() {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      if (decodedToken && decodedToken.roles) {
+        const isAdmin = decodedToken.roles.includes('ADMIN');
+        this.setAdminState(isAdmin);
+      }
+    } else {
+      this.setAdminState(false);
+    }
   }
 
 }

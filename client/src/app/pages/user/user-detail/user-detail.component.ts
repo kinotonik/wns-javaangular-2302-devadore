@@ -4,6 +4,7 @@ import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Role} from "../../../models/role.model";
 import {forkJoin} from "rxjs";
+import {ToastService} from "../../../services/toastService";
 
 
 @Component({
@@ -30,7 +31,8 @@ export class UserDetailComponent implements OnInit {
     updatedAt: new Date(),
   };
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public toastService: ToastService) {
+  }
 
   ngOnInit(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0', 10);
@@ -43,6 +45,7 @@ export class UserDetailComponent implements OnInit {
         console.log(user);
       });
   }
+
 
   isRoleSelected(role: Role): boolean {
     return this.userRoles?.some(userRole => userRole.id === role.id);
@@ -65,6 +68,7 @@ export class UserDetailComponent implements OnInit {
       this.previewImage(this.imageFile);
     }
   }
+
   previewImage(file: File) {
     // show preview
     const reader = new FileReader();
@@ -84,11 +88,15 @@ export class UserDetailComponent implements OnInit {
         this.userService.updateUserImage(userId, imageFile, mimeType).subscribe({
           next: () => {
             // Mettre à jour uniquement les détails de l'utilisateur après la mise à jour de l'image
-            alert('Image de profil image mis à jour avec succès');
-            this.router.navigate(['/user-list']);
+            this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
+            /*alert('Image de profil image mis à jour avec succès');*/
+            setTimeout(() => {
+              this.router.navigate(['/user-list']);
+            }, 2000);
           },
           error: (error) => {
-            console.error('Erreur lors de la mise à jour de l\'image:', error);
+            this.toastService.showToast('Erreur lors de la mise à jour de l\'image', 'error');
+            /*console.error('Erreur lors de la mise à jour de l\'image:', error);*/
           }
         });
 
@@ -102,10 +110,15 @@ export class UserDetailComponent implements OnInit {
   private updateUserDetails(): void {
     this.userService.updateUser(this.user).subscribe({
       next: () => {
-        alert('Profil mis à jour avec succès');
-        this.router.navigate(['/user-list']);
+        /*alert('Profil mis à jour avec succès');*/
+        this.toastService.showToast('Profil mis à jour avec succès', 'success');
+        setTimeout(() => {
+          this.router.navigate(['/user-list']).then(() => {
+          });
+        }, 2000);
       },
       error: (error) => {
+        this.toastService.showToast('Erreur lors de la mise à jour du profil', 'error');
         console.error('Erreur lors de la mise à jour du profil:', error);
       }
     });
@@ -114,9 +127,11 @@ export class UserDetailComponent implements OnInit {
   deleteUser(userId: number): void {
     this.userService.deleteUser(userId).subscribe({
       next: () => {
-        alert('Profil supprimé avec succès');
+        this.toastService.showToast('Profil supprimé avec succès', 'success');
+        /* alert('Profil supprimé avec succès');*/
       },
       error: (error) => {
+        this.toastService.showToast('Erreur lors de la suppression du profil', 'error');
         console.error('Erreur lors de la suppression du profil:', error);
       }
     });
