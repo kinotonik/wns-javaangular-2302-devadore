@@ -71,8 +71,7 @@ export class UserListComponent implements OnInit {
     const user = this.users.data.find(u => u.id === userId);
 
     // Si l'utilisateur a été trouvé et que son rôle est "admin", arrêtez la fonction ici
-    if (user && user.roles.some(role => role.name === 'ADMIN')) {  // Assuming the role object has a 'name' property
-      /*alert('Cannot delete an admin user.');*/
+    if (user && user.roles.some(role => role.name === 'ADMIN')) {
       this.toastService.showToast('Impossible de supprimer un utilisateur admin', 'error');
       return;
     }
