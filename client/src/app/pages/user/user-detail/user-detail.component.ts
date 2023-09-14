@@ -105,10 +105,18 @@ export class UserDetailComponent implements OnInit {
         this.userService.updateUserImage(userId, imageFile, mimeType).subscribe({
           next: () => {
             // Mettre à jour uniquement les détails de l'utilisateur après la mise à jour de l'image
-            this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
-            setTimeout(() => {
-              this.router.navigate(['/user-list']);
-            }, 2000);
+            if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+              this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
+              setTimeout(() => {
+                this.router.navigate(['/user-list']);
+              }, 2000);
+            } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+              this.toastService.showToast('Profil mis à jour avec succès', 'success');
+              setTimeout(() => {
+                this.router.navigate(['/home']).then(() => {
+                });
+              }, 2000);
+            }
           },
           error: (error) => {
             this.toastService.showToast('Erreur lors de la mise à jour de l\'image', 'error');

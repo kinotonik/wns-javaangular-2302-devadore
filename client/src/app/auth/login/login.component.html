@@ -9,10 +9,11 @@
     {{ toast.message }}
   </div>
 </div>
-<div class="flex items-center justify-center min-h-screen">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+<div class="flex items-center justify-center">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
     <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-black">
-      <img class="w-8 h-8 mr-2" src="../../../assets/images/defaultAvatars/LOGO-QUIZ-FOR-ALL.png" alt="logo">
+      <img class="w-8 h-8 mr-2" ngSrc="../../../assets/images/defaultAvatars/LOGO-QUIZ-FOR-ALL.png" alt="logo"
+           width="24" height="24">
       Quizz4all
     </a>
     <form class="w-full max-w-md bg-white rounded-lg shadow" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -59,4 +60,5 @@
     </form>
   </div>
 </div>
+
 
