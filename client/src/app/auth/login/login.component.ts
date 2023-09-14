@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
+import {ToastService} from "../../services/toastService";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hide = true;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private http: HttpClient, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private http: HttpClient, private router: Router, public toastService: ToastService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -46,10 +47,17 @@ export class LoginComponent implements OnInit {
 
         this.authService.setAuthenticationState(true);
         this.router.navigate(['/home']).then(() => {
-          console.log('La navigation vers /home s\'est terminée avec succès');
         }).catch((error) => {
           console.error('Erreur de navigation:', error);
         });
+      },
+      error: (err) => {
+        console.error('Erreur d\'authentification:', err);
+        if (err.error.message === 'User not found') {
+          this.toastService.showToast('Utilisateur non trouvé', 'error');
+        } else {
+          this.toastService.showToast('MOT DE PASSE ou NOM D\'UTILISATEUR non valide', 'warning');
+        }
       }
     })
   }

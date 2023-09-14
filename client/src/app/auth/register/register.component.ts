@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
+import {emailValidator} from "../validators/email-validator";
+import {passwordValidator} from "../validators/password-validator";
+import {debounceTime, map, Observable} from "rxjs";
+import {ToastService} from "../../services/toastService";
 
 @Component({
   selector: 'app-register',
@@ -12,18 +16,40 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.formBuilder.group({
     username: ['', Validators.required],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    image: [null]
+    password: ['', [Validators.required, passwordValidator]],
+    confirmPassword: ['', [Validators.required, passwordValidator]],
+    email: ['', [Validators.required, emailValidator]],
+    image: [null, Validators.required],
   }, {validator: this.matchPasswords});
   image: File | null = null;
   previewUrl: any = null;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: UserService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: UserService, private router: Router, public toastService: ToastService) {
+    this.registerForm.get('username')!.setAsyncValidators(this.usernameValidator.bind(this));
+    this.registerForm.get('email')!.setAsyncValidators(this.emailValidator.bind(this));
   }
 
   ngOnInit() {
+  }
+
+  usernameValidator(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+    return this.userService.checkUsernameExistence(control.value).pipe(
+      debounceTime(300),
+      map(res => {
+        const error = res ? {usernameExists: true} : null;
+        return error;
+      })
+    );
+  }
+
+  emailValidator(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+    return this.userService.checkMailExistence(control.value).pipe(
+      debounceTime(300),
+      map(res => {
+        const error = res ? {emailExists: true} : null;
+        return error;
+      })
+    );
   }
 
   matchPasswords(formGroup: FormGroup) {
@@ -41,6 +67,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const filenameDisplay = document.getElementById('selectedFilename');
+
+    if (filenameDisplay) {
+      if (input.files && input.files[0]) {
+        filenameDisplay.textContent = input.files[0].name;
+      } else {
+        filenameDisplay.textContent = 'Aucun fichier sélectionné';
+      }
+    }
     const file = (event.target as HTMLInputElement).files;
     if (file && file.length) {
       this.image = file[0];
@@ -49,7 +85,7 @@ export class RegisterComponent implements OnInit {
   }
 
   previewImage(file: File) {
-    // show preview
+    // voir la preview
     const reader = new FileReader();
     reader.onload = () => {
       this.previewUrl = reader.result;
@@ -66,15 +102,26 @@ export class RegisterComponent implements OnInit {
       formData.append('image', this.image);
       formData.append('mimeType', this.image.type);
     }
-
+    if (this.registerForm.invalid) {
+      return;
+    }
     this.userService.register(formData).subscribe(
       response => {
+        setTimeout(() => {
+          this.toastService.showToast('L\'enrgistrement est réalisé avec succès', 'success');
+          this.router.navigate(['/home']);
+        }, 2000);
         console.log(response);
-        this.router.navigate(['/home'])
       },
       error => {
-        console.log(error);
+        if (error) {
+          this.toastService.showToast('Ce nom d\'utilisateur est déjà pris.', 'error');
+        } else {
+          this.toastService.showToast('Une erreur s\'est produite. Veuillez réessayer plus tard.', 'error');
+          alert('Une erreur s\'est produite. Veuillez réessayer plus tard.');
+        }
       }
     );
   }
+
 }
