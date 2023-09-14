@@ -118,7 +118,7 @@ export class UserDetailComponent implements OnInit {
               }, 2000);
             }
           },
-          error: (error) => {
+          error: () => {
             this.toastService.showToast('Erreur lors de la mise à jour de l\'image', 'error');
           }
         });
