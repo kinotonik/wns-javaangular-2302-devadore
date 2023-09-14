@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { QuestionModel } from '../models/question.model';
 @Injectable({
@@ -21,6 +21,12 @@ export class QuestionService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<QuestionModel>(url);
   }
+
+  getRandomQuestionByQuizId(id: number, excludeIds: number[]): Observable<QuestionModel> {
+    const params = new HttpParams().set('excludeIds', excludeIds.join(','));
+    return this.http.get<QuestionModel>(`http://localhost:8080/api/question/random/quiz/${id}`, { params });
+  }
+  
 
   createQuestion(question: QuestionModel): Observable<QuestionModel> {
     return this.http.post<QuestionModel>(this.apiUrl, question);
