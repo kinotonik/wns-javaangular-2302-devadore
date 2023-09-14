@@ -31,8 +31,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.checkAdminStatus();
     this.authService.isAdmin$.subscribe((isAdminValue) => {
       this.isAdmin = isAdminValue;
+      console.log('isAdminValue', isAdminValue)
     });
     this.loadImage()
     this.isLoggedIn = this.authService.isAuthenticated();
@@ -49,11 +51,11 @@ export class HomeComponent implements OnInit {
           const username = decodedToken.sub;
 
           // Récupérer l'identifiant de l'utilisateur par son nom d'utilisateur
-          this.userService.getUserIdByUsername(username).subscribe(
-            (userId: number) => {
+          this.userService.getUserIdByUsername(username).subscribe({
+            next: (userId: number) => {
               // Utiliser l'ID de l'utilisateur récupéré pour obtenir l'image de l'utilisateur
-              this.userService.getUserImage(userId).subscribe(
-                (imageData: any) => {
+              this.userService.getUserImage(userId).subscribe({
+                next: (imageData: any) => {
                   // Convertir les données de l'image (Blob) en URL utilisable
                   const reader = new FileReader();
                   reader.onloadend = () => {
@@ -61,12 +63,12 @@ export class HomeComponent implements OnInit {
                   };
                   reader.readAsDataURL(imageData);
                 },
-                error => {
+                error: error => {
                   console.log('Erreur lors de la récupération de l\'image :', error);
                 }
-              )
+              });
             }
-          )
+          });
         }
       }
     }

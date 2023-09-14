@@ -1,4 +1,14 @@
 <div class="flex min-h-screen items-center justify-center">
+  <div class="fixed top-0 left-0 z-50">
+    <div *ngFor="let toast of toastService.toasts"
+         class="mb-2 p-4 rounded shadow-lg"
+         [ngClass]="{
+          'bg-green-500 text-white': toast.type === 'success',
+          'bg-red-500 text-white': toast.type === 'error'
+       }">
+      {{ toast.message }}
+    </div>
+  </div>
   <div
     class="mx-auto flex h-full flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0"
   >
@@ -24,7 +34,7 @@
             <h2 class="mb-4 text-2xl font-bold">Mise à jour du profil</h2>
             <div class="mb-4">
               <label for="username" class="mb-2 block"
-                >Nom d'utilisateur :</label
+              >Nom d'utilisateur :</label
               >
               <input
                 [(ngModel)]="user.username"
@@ -47,7 +57,7 @@
             </div>
             <div class="mb-4">
               <label for="password" class="mb-2 block" style="display: none"
-                >Password :</label
+              >Password :</label
               >
               <input
                 [(ngModel)]="user.password"

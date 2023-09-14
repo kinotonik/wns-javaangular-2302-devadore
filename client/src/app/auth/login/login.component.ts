@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { AuthService } from "../../services/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,6 @@ import { AuthService } from "../../services/auth.service";
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hide = true;
-/*  isAdmin: boolean = false;*/
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private http: HttpClient, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const { username, password } = this.loginForm.value;
+    const {username, password} = this.loginForm.value;
     this.authService.authenticateUser(username, password).subscribe({
       next: (response) => {
         console.log('Response:', response);
@@ -54,9 +53,11 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
   goToRegisterPage() {
     this.router.navigateByUrl('/auth/register');
   }
+
   goToForgotPasswordPage() {
     this.router.navigateByUrl('/auth/forgot-password');
   }
