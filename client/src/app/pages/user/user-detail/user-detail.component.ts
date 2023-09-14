@@ -125,11 +125,19 @@ export class UserDetailComponent implements OnInit {
   private updateUserDetails(): void {
     this.userService.updateUser(this.user).subscribe({
       next: () => {
-        this.toastService.showToast('Profil mis à jour avec succès', 'success');
-        setTimeout(() => {
-          this.router.navigate(['/user-list']).then(() => {
-          });
-        }, 2000);
+        if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+          this.toastService.showToast('Profil mis à jour avec succès', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/user-list']).then(() => {
+            });
+          }, 2000);
+        } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+          this.toastService.showToast('Profil mis à jour avec succès', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/home']).then(() => {
+            });
+          }, 2000);
+        }
       },
       error: (error) => {
         this.toastService.showToast('Erreur lors de la mise à jour du profil', 'error');

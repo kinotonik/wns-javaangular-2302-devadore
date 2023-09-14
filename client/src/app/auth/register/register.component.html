@@ -85,12 +85,12 @@
               (change)="onImageSelected($event)"
               class="hidden"
             />
+            <div class="text-red-500 text-sm mt-1">
+              <div *ngIf="registerForm.get('image')?.errors?.['required']">L'image est requise.</div>
+            </div>
           </div>
         </div>
-        <div class="text-red-500 text-sm mt-1"
-             *ngIf="registerForm.get('image')?.invalid">
-          <div *ngIf="registerForm.get('email')?.errors?.['required']">L'image est requise.</div>
-        </div>
+
         <img *ngIf="previewUrl" [src]="previewUrl" alt="Image preview" width="100" class="mt-4">
         <button type="submit"
                 [disabled]="registerForm.invalid"

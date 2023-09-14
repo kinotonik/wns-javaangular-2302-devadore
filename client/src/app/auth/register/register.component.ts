@@ -81,6 +81,9 @@ export class RegisterComponent implements OnInit {
     if (file && file.length) {
       this.image = file[0];
       this.previewImage(this.image);
+      // Mettez à jour le statut de validation pour le champ 'image'.
+      this.registerForm.get('image')?.setValue(this.image);
+      this.registerForm.get('image')?.updateValueAndValidity();
     }
   }
 
