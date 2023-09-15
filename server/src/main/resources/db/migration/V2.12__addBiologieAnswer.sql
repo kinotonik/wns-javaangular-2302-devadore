@@ -1,7 +1,7 @@
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Glycogène',34,0,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Adénosine triphosphate (ATP)',34,1,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Cholestérol ',34,0,'2023-02-14','2023-02-14');
-INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Insuline',34,1,'2023-02-14','2023-02-14');
+INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Insuline',34,0,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Le pancréas',35,1,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Le foie',35,0,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Le rein',35,0,'2023-02-14','2023-02-14');
@@ -34,7 +34,7 @@ INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, update
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Évaporation',42,0,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Transpiration',42,1,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('Respiration',42,0,'2023-02-14','2023-02-14');
-INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('ARN messager (ARNm)',43,0,'2023-02-14','2023-02-14');
-INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('ARN messager (ARNm)',43,0,'2023-02-14','2023-02-14');
+INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('ARN messager (ARNm)',43,1,'2023-02-14','2023-02-14');
+INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('ADN polymérase',43,0,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('ARN ribosomique (ARNr)',43,0,'2023-02-14','2023-02-14');
 INSERT INTO quizzforall.answer(text, question_id, is_correct, created_at, updated_at) VALUES ('ADN ligase',43,0,'2023-02-14','2023-02-14');
