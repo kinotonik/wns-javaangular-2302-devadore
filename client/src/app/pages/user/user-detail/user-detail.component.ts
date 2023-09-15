@@ -20,7 +20,7 @@ export class UserDetailComponent implements OnInit {
   imageFile?: File;
   previewUrl: any = null;
   isAdmin: boolean = false;
-
+  isUser: boolean = false;
   user: User = {
     id: 0,
     username: '',
@@ -50,6 +50,11 @@ export class UserDetailComponent implements OnInit {
     this.authService.isAdmin$.subscribe((isAdminValue) => {
       this.isAdmin = isAdminValue;
       console.log('isAdminValue', isAdminValue)
+    });
+    this.authService.checkUserStatus();
+    this.authService.isUser$.subscribe((isUserValue) => {
+      this.isUser = isUserValue;
+      console.log('isUserValue', isUserValue)
     });
   }
 
@@ -105,12 +110,12 @@ export class UserDetailComponent implements OnInit {
         this.userService.updateUserImage(userId, imageFile, mimeType).subscribe({
           next: () => {
             // Mettre à jour uniquement les détails de l'utilisateur après la mise à jour de l'image
-            if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+            if (this.isAdmin) {
               this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
               setTimeout(() => {
                 this.router.navigate(['/user-list']);
               }, 2000);
-            } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+            } else if (this.isUser) {
               this.toastService.showToast('Profil mis à jour avec succès', 'success');
               setTimeout(() => {
                 this.router.navigate(['/home']).then(() => {
@@ -133,13 +138,14 @@ export class UserDetailComponent implements OnInit {
   private updateUserDetails(): void {
     this.userService.updateUser(this.user).subscribe({
       next: () => {
-        if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+        if (this.isAdmin) {
+          console.log(this.isAdmin)
           this.toastService.showToast('Profil mis à jour avec succès', 'success');
           setTimeout(() => {
             this.router.navigate(['/user-list']).then(() => {
             });
           }, 2000);
-        } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+        } else if (this.isUser) {
           this.toastService.showToast('Profil mis à jour avec succès', 'success');
           setTimeout(() => {
             this.router.navigate(['/home']).then(() => {
