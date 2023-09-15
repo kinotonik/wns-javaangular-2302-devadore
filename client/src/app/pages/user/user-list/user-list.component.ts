@@ -26,6 +26,7 @@ export class UserListComponent implements OnInit {
     this.loadUsers();
   }
 
+
   loadUsers(): void {
     const jwtToken = this.authService.getToken();
 

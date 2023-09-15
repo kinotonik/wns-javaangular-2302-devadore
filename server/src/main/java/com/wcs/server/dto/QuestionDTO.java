@@ -1,6 +1,7 @@
 package com.wcs.server.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class QuestionDTO {
 
@@ -9,6 +10,7 @@ public class QuestionDTO {
     private QuizDTO quiz;
     private Date createdAt;
     private Date updatedAt;
+    private List<AnswerDTO> answers;
     
     public Long getId() {
         return id;
@@ -40,6 +42,11 @@ public class QuestionDTO {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
+    public List<AnswerDTO> getAnswers() {
+        return answers;
+    }
+    public void setAnswers(List<AnswerDTO> answers) {
+        this.answers = answers;
+    }
     
 }
