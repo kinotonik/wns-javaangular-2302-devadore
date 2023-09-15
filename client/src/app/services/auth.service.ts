@@ -16,6 +16,8 @@ export class AuthService {
 
   private isAdminSubject = new BehaviorSubject<boolean>(false);
   public isAdmin$ = this.isAdminSubject.asObservable();
+  private isUserSubject = new BehaviorSubject<boolean>(false);
+  public isUser$ = this.isUserSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -47,6 +49,10 @@ export class AuthService {
 
   setAdminState(isAdmin: boolean): void {
     this.isAdminSubject.next(isAdmin);
+  }
+
+  setUserState(isUser: boolean): void {
+    this.isUserSubject.next(isUser);
   }
 
   private saveRoles(roles: string[]): void {
@@ -96,6 +102,19 @@ export class AuthService {
       }
     } else {
       this.setAdminState(false);
+    }
+  }
+
+  checkUserStatus() {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      if (decodedToken && decodedToken.roles) {
+        const isUser = decodedToken.roles.includes('USER');
+        this.setUserState(isUser);
+      }
+    } else {
+      this.setUserState(false);
     }
   }
 

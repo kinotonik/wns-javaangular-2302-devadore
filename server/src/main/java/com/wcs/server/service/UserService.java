@@ -3,6 +3,8 @@ package com.wcs.server.service;
 import com.wcs.server.dto.RoleDTO;
 import com.wcs.server.entity.*;
 
+import com.wcs.server.errormessage.EmailAlreadyTakenException;
+import com.wcs.server.errormessage.UsernameAlreadyTakenException;
 import com.wcs.server.repository.ImageRepository;
 import com.wcs.server.repository.QuizRepository;
 import com.wcs.server.repository.RoleRepository;
@@ -122,18 +124,31 @@ public class UserService {
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User with id " + userId + " not found"));
 
-        // Deleting quizzes associated with user, which will cascade to questions and answers.
+        // Suppression des quiz associés à l'utilisateur, ce qui se répercutera sur les questions et les réponses.
         List<Quiz> quizzes = quizRepository.findByCreatedBy(user);
         for (Quiz quiz : quizzes) {
             quizRepository.delete(quiz);
         }
 
-        // Delete user after quizzes, questions and answers have been deleted.
+        // Supprimer l'utilisateur une fois que les quiz, les questions et les réponses ont été supprimés.
         userRepository.delete(user);
     }
 
-    public User registerUser(UserRegistrationRequest registrationRequest) {
+    public boolean checkUsernameExistence(String username) {
+        return userRepository.existsByUsername(username);
+    }
 
+    public boolean checkMailExistence(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public User registerUser(UserRegistrationRequest registrationRequest) {
+        if (checkUsernameExistence(registrationRequest.getUsername())) {
+            throw new UsernameAlreadyTakenException("Username is already taken.");
+        }
+        if (checkMailExistence(registrationRequest.getEmail())) {
+            throw new EmailAlreadyTakenException("Mail is already taken.");
+        }
         if (userRepository.findByUsername(registrationRequest.getUsername()) != null) {
             return null;
         }

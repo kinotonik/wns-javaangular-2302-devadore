@@ -81,6 +81,14 @@ export class UserService {
     return this.http.post(`${this.regUrl}/register`, formData);
   }
 
+  checkUsernameExistence(username: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.regUrl}/checkUsername`, {params: {username}});
+  }
+
+  checkMailExistence(email: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.regUrl}/checkMailExist`, {params: {email}});
+  }
+
   updateUserImage(userId: number, imageFile: File, mimeType: string): Observable<User> {
     console.log('Image File:', imageFile);
     console.log('MIME Type:', mimeType);

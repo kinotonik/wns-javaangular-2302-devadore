@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Role} from "../../../models/role.model";
 import {forkJoin} from "rxjs";
 import {ToastService} from "../../../services/toastService";
+import {AuthService} from "../../../services/auth.service";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class UserDetailComponent implements OnInit {
   userRoles!: Role[];
   imageFile?: File;
   previewUrl: any = null;
+  isAdmin: boolean = false;
 
   user: User = {
     id: 0,
@@ -31,7 +33,7 @@ export class UserDetailComponent implements OnInit {
     updatedAt: new Date(),
   };
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public toastService: ToastService) {
+  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute, private router: Router, public toastService: ToastService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +46,11 @@ export class UserDetailComponent implements OnInit {
         this.userRoles = user.roles;
         console.log(user);
       });
+    this.authService.checkAdminStatus();
+    this.authService.isAdmin$.subscribe((isAdminValue) => {
+      this.isAdmin = isAdminValue;
+      console.log('isAdminValue', isAdminValue)
+    });
   }
 
 
@@ -62,6 +69,16 @@ export class UserDetailComponent implements OnInit {
   }
 
   onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const filenameDisplay = document.getElementById('selectedFilename');
+
+    if (filenameDisplay) {
+      if (input.files && input.files[0]) {
+        filenameDisplay.textContent = input.files[0].name;
+      } else {
+        filenameDisplay.textContent = 'Aucun fichier sélectionné';
+      }
+    }
     const file = (event.target as HTMLInputElement).files;
     if (file && file.length) {
       this.imageFile = file[0];
@@ -89,15 +106,21 @@ export class UserDetailComponent implements OnInit {
         this.userService.updateUserImage(userId, imageFile, mimeType).subscribe({
           next: () => {
             // Mettre à jour uniquement les détails de l'utilisateur après la mise à jour de l'image
-            this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
-            /*alert('Image de profil image mis à jour avec succès');*/
-            setTimeout(() => {
-              this.router.navigate(['/user-list']);
-            }, 2000);
+            if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+              this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
+              setTimeout(() => {
+                this.router.navigate(['/user-list']);
+              }, 2000);
+            } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+              this.toastService.showToast('Profil mis à jour avec succès', 'success');
+              setTimeout(() => {
+                this.router.navigate(['/home']).then(() => {
+                });
+              }, 2000);
+            }
           },
-          error: (error) => {
+          error: () => {
             this.toastService.showToast('Erreur lors de la mise à jour de l\'image', 'error');
-            /*console.error('Erreur lors de la mise à jour de l\'image:', error);*/
           }
         });
 
@@ -111,12 +134,19 @@ export class UserDetailComponent implements OnInit {
   private updateUserDetails(): void {
     this.userService.updateUser(this.user).subscribe({
       next: () => {
-        /*alert('Profil mis à jour avec succès');*/
-        this.toastService.showToast('Profil mis à jour avec succès', 'success');
-        setTimeout(() => {
-          this.router.navigate(['/user-list']).then(() => {
-          });
-        }, 2000);
+        if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+          this.toastService.showToast('Profil mis à jour avec succès', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/user-list']).then(() => {
+            });
+          }, 2000);
+        } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+          this.toastService.showToast('Profil mis à jour avec succès', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/home']).then(() => {
+            });
+          }, 2000);
+        }
       },
       error: (error) => {
         this.toastService.showToast('Erreur lors de la mise à jour du profil', 'error');
@@ -126,17 +156,39 @@ export class UserDetailComponent implements OnInit {
   }
 
   deleteUser(userId: number): void {
-    this.userService.deleteUser(userId).subscribe({
-      next: () => {
-        this.toastService.showToast('Profil supprimé avec succès', 'success');
-        /* alert('Profil supprimé avec succès');*/
-      },
-      error: (error) => {
-        this.toastService.showToast('Erreur lors de la suppression du profil', 'error');
-        console.error('Erreur lors de la suppression du profil:', error);
-      }
-    });
+    if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
+      // Si l'utilisateur a le rôle ADMIN
+      this.toastService.showToast('La suppression est impossible pour les utilisateurs avec un rôle ADMIN', 'warning');
+    } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
+      // Si l'utilisateur a le rôle USER
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          this.toastService.showToast('Profil supprimé avec succès', 'success');
+          this.logoutAfterDelete(); // Déconnexion après la suppression de l'utilisateur
+        },
+        error: (error) => {
+          this.toastService.showToast('Erreur lors de la suppression du profil', 'error');
+          console.error('Erreur lors de la suppression du profil:', error);
+        }
+      });
+    } else {
+      // Cas pour d'autres rôles mais y en a pas !
+      this.toastService.showToast('Rôle non reconnu', 'warning');
+    }
   }
 
+  logoutAfterDelete(): void {
+    console.log('Removing tokens...');
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('refreshToken');
+    this.router.navigate(['/home']);
+  }
+
+
+  goToUserlist() {
+    this.router.navigateByUrl('user-list').then(() => {
+      // Après avoir navigué vers la page d'accueil, ?????
+    });
+  }
 
 }

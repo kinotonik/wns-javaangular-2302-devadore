@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
-import { UserRoutingModule } from './user-routing.module';
-import { UserComponent } from './user.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import {UserRoutingModule} from './user-routing.module';
+import {UserComponent} from './user.component';
+import {UserListComponent} from './user-list/user-list.component';
+import {UserDetailComponent} from './user-detail/user-detail.component';
 
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
@@ -18,13 +18,15 @@ import {FormsModule} from "@angular/forms";
     UserListComponent,
     UserDetailComponent
   ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        FormsModule,
-        MatTableModule,
-        MatButtonModule,
-        MatInputModule
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    FormsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatInputModule,
+    NgOptimizedImage
+  ]
 })
-export class UserModule { }
+export class UserModule {
+}
