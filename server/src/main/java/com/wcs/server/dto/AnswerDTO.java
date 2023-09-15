@@ -11,7 +11,6 @@ public class AnswerDTO {
     private Date createdAt;
     private Date updatedAt;
 
-    private QuestionDTO question;
 
     public Long getId() {
         return id;
@@ -42,12 +41,6 @@ public class AnswerDTO {
     }
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-    public QuestionDTO getQuestion() {
-        return question;
-    }
-    public void setQuestion(QuestionDTO question) {
-        this.question = question;
     }
 
     

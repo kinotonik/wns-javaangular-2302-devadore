@@ -69,6 +69,7 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
+
   previewImage(file: File) {
     // show preview
     const reader = new FileReader();

@@ -10,6 +10,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 export class QuizPreviewComponent implements OnInit {
 
   randomQuiz: QuizModel;
+  quizId: number;
 
   constructor(private quizService: QuizService){}
 
@@ -21,7 +22,8 @@ export class QuizPreviewComponent implements OnInit {
     this.quizService.getRandomQuiz().subscribe(
       res => {
         this.randomQuiz = res 
-        console.log(this.randomQuiz);
+        this.quizId = this.randomQuiz.id;
+        console.log(this.randomQuiz, this.quizId);
       });
   }
 
