@@ -156,7 +156,7 @@ export class UserDetailComponent implements OnInit {
 
   deleteUser(userId: number): void {
     if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
-      // Si l'utilisateur a le rôle interdits
+      // Si l'utilisateur a le rôle ADMIN
       this.toastService.showToast('La suppression est impossible pour les utilisateurs avec un rôle ADMIN', 'warning');
     } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
       // Si l'utilisateur a le rôle USER
