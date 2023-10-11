@@ -63,7 +63,9 @@ create table images (
     image     mediumblob   null,
     mime_type varchar(255) null,
     name      varchar(255) null,
-    user_id   int       null
+    user_id   int       null, 
+    quiz_id   int       null,
+    question_id int     null
 );
 alter table quiz add constraint quiz_ibfk_1 foreign key (category_id) references category (id) on update cascade on delete cascade;
 alter table quiz add constraint quiz_ibfk_2 foreign key (created_by) references user (id) on update cascade on delete cascade;
@@ -71,4 +73,7 @@ alter table question add constraint question_ibfk_1 foreign key (quiz_id) refere
 alter table answer add constraint answer_ibfk_1 foreign key (question_id) references question (id);
 alter table user_roles add constraint user_roles_ibfk_1 foreign key (user_id) references user (id) on update cascade;
 alter table user_roles add constraint user_roles_ibfk_2 foreign key (role_id) references role (id) on update cascade;
-alter table images add constraint FK_fccua10sh2240kfshte8bkbpt foreign key (user_id) references user (id);   
+alter table images add constraint FK_fccua10sh2240kfshte8bkbpt foreign key (user_id) references user (id); 
+alter table images add constraint FK_1q6j2w8hj0y8f8i1j6qy5t5k4 foreign key (quiz_id) references quiz (id);
+alter table images add constraint FK_1q6j2w8hj0y8f8i1j6qy5t5k3 foreign key (question_id) references question (id);
+
