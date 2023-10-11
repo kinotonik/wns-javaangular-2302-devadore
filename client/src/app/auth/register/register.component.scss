@@ -1,0 +1,24 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust the height as needed */
+}
+
+input.form-group-right-align::-webkit-outer-spin-button,
+input.form-group-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.form-group-right-align {
+  -moz-appearance: textfield;
+}
+
+.ng-valid[required] {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+}
