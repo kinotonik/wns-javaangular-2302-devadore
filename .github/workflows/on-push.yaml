@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - develop
+      -devOps
   # allow user to start job manually
   workflow_dispatch:
 
@@ -33,8 +34,7 @@ jobs:
       # build backend image with Spring Boot plugin for Maven
       - name: Build BACK image with Maven
         working-directory: ./server
-        run: chmod +x mvnw && ./mvnw --batch-mode --update-snapshots spring-boot:build-image -Dimage.tag=${GITHUB_REF##*/} "-Dimage.dockeruser=${{ secrets.DOCKERHUB_USERNAME }}/" -Dmodule.image.name=${{ secrets.DOCKERHUB_USERNAME }}/wns-javaangular-2302-devadore-server:${GITHUB_REF##*/}
-
+        run: chmod +x mvnw && ./mvnw --batch-mode --update-snapshots spring-boot:build-image -Dimage.tag=${GITHUB_REF##*/} "
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
