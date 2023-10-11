@@ -166,6 +166,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <jvmArguments>${argLine}</jvmArguments>
+                    <imageName>${image.dockeruser}${image.name}:${image.tag}</imageName>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
                 </configuration>
                 <executions>
                     <execution>
