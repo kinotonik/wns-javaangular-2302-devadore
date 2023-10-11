@@ -21,19 +21,18 @@ export class UserDetailComponent implements OnInit {
   previewUrl: any = null;
   isAdmin: boolean = false;
   isUser: boolean = false;
-  user: User = {
-    id: 0,
-    username: '',
-    email: '',
-    password: '',
-    image: '',
-    score: 0,
-    roles: [],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
+  user = {} as User;
+  showToast = false;
+  toastMessage = '';
+  selectedUserId: number | null = null;
 
-  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute, private router: Router, public toastService: ToastService) {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router,
+    public toastService: ToastService
+  ) {
   }
 
   ngOnInit(): void {
@@ -57,7 +56,6 @@ export class UserDetailComponent implements OnInit {
       console.log('isUserValue', isUserValue)
     });
   }
-
 
   isRoleSelected(role: Role): boolean {
     return this.userRoles?.some(userRole => userRole.id === role.id);
@@ -110,7 +108,7 @@ export class UserDetailComponent implements OnInit {
 
         this.userService.updateUserImage(userId, imageFile, mimeType).subscribe({
           next: () => {
-            // Mettre à jour uniquement les détails de l'utilisateur après la mise à jour de l'image
+            // Met à jour uniquement les détails de l'utilisateur après la mise à jour de l'image
             if (this.isAdmin) {
               this.toastService.showToast('Image du profil mise à jour avec succès', 'success');
               setTimeout(() => {
@@ -161,26 +159,44 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  deleteUser(userId: number): void {
+  onDeleteUser(userId: number) {
+    if (!this.user || this.user.id !== userId) {
+      console.error('User not found or not loaded');
+      return;
+    }
+
     if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
       // Si l'utilisateur a le rôle ADMIN
       this.toastService.showToast('La suppression est impossible pour les utilisateurs avec un rôle ADMIN', 'warning');
-    } else if (this.user.roles.some(role => ['USER'].includes(role.name))) {
-      // Si l'utilisateur a le rôle USER
-      this.userService.deleteUser(userId).subscribe({
+    } else {
+      this.toastMessage = `Êtes-vous sûr de vouloir supprimer l'utilisateur "${this.user.username}" ?`;
+      this.showToast = true;
+      this.selectedUserId = userId;
+    }
+  }
+
+
+  onToastConfirm() {
+    if (this.selectedUserId !== null) {
+      this.userService.deleteUser(this.selectedUserId).subscribe({
         next: () => {
           this.toastService.showToast('Profil supprimé avec succès', 'success');
-          this.logoutAfterDelete(); // Déconnexion après la suppression de l'utilisateur
+          this.logoutAfterDelete();
         },
         error: (error) => {
           this.toastService.showToast('Erreur lors de la suppression du profil', 'error');
           console.error('Erreur lors de la suppression du profil:', error);
         }
       });
-    } else {
-      // Cas pour d'autres rôles mais y en a pas !
-      this.toastService.showToast('Rôle non reconnu', 'warning');
+      this.showToast = false;
+      this.selectedUserId = null;
     }
+  }
+
+
+  onToastCancel() {
+    this.showToast = false;
+    this.selectedUserId = null;
   }
 
   logoutAfterDelete(): void {
@@ -193,8 +209,13 @@ export class UserDetailComponent implements OnInit {
 
   goToUserlist() {
     this.router.navigateByUrl('user-list').then(() => {
-      // Après avoir navigué vers la page d'accueil, ?????
     });
   }
+
+  goToQuizlistUser() {
+    if (this.user) this.router.navigateByUrl(`quiz/quiz-list-user/${this.user.id}`).then(() => {
+    });
+  }
+
 
 }
