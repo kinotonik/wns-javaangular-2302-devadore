@@ -6,6 +6,7 @@ services:
   # define database container
   db:
     container_name: app_${APP_ENV}_db
+    image: mysql:8.1.0
     restart: always
     environment:
       MYSQL_DATABASE: "quizzforall"
