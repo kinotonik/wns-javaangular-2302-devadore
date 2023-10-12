@@ -12,6 +12,7 @@ import {MatTableModule} from "@angular/material/table";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AnimatedSlideComponent} from './pages/home/components/animated-slide/animated-slide.component';
 import {ToastService} from "./services/toastService";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,6 @@ import {ToastService} from "./services/toastService";
     AnimatedSlideComponent,
   ],
   imports: [
-
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -28,7 +28,7 @@ import {ToastService} from "./services/toastService";
     MatButtonModule,
     MatCheckboxModule,
     MatTableModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [
