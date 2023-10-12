@@ -6,7 +6,6 @@ import {CategoryService} from "../../../../services/category.service";
 import {UserProfileService} from "../../../../services/user-profile-service";
 import {User} from "../../../../models/user.model";
 import {Router} from "@angular/router";
-import {ToastService} from "../../../../services/toastService";
 import {hasCorrectAnswerValidator} from "../../../../validators/question.validator";
 
 
@@ -35,8 +34,8 @@ export class QuizCreateComponent implements OnInit {
         private quizService: QuizService,
         private categoryService: CategoryService,
         private userProfileService: UserProfileService,
-        private router: Router,
-        public toastService: ToastService) {
+        private router: Router
+    ) {
         this.quizForm = this.createQuizForm();
     }
 
@@ -195,8 +194,7 @@ export class QuizCreateComponent implements OnInit {
         for (let [key, value] of (this.formData as any).entries()) {
             console.log(key, value);
         }
-
-        // Affichez la confirmation
+        
         this.toastMessage = 'Voulez-vous vraiment enregistrer ce quiz?';
         this.toastType = 'confirm';
         this.canShowButton = true;
@@ -226,8 +224,6 @@ export class QuizCreateComponent implements OnInit {
                     this.toastMessage = 'Une erreur s\'est produite. Veuillez réessayer plus tard.';
                     this.toastType = 'error';
                     this.showToast = true;
-                } else {
-                    alert('Une erreur s\'est produite. Veuillez réessayer plus tard.');
                 }
             }
         );

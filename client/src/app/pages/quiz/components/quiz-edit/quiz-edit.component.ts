@@ -20,6 +20,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class QuizEditComponent implements OnInit {
     quizForm: FormGroup;
+    private formData: FormData;
     quizId: number;
     categories: CategoryModel[];
     userImage: any;
@@ -28,6 +29,11 @@ export class QuizEditComponent implements OnInit {
     image: File | null = null;
     previewUrl: any = null;
     imageQuiz: any;
+    showToast = false;
+    toastMessage: string;
+    toastType: 'confirm' | 'success' | 'error' | 'warning';
+    canShowButton: boolean = false;
+    isHovered = false;
 
     constructor(
         private fb: FormBuilder,
@@ -37,7 +43,6 @@ export class QuizEditComponent implements OnInit {
         private categoryService: CategoryService,
         private userProfileService: UserProfileService,
         private sanitizer: DomSanitizer,
-        public toastService: ToastService
     ) {
     }
 
@@ -276,33 +281,65 @@ export class QuizEditComponent implements OnInit {
     }
 
     onSubmit(): void {
-        if (this.quizForm.valid) {
+        if (this.quizForm) {
             const questions = this.quizForm.get('questions')?.value;
             const isValid = this.validateQuestions(questions);
 
             if (!isValid) {
-                this.toastService.showToast('Each question must have at least one correct answer.', 'error');
+                this.toastMessage = 'Votre quiz est incomplet.';
+                this.toastType = 'warning';
+                this.canShowButton = false;
+                this.showToast = true;
                 return;
             }
 
-            const formData: FormData = new FormData();
+            this.formData = new FormData();
+            this.formData.append('title', this.quizForm.get('title')?.value);
+            this.formData.append('description', this.quizForm.get('description')?.value);
+            this.formData.append('categoryId', this.quizForm.get('categoryId')?.value);
 
-            formData.append('title', this.quizForm.get('title')?.value);
-            formData.append('description', this.quizForm.get('description')?.value);
-            formData.append('categoryId', this.quizForm.get('categoryId')?.value);
-
-            formData.append('questions', JSON.stringify(this.quizForm.get('questions')?.value));
+            this.formData.append('questions', JSON.stringify(this.quizForm.get('questions')?.value));
 
             if (this.image) {
-                formData.append('image', this.image, this.image.name);
+                this.formData.append('image', this.image, this.image.name);
             }
 
-            this.quizService.updateQuiz(this.quizId, formData).subscribe(response => {
-                this.toastService.showToast('Votre quiz est mis à jour.', 'success');
-                if (this.user) this.router.navigate(['/quiz-list-user', this.user?.id]);
-            });
+            this.toastMessage = 'Voulez-vous vraiment enregistrer ce quiz?';
+            this.toastType = 'confirm';
+            this.canShowButton = true;
+            this.showToast = true;
         }
     }
 
+    onToastConfirmed() {
+        this.canShowButton = false;
+        this.quizService.updateQuiz(this.quizId, this.formData).subscribe(response => {
+                this.toastMessage = 'L\'enregistrement de ton quiz est réalisé avec succès';
+                this.toastType = 'success';
+                this.showToast = true;
+
+                setTimeout(() => {
+                    if (this.user) {
+                        this.router.navigate(['/user-detail', this.user.id]);
+                        this.showToast = false;
+                    }
+                }, 2000);
+            },
+            error => {
+                if (error) {
+                    this.toastMessage = 'Une erreur s\'est produite. Veuillez réessayer plus tard.';
+                    this.toastType = 'error';
+                    this.showToast = true;
+                }
+            }
+        );
+    }
+
+    editUser(userId: number | undefined): void {
+        if (userId === undefined) {
+            return;
+        }
+        this.router.navigate(['/user-detail', userId]);
+    }
 }
 

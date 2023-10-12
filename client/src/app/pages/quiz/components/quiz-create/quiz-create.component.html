@@ -42,7 +42,6 @@
                 </div>
 
             </div>
-            <!-- Dropdown for categories -->
             <div class="m-4">
                 <label for="category" class="block mb-2">Category</label>
                 <select id="category" formControlName="categoryId"
@@ -104,7 +103,7 @@
                     <div *ngIf="questionCtrl.hasError('noCorrectAnswer')">
                         <p class="text-orange-600">La question doit comporter au moins une réponse correcte.</p>
                     </div>
-                    <label class="block m-2">Réponses (cocher la bonne réponses)</label>
+                    <label class="block m-2">Cocher la(les) bonne(s) réponse(s)</label>
                     <div formArrayName="answers">
                         <div *ngFor="let answerCtrl of getAnswersArray(questionCtrl); let j = index" [formGroupName]="j"
                              class="mb-2 flex items-center">
