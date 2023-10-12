@@ -3,25 +3,33 @@ version: "3.5"
 # this docker compose file is used for deployment
 
 services:
-
   # define database container
   db:
     container_name: app_${APP_ENV}_db
-    image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=appdb
-      - POSTGRES_PASSWORD=appdb
-      - POSTGRES_DB=appdb
+      MYSQL_DATABASE: "quizzforall"
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: "lateam"
+      # You can use whatever password you like
+      MYSQL_PASSWORD: "devadore"
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - "3306:3306"
+    expose:
+      # Opens port 3306 on the container
+      - "3306"
+      # Where our data will be persisted
     volumes:
-      - db:/var/lib/postgresql/data
+      - db:/var/lib/mysql
     networks:
       - appinternals
-
   # define backend container
   back:
     container_name: app_${APP_ENV}_back
-    image: ${DOCKER_USER}/wns-deploy-angular-spring-back:${DOCKER_IMAGE_TAG}
+    image: ${DOCKER_USER}/wns-deploy-angular-spring-server:${DOCKER_IMAGE_TAG}
     restart: always
     depends_on:
       - db
@@ -29,11 +37,11 @@ services:
       appinternals:
         aliases:
           - back
-  
+
   # define nginx + front container
   nginx:
     container_name: app_${APP_ENV}_front
-    image: ${DOCKER_USER}/wns-deploy-angular-spring-front:${DOCKER_IMAGE_TAG}
+    image: ${DOCKER_USER}/wns-deploy-angular-spring-server:${DOCKER_IMAGE_TAG}
     depends_on:
       - back
     restart: always
@@ -47,5 +55,5 @@ volumes:
     driver: local
 networks:
   appinternals:
-    # customize the actual network name depending on environment, so "prod" containers do not share network with "preprod" even on same machine / docker server 
+    # customize the actual network name depending on environment, so "prod" containers do not share network with "preprod" even on same machine / docker server
     name: appinternals_${APP_ENV}
