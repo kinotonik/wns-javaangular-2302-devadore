@@ -5,15 +5,23 @@
       'bg-red-500': type === 'error',
       'bg-orange-500': type === 'warning'
     }">
-  <span class="text-white">{{ message }}</span>
-  <div *ngIf="type === 'confirm'" class="ml-4">
-    <button (click)="confirm()" class="bg-white text-blue-500 hover:text-blue-700 px-2 py-1 rounded mr-2">
-      Confirm
-    </button>
-    <button (click)="cancel()" class="bg-white text-red-500 hover:text-red-700 px-2 py-1 rounded">
-      Cancel
-    </button>
-  </div>
+    <span class="text-white">{{ message }}</span>
+    <div class="ml-4 flex items-center">
+        <!-- Close button -->
+        <button (click)="closeToast()" class="bg-white text-gray-800 hover:text-gray-600 px-2 py-1 rounded mr-2">
+            X
+        </button>
+        <!-- Only display Confirm and Cancel buttons for 'confirm' type -->
+        <ng-container *ngIf="type === 'confirm' && canShowButton">
+            <button (click)="confirm()" class="bg-white text-blue-500 hover:text-blue-700 px-2 py-1 rounded mr-2">
+                Confirm
+            </button>
+            <button (click)="cancel()" class="bg-white text-red-500 hover:text-red-700 px-2 py-1 rounded">
+                Cancel
+            </button>
+        </ng-container>
+    </div>
 </div>
+
 
 
