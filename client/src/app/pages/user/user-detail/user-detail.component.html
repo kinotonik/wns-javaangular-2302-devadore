@@ -2,9 +2,12 @@
     <app-toast
             *ngIf="showToast"
             [message]="toastMessage"
-            (onConfirm)="onToastConfirm()"
-            (onCancel)="onToastCancel()"
-    ></app-toast>
+            [type]="toastType"
+            [canShowButton]="canShowButton"
+            (onConfirm)="onToastConfirmed()"
+            (onCancel)="showToast=false"
+            (close)="showToast=false">
+    </app-toast>
     <div
             class="mx-auto flex h-full flex-col items-center justify-center px-6 py-8 "
     >
