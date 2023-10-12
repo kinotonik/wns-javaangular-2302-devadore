@@ -181,7 +181,6 @@ export class UserDetailComponent implements OnInit {
 
         if (this.user.roles.some(role => ['ADMIN'].includes(role.name))) {
             // Si l'utilisateur a le rôle ADMIN
-            this.toastService.showToast('La suppression est impossible pour les utilisateurs avec un rôle ADMIN', 'warning');
             this.toastMessage = 'La suppression est impossible pour les utilisateurs avec un rôle ADMIN';
             this.toastType = 'warning';
             this.showToast = true;
