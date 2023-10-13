@@ -75,6 +75,11 @@ export class AuthService {
     }
   }
 
+  clearToken(): void {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('refreshToken');
+  }
+
   logout(): Observable<any> {
     const token = this.getToken();
     if (token) {

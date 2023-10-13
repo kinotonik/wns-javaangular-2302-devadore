@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
-
-
+import {Component, HostListener} from '@angular/core';
+import {AuthService} from "./services/auth.service";
 
 
 @Component({
@@ -8,7 +7,15 @@ import {Component} from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent { // en attendant un navbar ?
+export class AppComponent {
   title = 'client';
+
+  constructor(private authService: AuthService) {
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    this.authService.clearToken();
+  }
 
 }
