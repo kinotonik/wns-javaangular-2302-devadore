@@ -47,7 +47,7 @@
           Liste d'utilisateurs
         </button>
         <button
-          *ngIf="isUser && !isAdmin"
+          *ngIf="isUser"
           class="mt-4 transform rounded-full border-2 border-white px-4 py-2 text-current transition-transform duration-200 hover:scale-105"
           (click)="user && editUser(user.id)"
         >
@@ -89,73 +89,3 @@
     </div>
   </div>
 </div>
-
-<!--
-<div
-  class="relative flex h-screen items-center justify-center bg-cover bg-center text-white"
-  style="
-    background-image: url(/assets/images/defaultAvatars/MidJourney-wizard-hall.jpg);
-  "
->
-  <div class="flex flex-col items-center">
-    <h1 class="text-center text-8xl font-extrabold uppercase">
-      <span>Testez vos</span><br/>
-      <span>connaissances !</span>
-    </h1>
-    <div class="flex gap-4">
-      <button
-        class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current uppercase transform transition-transform duration-200 hover:scale-105"
-        [routerLink]="'/quiz/preview'"
-      >
-        aléatoire
-      </button>
-      <button
-        class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current uppercase transform transition-transform duration-200 hover:scale-105"
-      >
-        voir tout
-      </button>
-    </div>
-
-    <div class="absolute right-0 top-0 m-5 flex flex-col items-center dropdown-container">
-      <img
-        class="w-52 object-contain"
-        src="../../../assets/images/defaultAvatars/LOGO-QUIZ-FOR-ALL.png"
-        alt="Logo"
-
-      />
-      
-      <div *ngIf="isLoggedIn && userImage" class="w-16 h-16 rounded-full overflow-hidden">
-        <img [src]="userImage" alt="User Image" class="w-full h-full rounded-full border-4 border-amber-500"
-             (mouseenter)="showDropdown()"
-             (mouseleave)="hideDropdown()">
-      </div>
-
-      
-      <fa-icon *ngIf="!isLoggedIn" class="fa-4x" [icon]="faCircleUser"
-               (mouseenter)="showDropdown()"
-               (mouseleave)="hideDropdown()"
-               [ngClass]="{'color-lawngreen': isLoggedIn, 'color-default': !isLoggedIn}">
-      </fa-icon>
-
-      <div #dropdownMenu class="dropdown-menu" [class.show]="isDropdownVisible" (mouseenter)="showDropdown()"
-           (mouseleave)="hideDropdown()">
-        <button
-          class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current transform transition-transform duration-200 hover:scale-105"
-          (click)="handleButtonClick()">
-          {{ isAuthenticated() ? 'Logout' : 'Login' }}
-        </button>
-        <br>
-        <button *ngIf="isAdmin"
-                class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current transform transition-transform duration-200 hover:scale-105"
-                routerLink="/user-list">User List
-        </button>
-        <button *ngIf="isUser && !isAdmin"
-                class="mt-4 rounded-full border-2 border-white px-4 py-2 text-current transform transition-transform duration-200 hover:scale-105"
-                (click)="user && editUser(user.id)">
-          Profile
-        </button>
-      </div>
-    </div>
-  </div>
-</div> 
--->
