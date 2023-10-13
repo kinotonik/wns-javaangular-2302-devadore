@@ -77,7 +77,7 @@ export class AuthService {
 
   clearToken(): void {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('refreshToken'); // Remove this if you don't use refresh tokens.
+    localStorage.removeItem('refreshToken');
   }
 
   logout(): Observable<any> {
