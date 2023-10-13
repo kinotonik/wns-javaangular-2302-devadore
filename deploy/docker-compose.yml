@@ -5,7 +5,7 @@ version: "3.5"
 services:
   # define database container
   db:
-    container_name: app_${APP_ENV}_db
+    container_name: quizz_${APP_ENV}_db
     image: mysql:8.1.0
     restart: always
     environment:
@@ -24,37 +24,37 @@ services:
       - "3306"
       # Where our data will be persisted
     volumes:
-      - db:/var/lib/mysql
+      - quizzdb:/var/lib/mysql
     networks:
-      - appinternals
+      - quizzappinternals
   # define backend container
-  back:
-    container_name: app_${APP_ENV}_back
-    image: ${DOCKER_USER}/wns-deploy-angular-spring-server:${DOCKER_IMAGE_TAG}
+  server:
+    container_name: quizz_${APP_ENV}_server
+    image: ${DOCKER_USER}/wns-javaangular-2302-devadore-server:${DOCKER_IMAGE_TAG}
     restart: always
     depends_on:
       - db
     networks:
-      appinternals:
+      quizzappinternals:
         aliases:
-          - back
+          - server
 
   # define nginx + front container
   nginx:
-    container_name: app_${APP_ENV}_front
-    image: ${DOCKER_USER}/wns-deploy-angular-spring-server:${DOCKER_IMAGE_TAG}
+    container_name: quizz__${APP_ENV}_client
+    image: ${DOCKER_USER}/wns-javaangular-2302-devadore-client:${DOCKER_IMAGE_TAG}
     depends_on:
-      - back
+      - server
     restart: always
     networks:
-      - appinternals
+      - quizzappinternals
     ports:
       - ${GATEWAY_PORT:-8000}:80
 
 volumes:
-  db:
+  quizzdb:
     driver: local
 networks:
-  appinternals:
+  quizzappinternals:
     # customize the actual network name depending on environment, so "prod" containers do not share network with "preprod" even on same machine / docker server
-    name: appinternals_${APP_ENV}
+    name: quizzappinternals_${APP_ENV}
