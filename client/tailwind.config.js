@@ -13,6 +13,9 @@ module.exports = {
     },
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],
+      koulen: ["Koulen", "sans-serif"],
+      lilita: ["Lilita One", "sans-serif"],
+      lexend: ["Lexend", "sans-serif"]
     },
   },
   plugins: [],

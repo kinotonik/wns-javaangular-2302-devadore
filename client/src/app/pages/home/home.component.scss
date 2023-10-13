@@ -9,9 +9,9 @@
 }
 
 .dropdown-menu.show {
-  display: block;
-
+  display: flex;
 }
+
 .dropdown-menu button {
   transition: background-color 0.3s ease;
 }
@@ -19,6 +19,7 @@
 .dropdown-menu button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
 .color-lawngreen {
   color: lawngreen;
 }
@@ -26,3 +27,8 @@
 .color-default {
   color: red;
 }
+
+.text-red {
+  color: red;
+}
+

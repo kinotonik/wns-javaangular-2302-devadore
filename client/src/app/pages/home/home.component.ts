@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn = false;
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
   user: User | null;
+  isMenuHovered: boolean = false;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router, private userProfileService: UserProfileService) {
 
@@ -32,6 +33,14 @@ export class HomeComponent implements OnInit {
 
   hideDropdown() {
     this.isDropdownVisible = false;
+  }
+
+  showSubMenu(): void {
+    this.isMenuHovered = true;
+  }
+
+  hideSubMenu(): void {
+    this.isMenuHovered = false;
   }
 
   ngOnInit() {
