@@ -93,7 +93,14 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://dev.quizz4all.lille-1.wilders.dev" ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "x-auth-token"));
+        configuration.setAllowedHeaders(Arrays.asList(
+            "Authorization",
+            "Accept",
+            "Cache-Control",
+            "Content-Type",
+            "Origin",
+            "x-csrf-token",
+            "x-requested-with"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
         configuration.setAllowCredentials(true);
 
