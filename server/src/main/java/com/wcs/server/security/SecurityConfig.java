@@ -126,12 +126,11 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .anyRequest().permitAll())
-                     /*    .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
+                        .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
                         .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}", "/api/categories/**").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
                         .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/api/quiz/random", "/api/question/random/quiz/**").permitAll()
-                        .anyRequest().authenticated()) */
+                        .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(userDetailsService, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
