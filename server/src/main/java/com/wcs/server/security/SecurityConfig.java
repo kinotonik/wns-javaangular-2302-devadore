@@ -96,11 +96,8 @@ public class SecurityConfig {
         configuration.setAllowedHeaders(Arrays.asList(
             "Authorization",
             "Accept",
-            "Cache-Control",
             "Content-Type",
-            "Origin",
-            "x-csrf-token",
-            "x-requested-with"));
+            "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
         configuration.setAllowCredentials(true);
 
@@ -129,11 +126,12 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
+                        .permitAll())
+                     /*    .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
                         .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}", "/api/categories/**").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
                         .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/api/quiz/random", "/api/question/random/quiz/**").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()) */
                 .addFilterBefore(new JwtAuthenticationFilter(userDetailsService, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
