@@ -126,7 +126,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .permitAll())
+                        .anyRequest().permitAll())
                      /*    .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
                         .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}", "/api/categories/**").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
