@@ -46,7 +46,7 @@ services:
     networks:
       - quizzappinternals
     ports:
-      - ${GATEWAY_PORT:-8142}:80
+      - ${GATEWAY_PORT:-8000}:80
 
 volumes:
   quizzdb:
