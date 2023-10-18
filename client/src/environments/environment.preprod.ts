@@ -1,3 +1,4 @@
 export const environment = {
-    production: false,
+  production: false,
+  URL: 'https://dev.quizz4all.lille-1.wilders.dev',
 };

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { QuestionModel } from '../models/question.model';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,7 +31,7 @@ export class QuestionService {
   ): Observable<QuestionModel> {
     const params = new HttpParams().set('excludeIds', excludeIds.join(','));
     return this.http.get<QuestionModel>(
-     environment.URL+'/api/question/random/quiz/${id}`,
+      environment.URL + `/api/question/random/quiz/${id}`,
       { params }
     );
   }
