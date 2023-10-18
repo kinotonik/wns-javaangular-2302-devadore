@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.checkAdminStatus();
-    console.log(environment.URL, 'environment.URL'));
+    console.log(environment.URL, 'environment.URL');
     this.authService.isAdmin$.subscribe((isAdminValue) => {
       this.isAdmin = isAdminValue;
       console.log('isAdminValue', isAdminValue);
