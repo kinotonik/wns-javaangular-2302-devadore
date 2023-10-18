@@ -9,7 +9,7 @@ import { HeaderUtilService } from './header-util.service';
   providedIn: 'root',
 })
 export class QuizService {
-  private apiUrl = 'https://dev.quizz4all.lille-1.wilders.dev/api/quiz';
+  private apiUrl = 'http://localhost:8080/api/quiz';
 
   constructor(
     private http: HttpClient,
