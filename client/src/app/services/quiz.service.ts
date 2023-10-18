@@ -4,12 +4,13 @@ import { Observable, map } from 'rxjs';
 import { QuizModel } from '../models/quiz.model';
 import { CreateQuizModel } from '../models/create-quiz.model';
 import { HeaderUtilService } from './header-util.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  private apiUrl = 'http://localhost:8080/api/quiz';
+  private apiUrl = environment.URL + '/api/quiz';
 
   constructor(
     private http: HttpClient,
