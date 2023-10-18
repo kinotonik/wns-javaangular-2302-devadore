@@ -3,7 +3,6 @@
 
 FROM node:18.16.1-alpine as compile
 
-FROM node........ 
 ARG NG_ENV
 
 # create build dirs
