@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - develop
+      - devOps
   # allow user to start job manually
   workflow_dispatch:
 
@@ -32,7 +33,7 @@ jobs:
         run: docker build --build-arg NG_ENV=production -f ./deploy/Dockerfile-nginx-front -t ${{ secrets.DOCKERHUB_USERNAME }}/wns-javaangular-2302-devadore-client:${GITHUB_REF##*/} .
 
       - name: Build FRONT image PREPROD
-        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/devOps'
         run: docker build --build-arg NG_ENV=preproduction -f ./deploy/Dockerfile-nginx-front -t ${{ secrets.DOCKERHUB_USERNAME }}/wns-javaangular-2302-devadore-client:${GITHUB_REF##*/} .
 
       # build backend image with Spring Boot plugin for Maven
