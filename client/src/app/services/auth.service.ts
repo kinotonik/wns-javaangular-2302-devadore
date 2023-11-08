@@ -70,7 +70,7 @@ export class AuthService {
   decodeToken(token: string): any {
     try {
       return jwt_decode(token);
-    } catch (Error) {
+    } catch (Err) {
       return null;
     }
   }
@@ -123,4 +123,18 @@ export class AuthService {
       this.setUserState(false);
     }
   }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, {email});
+  }
+
+  resetPassword(newPassword: string, token: string | null): Observable<any> {
+    const payload = {
+      newPassword: newPassword,
+      token: token
+    };
+
+    return this.http.post(`${this.apiUrl}/reset-password`, payload);
+  }
+
 }

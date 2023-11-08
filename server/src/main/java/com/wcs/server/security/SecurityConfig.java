@@ -91,8 +91,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://dev.quizz4all.lille-1.wilders.dev", "https://quizz4all.lille-1.wilders.dev" ));
-                //configuration.setAllowedOrigins(Arrays.asList("*"));
+
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://dev.quizz4all.lille-1.wilders.dev", "https://quizz4all.lille-1.wilders.dev", "http://localhost:8429" ));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList(
@@ -128,10 +128,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
-                        .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}", "/api/categories/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist", "/api/quiz/**", "/api/users/**", "/api/question/random/quiz/**", "/api/categories").permitAll()
+                        .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}", "/api/quiz/**", "/api/categories/**").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
-                        .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/api/quiz/random", "/api/question/random/quiz/**").permitAll()
+                        .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(userDetailsService, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
@@ -147,4 +147,5 @@ public class SecurityConfig {
     public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
         return new HandlerMappingIntrospector();
     }
+
 }
