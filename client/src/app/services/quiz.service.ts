@@ -37,6 +37,10 @@ export class QuizService {
       .pipe(map((res) => res));
   }
 
+  getTotalQuestionsForQuiz(quizId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/${quizId}/totalQuestions`);
+  }
+
   getAllQuizzesCreatedByUser(userId: number): Observable<QuizModel[]> {
     return this.http.get<QuizModel[]>(`${this.apiUrl}/${userId}`, {
       headers: this.headerUtil.getHeaders(),
@@ -59,5 +63,9 @@ export class QuizService {
     return this.http.delete<QuizModel[]>(`${this.apiUrl}/${id}`, {
       headers: this.headerUtil.getHeaders(),
     });
+  }
+
+  canUserEditQuiz(quizId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/${quizId}/can-edit`, {headers: this.headerUtil.getHeaders()});
   }
 }

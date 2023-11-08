@@ -132,22 +132,20 @@
     </div>
     <button *ngIf="isAdmin"
             (click)="goToUserlist()"
-            class="mt-4 rounded-full border-2 border-b-amber-400 px-4 py-2 text-stone-100 transform transition-transform duration-200 hover:scale-105"
-    >
+            class="mt-4 rounded-full border-2 border-b-amber-400 px-4 py-2 text-white transform transition-transform duration-200 hover:scale-105" >
       Liste des utilisateurs
     </button>
   </div>
   <div *ngIf="isUser">
 
     <button
-      class="mt-4 w-full rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-stone-100 transform transition-transform duration-200 hover:scale-105"
-      [routerLink]="'/quiz/create-quiz'"
-    >
+      class="mt-4 w-full rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-white transform transition-transform duration-200 hover:scale-105"
+      [routerLink]="'/quiz/create-quiz'">
       Créer son QUIZ
     </button>
     <button
-      class="mt-4 w-full rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-stone-100 transform transition-transform duration-200 hover:scale-105"
-      (click)="goToQuizlistUser()"
+      class="mt-4 w-full rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-white transform transition-transform duration-200 hover:scale-105"
+     (click)="goToQuizlistUser()"
     >
       Liste de tes QUIZZES
     </button>

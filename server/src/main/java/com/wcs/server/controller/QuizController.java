@@ -68,6 +68,13 @@ public class QuizController {
         return new ResponseEntity<>(quizOptional.get(), HttpStatus.OK);
     }
 
+    @Operation(summary = "permet de connaitre le total de question-quizID")
+    @GetMapping("/quiz/{quizId}/totalQuestions")
+    public ResponseEntity<Integer> getTotalQuestionsForQuiz(@PathVariable Long quizId) {
+        int total = quizService.getTotalQuestionsByQuizId(quizId);
+        return ResponseEntity.ok(total);
+    }
+
     @Operation(summary = "permet à un utilisateur de créer un quiz")
     @PostMapping("/quiz")
     public ResponseEntity<String> createQuiz(
@@ -150,6 +157,12 @@ public class QuizController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\": \"An error occurred during registration\"}");
         }
+    }
+
+    @GetMapping("/quiz/{quizId}/can-edit")
+    public ResponseEntity<?> canUserEditQuiz(@PathVariable Long quizId, Authentication authentication) {
+        boolean canEdit = quizService.canUserEditQuiz(quizId, authentication);
+        return ResponseEntity.ok(canEdit);
     }
 
     @DeleteMapping("/quiz/{id}")
