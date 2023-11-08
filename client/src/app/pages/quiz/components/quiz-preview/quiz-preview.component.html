@@ -1,17 +1,36 @@
-<div class="container mx-auto p-6">
-  <div class="flex justify-center">
-    <div class="max-w-sm rounded overflow-hidden shadow-lg my-2" *ngIf="randomQuiz">
+<div class="flex justify-center flex-col h-screen m-auto place-items-center gap-3">
+  <div
+    class="overflow-hidden rounded-lg shadow-lg bg-gray-900 flex flex-col items-center border border-white text-white p-12"
+    *ngIf="randomQuiz"
+  >
+    <div class="w-96 px-6 py-4 flex flex-col items-center">
+      <div class="mb-2 text-4xl font-bold font-lilita">{{ randomQuiz.title }}</div>
+      <img
+        class="m-auto h-20 w-20 shadow"
+        *ngIf="randomQuiz.image"
+        [src]="'data:' + randomQuiz.mimeType + ';base64,' + randomQuiz.image"
+        alt="Image du Quiz"
+      />
+      <p class="text-lg font-lexend text-center">{{ randomQuiz.description }}</p>
+    </div>
+    <div>
       <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">{{ randomQuiz.title }}</div>
-        <p class="text-gray-700 text-base">{{ randomQuiz.description }}</p>
-      </div>
-      <div class="px-6 py-4">
-        <button 
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        [routerLink]="['/quiz/play', quizId]">
+        <button
+        class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring focus:border-blue-300 font-lexend font-bold"
+          [routerLink]="['/quiz/play', quizId]"
+        >
           Lancer le Quiz !
         </button>
       </div>
+      <div class="cursor-pointer text-center flex justify-center gap-1 text-xs" (click)="getRandomQuiz()">
+        <span class="reload-icon">&#x21BB;</span>
+        <div>Changer de quiz</div>
+      </div>
     </div>
+  </div>
+  <div class="flex content-start">
+    <button class="bg-white border-b-4 border-gray-500 rounded-lg py-1 px-5 font-lexend" [routerLink]="['/']">
+      Retour
+    </button>
   </div>
 </div>

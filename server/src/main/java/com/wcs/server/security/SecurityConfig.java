@@ -91,9 +91,15 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://dev.quizz4all.lille-1.wilders.dev", "https://quizz4all.lille-1.wilders.dev" ));
+                //configuration.setAllowedOrigins(Arrays.asList("*"));
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "x-auth-token"));
+        configuration.setAllowedHeaders(Arrays.asList(
+            "Authorization",
+            "Accept",
+            "Content-Type",
+            "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
         configuration.setAllowCredentials(true);
 
@@ -123,9 +129,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/auth/**", "/auth/checkUsername", "/auth/checkMailExist").permitAll()
-                        .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/users/{id}/image", "/api/users/name/**", "/api/users/{id}", "/api/categories/**").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/api/users/**").hasAuthority("ADMIN")
-                        .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/api/quiz/random", "/api/question/random/quiz/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(userDetailsService, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
