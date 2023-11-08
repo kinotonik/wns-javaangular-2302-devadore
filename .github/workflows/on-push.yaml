@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - develop
+      - devOps
   # allow user to start job manually
   workflow_dispatch:
 
