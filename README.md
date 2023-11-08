@@ -76,3 +76,4 @@ Instructions pour ceux qui souhaitent contribuer au projet.
 ## Licence
 
 Ce projet est sous licence [NOM DE LA LICENCE] - voir le fichier [LICENSE.md](lien-vers-le-fichier-license.md) pour plus de détails.
+//Trigger
