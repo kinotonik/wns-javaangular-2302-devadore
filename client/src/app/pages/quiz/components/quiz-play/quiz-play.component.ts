@@ -132,7 +132,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
    * @param totalCorrectCount - (Optionnel) Nombre total de réponses correctes pour la question actuelle.
    * @param isMultipleChoice - (Optionnel) Booléen indiquant si la question actuelle est à choix multiples.
    */
-  calculateScore(allCorrect: boolean, timeLeft: number, correctSelectedCount?: number, totalCorrectCount?: number): void {
+  calculateScore(allCorrect: boolean, timeLeft: number, correctSelectedCount?: number, totalCorrectCount?: number, isMultipleChoice?: boolean): void {
 
     // Calcul du score de base. Cela dépend du temps restant, avec une pénalité pour chaque seconde écoulée.
     let baseScore = Math.max(0, this.maxScorePerQuestion - (10 * (this.maxTime - timeLeft - 2)));
