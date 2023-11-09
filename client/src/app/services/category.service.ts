@@ -1,24 +1,23 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CategoryModel } from '../models/category.model';
-import { AuthService } from './auth.service';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {CategoryModel} from '../models/category.model';
+import {environment} from 'src/environments/environment';
+import {HeaderUtilService} from "./header-util.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  private readonly apiUrl = environment + '/api/categories';
+  private readonly apiUrl = environment.URL + '/api/categories';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private headerUtil: HeaderUtilService) {
+  }
 
   getAllCategories(): Observable<CategoryModel[]> {
-    const jwtToken = this.authService.getToken();
-    const headers = jwtToken
-      ? new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`)
-      : {};
-    return this.http.get<CategoryModel[]>(this.apiUrl);
+    return this.http.get<CategoryModel[]>(`${this.apiUrl}`, {
+      headers: this.headerUtil.getHeaders(),
+    });
   }
 
   getCategoryById(id: number): Observable<CategoryModel> {

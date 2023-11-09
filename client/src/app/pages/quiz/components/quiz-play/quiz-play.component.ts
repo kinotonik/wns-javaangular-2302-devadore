@@ -6,6 +6,7 @@ import {QuestionService} from 'src/app/services/question.service';
 import {Subject, Subscription, takeUntil, takeWhile, timer} from "rxjs";
 import {User} from "../../../../models/user.model";
 import {UserProfileService} from "../../../../services/user-profile-service";
+import {QuizService} from "../../../../services/quiz.service";
 
 @Component({
   selector: 'app-quiz-play',
@@ -28,23 +29,29 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
   username: string | null = null;
   userImage: any;
   user: User | null;
-
+  totalQuestions: number;
 
   constructor(
     private route: ActivatedRoute,
     private questionService: QuestionService,
+    private quizService: QuizService,
     private cdr: ChangeDetectorRef,
     private userProfileService: UserProfileService
   ) {
   }
 
   ngOnInit(): void {
+    this.quizId = +this.route.snapshot.paramMap.get('id')!;
     this.userProfileService.getUserImage().subscribe(image => {
       this.userImage = image;
     });
     this.userProfileService.getUser().subscribe(user => {
       this.user = user;
       this.username = user?.username ?? null;
+    });
+    this.quizService.getTotalQuestionsForQuiz(this.quizId).subscribe(total => {
+      this.totalQuestions = total;
+      console.log("total question: ", total)
     });
     this.getPageInfos();
   }
@@ -125,7 +132,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
    * @param totalCorrectCount - (Optionnel) Nombre total de réponses correctes pour la question actuelle.
    * @param isMultipleChoice - (Optionnel) Booléen indiquant si la question actuelle est à choix multiples.
    */
-  calculateScore(allCorrect: boolean, timeLeft: number, correctSelectedCount?: number, totalCorrectCount?: number, isMultipleChoice?: boolean): void {
+  calculateScore(allCorrect: boolean, timeLeft: number, correctSelectedCount?: number, totalCorrectCount?: number): void {
 
     // Calcul du score de base. Cela dépend du temps restant, avec une pénalité pour chaque seconde écoulée.
     let baseScore = Math.max(0, this.maxScorePerQuestion - (10 * (this.maxTime - timeLeft - 2)));
@@ -193,22 +200,23 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
    *
    * @param answer - La réponse dont l'état de sélection doit être basculé.
    */
+
   private toggleAnswerSelection(answer: AnswerModel): void {
-    // Inverse l'état de sélection de la réponse passée en paramètre.
     answer.isSelected = !answer.isSelected;
-
-    // Vérifie que this.question est défini pour éviter des erreurs à l'exécution.
     if (this.question && !this.question.isMultipleChoice) {
-      console.log('this.question.isMultipleChoice: ', this.question.isMultipleChoice)
-      // Si la question associée n'est pas à choix multiples
-      // Emet un signal pour arrêter le chronomètre
       this.stopTimer$.next();
-
-      // Marque la question comme ayant été répondue.
-      this.question.isAnswered = true;
+      this.onSubmitAnswers();
     }
   }
 
+  private showScoreBriefly(): void {
+    // Affiche le score pendant 3 secondes
+    if (this.excludeIds.length < this.totalQuestions) {
+      setTimeout(() => {
+        this.getNextQuestion();
+      }, 3000);
+    }
+  }
 
   /**
    * Extrait et renvoie les réponses qui ont été sélectionnées et celles qui sont correctes.
@@ -266,6 +274,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
 
         // Appelle la méthode toggleAnswerSelection avec la réponse sélectionnée comme argument.
         this.toggleAnswerSelection(answer);
+
       }
     }
   }
@@ -276,28 +285,31 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
    * Cette méthode évalue les réponses sélectionnées, calcule le score,
    * arrête le timer et marque la question comme ayant été répondue.
    */
+
   onSubmitAnswers(): void {
-    // Vérifie que la question n'a pas déjà été répondue et qu'une question est bien en cours.
     if (!this.isAnswered && this.question) {
-
-      // Récupère les réponses sélectionnées et correctes en utilisant la méthode getSelectedAndCorrectAnswers.
       const {selected, correct} = this.getSelectedAndCorrectAnswers();
-
-      // Utilise la méthode checkAnswers pour déterminer si les réponses sélectionnées par l'utilisateur sont correctes.
       if (this.checkAnswers(selected, correct)) {
         this.calculateScore(true, this.timeLeft);
       } else {
         this.calculateScore(false, this.timeLeft, selected.filter(a => a.isCorrect).length, correct.length, this.question?.isMultipleChoice);
       }
-
-      // Arrêter le timer associé à la question en cours.
       this.stopTimer$.next();
+      if (!this.isAnswered && this.question) {
 
-      // Marque la question comme répondue.
-      this.isAnswered = true;
+        this.isAnswered = true;
+
+        // Ajoutez l'ID de la question à excludeIds si ce n'est pas déjà fait.
+        if (this.question.id && !this.excludeIds.includes(this.question.id)) {
+          this.excludeIds.push(this.question.id);
+        }
+        this.isAnswered = true;
+        if (this.excludeIds.length < this.totalQuestions) {
+          this.showScoreBriefly();
+        }
+      }
     }
   }
-
 
   /**
    * Méthode appelée pour charger la prochaine question à présenter à l'utilisateur.
