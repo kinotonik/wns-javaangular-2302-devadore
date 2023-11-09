@@ -176,7 +176,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <jvmArguments>${argLine}</jvmArguments>
+                    <jvmArguments>${argLine} 
+                        -Xms256m
+                        -Xmx1g
+                    </jvmArguments>
                     <imageName>${image.dockeruser}${image.name}:${image.tag}</imageName>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
                 </configuration>
