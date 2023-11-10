@@ -59,7 +59,14 @@ public class QuizService {
                 .map(quiz -> modelMapper.map(quiz, QuizDTO.class))
                 .collect(Collectors.toList());
     }
-
+    
+    public List<QuestionDTO> getAllQuestionsByQuizId(Long quizId) {
+        List<Question> questions = questionRepository.findAllByQuizId(quizId);
+        return questions.stream()
+                .map(question -> modelMapper.map(question, QuestionDTO.class))
+                .collect(Collectors.toList());
+    }
+    
     public Optional<CreateQuizDTO> findById(Long id) {
         Optional<Quiz> quizOptional = quizRepository.findById(Math.toIntExact(id));
         if (quizOptional.isEmpty()) {
