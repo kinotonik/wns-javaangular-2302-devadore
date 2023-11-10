@@ -176,9 +176,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <image>
+                        <name>${image.dockeruser}${image.name}:${image.tag}</name>
+                        <env>
+                            <JAVA_TOOL_OPTIONS>-Xmx64m -XX:MaxMetaspaceSize=64M -XX:ReservedCodeCacheSize=64M </JAVA_TOOL_OPTIONS>
+                        </env>
+                    </image>
                     <jvmArguments>${argLine} 
                     </jvmArguments>
-                    <imageName>${image.dockeruser}${image.name}:${image.tag}</imageName>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
                 </configuration>
                 <executions>
