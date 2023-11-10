@@ -74,7 +74,14 @@ public class QuizController {
         int total = quizService.getTotalQuestionsByQuizId(quizId);
         return ResponseEntity.ok(total);
     }
-
+    
+    @Operation(summary = "Récupère toutes les questions pour un quiz spécifié par quizID")
+    @GetMapping("/quiz/{quizId}/questions")
+    public ResponseEntity<List<QuestionDTO>> getAllQuestionsForQuiz(@PathVariable Long quizId) {
+        List<QuestionDTO> questions = quizService.getAllQuestionsByQuizId(quizId);
+        return ResponseEntity.ok(questions);
+    }
+    
     @Operation(summary = "permet à un utilisateur de créer un quiz")
     @PostMapping("/quiz")
     public ResponseEntity<String> createQuiz(
