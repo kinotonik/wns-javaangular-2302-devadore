@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wcs.server.dto.CreateQuizDTO;
+import com.wcs.server.dto.QuestionDTO;
 import com.wcs.server.entity.User;
 import com.wcs.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,13 @@ public class QuizController {
     public ResponseEntity<Integer> getTotalQuestionsForQuiz(@PathVariable Long quizId) {
         int total = quizService.getTotalQuestionsByQuizId(quizId);
         return ResponseEntity.ok(total);
+    }
+
+    @Operation(summary = "Récupère toutes les questions pour un quiz spécifié par quizID")
+    @GetMapping("/quiz/{quizId}/questions")
+    public ResponseEntity<List<QuestionDTO>> getAllQuestionsForQuiz(@PathVariable Long quizId) {
+        List<QuestionDTO> questions = quizService.getAllQuestionsByQuizId(quizId);
+        return ResponseEntity.ok(questions);
     }
 
     @Operation(summary = "permet à un utilisateur de créer un quiz")

@@ -22,6 +22,7 @@
 		<image.name>wns-javaangular-2302-devadore-server</image.name>
 		<image.tag>latest</image.tag>
     </properties>
+
     <dependencies>
 
         <dependency>

@@ -1,0 +1,17 @@
+name: server-tests-workflow
+
+on: pull_request
+
+jobs:
+  test-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Run tests
+        run: cd server && mvn test
