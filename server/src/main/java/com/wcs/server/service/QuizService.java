@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.wcs.server.dto.CreateQuizDTO;
+import com.wcs.server.dto.QuestionDTO;
 import com.wcs.server.entity.*;
 import com.wcs.server.errormessage.ResourceNotFoundException;
 import com.wcs.server.errormessage.UnauthorizedException;
@@ -43,7 +44,7 @@ public class QuizService {
 
         // nextInt(n) genère un nombre aléatoire entre 0 inclus et n exclus
         // Ce qui permet de récupérer un index aléatoire de la liste et retourner son id
-    
+
         Random random = new Random();
         int randomId = ids.get(random.nextInt(ids.size()));
 
@@ -57,6 +58,13 @@ public class QuizService {
         List<Quiz> quizzes = quizRepository.findQuizzesByCreatedBy(userId);
         return quizzes.stream()
                 .map(quiz -> modelMapper.map(quiz, QuizDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<QuestionDTO> getAllQuestionsByQuizId(Long quizId) {
+        List<Question> questions = questionRepository.findAllByQuizId(quizId);
+        return questions.stream()
+                .map(question -> modelMapper.map(question, QuestionDTO.class))
                 .collect(Collectors.toList());
     }
 
