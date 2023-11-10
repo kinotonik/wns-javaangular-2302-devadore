@@ -91,7 +91,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://dev.quizz4all.lille-1.wilders.dev", "https://quizz4all.lille-1.wilders.dev" ));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://dev.quizz4all.paris-1.wilders.dev", "https://quizz4all.paris-1.wilders.dev" ));
                 //configuration.setAllowedOrigins(Arrays.asList("*"));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
