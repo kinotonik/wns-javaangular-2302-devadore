@@ -6,6 +6,7 @@
 ---
 ![Capture d'écran du projet](client/src/assets/images/defaultAvatars/Quiz4All.png)
 
+---
 ## Table des matières
 
 - [Technologies utilisées](#technologies-utilisées)
@@ -21,8 +22,9 @@
 
 ## Technologies utilisées
 
-#####  Langages de Programmation et Frameworks Principaux 
+###  Langages de Programmation et Frameworks Principaux 
     - Java: Version 17
+    - Apache Maven: Version 3.9.2
 ##### Spring Boot: Version 3.0.6
     - spring-boot-starter-data-jpa : Pour la couche de persistance des données en utilisant JPA (Java Persistence API).
     - spring-boot-starter-web : Pour construire l'application web,
@@ -39,11 +41,11 @@
 ##### Tailwind CSS 
     - Pour le style
 
-##### Bases de Données et Connecteurs
+### Bases de Données et Connecteurs
     - H2 : Pour les tests
     - MySQL Connector J : Pour la connexion à la base de données MySQL.
 
-##### Sécurité et Authentification
+### Sécurité et Authentification
     - spring-boot-starter-security : Pour intègre la sécurité dans l'application.
     - spring-boot-starter-test : Pour tester l'application Spring Boot.
     - spring-security-crypto: 6.1.1 : Pour les fonctionnalités de cryptographie telles que le hashage et l'encodage de mot de passe.
@@ -52,29 +54,29 @@
     - jjwt-jackson: 0.11.2 : pour le traitement (sérialisation/désérialisation) des données JSON dans les JWT.
     - jwt-decode: ^3.1.2 :Pour décoder les JWT côté client.
 
-##### Validation et Mappage de Données
+### Validation et Mappage de Données
     - ModelMapper: 3.1.1 : Pour le mappage entre les modèles de données.
     - Hibernate Validator: 8.0.0.Final : Pour que les données de l'application respectent les contraintes définies.
 
-##### Gestion des Migrations de Base de Données
+### Gestion des Migrations de Base de Données
     - Flyway MySQL : Pour gérer et appliquer les changements de schéma
 
-##### Documentation API et UI
+### Documentation API et UI
     - SpringDoc OpenAPI Starter WebMvc UI: 2.1.0 : Pour la documentation interactive de API REST,  le test et l'intégration
 
-##### Testing et Assurance Qualité
+### Testing et Assurance Qualité
     - JUnit Jupiter : Pour le moteur de test JUnit 5
 
-##### Utilitaires et Outils Divers
+### Utilitaires et Outils Divers
     - spring-boot-starter-mail : Pour les fonctionnalités de messagerie électronique
 
-##### Intégration et Déploiement Continus
+### Intégration et Déploiement Continus
     - Docker et Docker Compose : Pour la conteneurisation et l'orchestration des services
     - Docker Hub : Pour le stockage et la gestion des images Docker
     - GitHub : Pour le contrôle de version et la gestion du code source
     - GitHub Actions : Pour l'automatisation des pipelines CI/CD (Intégration et Déploiement Continus)
 
-
+---
 ## Configuration Préalable
 
 Avant de commencer à utiliser ou à contribuer à ce projet, assurez-vous que votre environnement est correctement configuré. Suivez ces étapes pour préparer votre système :
@@ -119,21 +121,39 @@ Avant de commencer à utiliser ou à contribuer à ce projet, assurez-vous que v
 
 Suivez ces étapes pour assurer une configuration sans problème et commencer à travailler sur le projet.
 
-
+---
 ## Installation
 
 ### Backend (Spring Boot)
 
-1. Naviguez vers le dossier du backend : `server`
+1. Naviguez vers le dossier du backend :  
+    ```bash 
+   cd ..
+    ```
+    ```bash 
+    cd .\server
+    ```
 2. Construisez le projet : `mvn clean install`
-3. Exécutez le projet : `java -jar target/server-0.0.1-SNAPSHOT.jar`
+3. Exécutez le projet : 
+    ```bash
+   java -jar target/server-0.0.1-SNAPSHOT.jar
+    ```
 
 ### Frontend (Angular)
 
-1. Naviguez vers le dossier du frontend : `client`
+1. Naviguez vers le dossier du frontend : 
+    ```bash 
+   cd ..
+    ```
+    ```bash
+    cd .\client
+    ```
 2. Installez les dépendances : `npm install`
 3. Démarrer le serveur de développement : `ng serve`
-
+    ```bash 
+   ng serve
+    ```
+---
 ## Fonctionnalités principales
 
 - Dans ce projet, l'utilisateur aura la capacité de :
@@ -142,7 +162,7 @@ Suivez ces étapes pour assurer une configuration sans problème et commencer à
   - Créer des quizzes : Les utilisateurs pourront concevoir et publier leurs propres quizzes, définissant les questions, les réponses, et les paramètres relatifs à ces quizzes.
   - Modifier leurs quizzes : Ils auront également la flexibilité de revenir et d'apporter des modifications à leurs quizzes déjà créés, permettant une mise à jour et une amélioration continues du contenu.
   - Jouer aux Quizzes : Ces quiz se composeront de diverses questions, et les joueurs répondront en sélectionnant parmi les réponses proposées.
-
+---
 ## API Endpoints
 
 - GET `/http://localhost:8080/api/quiz/random`: Permet de retourner un quiz aléatoire.
@@ -150,7 +170,7 @@ Suivez ces étapes pour assurer une configuration sans problème et commencer à
 - ...
 
 
-
+---
 # Processus de Déploiement de l'Application
 
 Ce document décrit les étapes du processus de déploiement automatisé pour notre application, utilisant GitHub Actions, un VPS (Virtual Private Server), Docker, NGINX, et Caddy.
@@ -166,11 +186,11 @@ Ce document décrit les étapes du processus de déploiement automatisé pour no
 7. [Exécution des Conteneurs](#étape-7-exécution-des-conteneurs)
 8. [Conclusion](#conclusion)
 
-## Étape 1: Développement
+### Étape 1: Développement
 
 Développement des fonctionnalités sur les branches `main` ⬅️ `develop` ↖️ `feature` | `fix`.
 
-## Étape 2: Push sur GitHub et GitHub Actions
+### Étape 2: Push sur GitHub et GitHub Actions
 
 - Le code est poussé vers GitHub.
 - Déclenchement du workflow GitHub Actions (`on-push.yaml`) :
@@ -181,34 +201,34 @@ Développement des fonctionnalités sur les branches `main` ⬅️ `develop` ↖
   - Construction des images Docker (frontend et backend).
   - Push des images sur DockerHub.
 
-## Étape 3: Activation du Webhook et Script de Déploiement
+### Étape 3: Activation du Webhook et Script de Déploiement
 
 - Le push sur DockerHub active un webhook configuré dans `webhook.conf`.
 - Le webhook déclenche l'exécution du script `fetch-and-deploy.sh` sur le VPS.
 
-## Étape 4: Docker Compose sur VPS
+### Étape 4: Docker Compose sur VPS
 
 - Docker Compose (`docker-compose.yml`) est utilisé pour orchestrer le déploiement des conteneurs sur le VPS.
 
-## Étape 5: Configuration NGINX
+### Étape 5: Configuration NGINX
 
 - NGINX est configuré via `nginx.conf` sur le VPS pour router les requêtes.
 
-## Étape 6: Configuration de Caddy
+### Étape 6: Configuration de Caddy
 
 - Caddy est configuré sur le VPS pour gérer le HTTPS et rediriger les requêtes vers NGINX.
 
-## Étape 7: Exécution des Conteneurs
+### Étape 7: Exécution des Conteneurs
 
 - Les conteneurs Docker sont exécutés sur le VPS, lançant l'application.
 
-## Conclusion
+### Conclusion
 
 Ce processus intègre le développement, les tests, GitHub Actions, DockerHub, un webhook, un script de déploiement sur VPS, et l'utilisation de Docker Compose, NGINX, et Caddy pour un déploiement et une exécution efficaces de l'application.
 
 
-
-### Backend
+---
+## Test
 
 #### Exécution des Tests du Backend
 
@@ -224,7 +244,7 @@ Pour exécuter les tests du backend, suivez ces étapes :
 2. **Naviguer dans le répertoire du Frontend** :
    ###### Ouvrez un terminal et accédez au répertoire où se trouve le code du frontend.
         cd client
-
+---
 ## Contribution
 
 Nous accueillons chaleureusement les contributions à ce projet ! Si vous souhaitez contribuer, voici quelques lignes directrices à suivre :
@@ -262,14 +282,15 @@ Les contributeurs doivent respecter un code de conduite basé sur le respect, la
 
 Si vous avez des questions sur le processus de contribution, n'hésitez pas à ouvrir un ticket dans la section 'Issues' du dépôt GitHub.
 
-Nous sommes impatients de voir vos contributions et de collaborer pour améliorer ce projet !
+##### Nous sommes impatients de voir vos contributions et de collaborer pour améliorer ce projet !
 
+---
 ## Auteurs
 
 - Michael Birepinte - [Profil GitHub](https://github.com/Mbirepinte)
 - Axel Colliaux - [Profil GitHub](https://github.com/AxelColliaux)
 - Mehdi Zidouni - [Profil GitHub](https://github.com/kinotonik)
-
+---
 ## Licence
 
 Ce projet est réalisé dans un cadre éducatif pour l'obtention d'un diplôme français de concepteur développeur d'application. Il est sous licence Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) - voir le fichier [LICENSE.md](LICENSE.md) pour plus de détails.
