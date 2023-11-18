@@ -173,22 +173,21 @@ Suivez ces étapes pour assurer une configuration sans problème et commencer à
 - POST `http://localhost:8080/auth/authenticate`: Permet d'authentifier un utilisateur par son username et mdp
 - ...
 
-
 ---
 ## Déploiement
 
 Ce document décrit les étapes du processus de déploiement automatisé pour notre application, utilisant GitHub Actions, un VPS (Virtual Private Server), Docker, NGINX, et Caddy.
 
-## Sommaire
+#### Sommaire
 
-1. [Développement](#etape-1-developpement)
-2. [Push sur GitHub et GitHub Actions](#etpae-2-push-sur-github-et-github-actions)
-3. [Activation du Webhook et Script de Déploiement](#etpae-3-activation-du-webhook-et-script-de-deploiement)
-4. [Docker Compose sur VPS](#etpae-4-docker-compose-sur-vps)
-5. [Configuration NGINX](#etpae-5-configuration-nginx)
-6. [Configuration de Caddy](#etpae-6-configuration-de-caddy)
-7. [Exécution des Conteneurs](#etpae-7-execution-des-conteneurs)
-8. [Conclusion](#conclusion)
+- *Développement*
+- *Push sur GitHub et GitHub Actions*
+- *Activation du Webhook et Script de Déploiement*
+- *Docker Compose sur VPS*
+- *Configuration NGINX*
+- *Configuration de Caddy*
+- *Exécution des Conteneurs*
+- *Conclusion*
 
 ### Étape 1: Développement
 
