@@ -240,11 +240,12 @@ Pour exécuter les tests du backend, suivez ces étapes :
 
 1. **Naviguer dans le répertoire du Backend** :
    ###### Ouvrez un terminal et accédez au répertoire où se trouve le code du backend.
-        cd server
-   
-      ```bash
-      ./mvnw test
-  
+    ```bash        
+    cd server
+    ```
+    ```bash
+    ./mvnw test
+    ```
 2. **Naviguer dans le répertoire du Frontend** :
    ###### Ouvrez un terminal et accédez au répertoire où se trouve le code du frontend.
         cd client
