@@ -1,7 +1,7 @@
 # WNS-JAVAANGULAR-2023-DEVADORE
 
 ---
-## Fonctionnement
+## Fonctionnement général
 - Le jeu permettra aux joueurs de participer à des quiz interactifs. Ces quiz se composeront de diverses questions, et les joueurs répondront en sélectionnant parmi les réponses proposées. Ce jeu vise à fournir une plateforme éducative et divertissante, pour apprendre et tester des connaissances de manière ludique.
 ---
 ![Capture d'écran du projet](client/src/assets/images/defaultAvatars/Quiz4All.png)
@@ -9,7 +9,6 @@
 ---
 ## Table des matières
 
-- [Fonctionnement Général](#fonctionnement)
 - [Technologies utilisées](#technologies)
 - [Configuration préalable](#configuration)
 - [Installation](#installation)
@@ -36,13 +35,15 @@
 ...
 
 ##### Angular: Version ^15.2.0
+    - TypeScript : Version ~4.9.4
     - @angular/compiler : Pour compiler des templates Angular en code JavaScript exécutable.
     - @angular/core: Pour les fonctionnalités essentielles d'Angular telles que la détection de changements, la dépendance injection, et la communication entre composants.
     - @angular/material: ^15.2.9 (Angular Material) : Pour pour une interface utilisateur.
     ...
     - rxjs: ~7.8.0 : Pour faciliter la gestion des événements asynchrones et des flux de données.
 ##### Tailwind CSS 
-    - Pour le style
+    - Version : ^3.3.2
+    - Pour le style du Frontend
 
 ### Bases de Données et Connecteurs
     - H2 : Pour les tests
