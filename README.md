@@ -1,7 +1,7 @@
 # WNS-JAVAANGULAR-2023-DEVADORE
 
 ---
-## Fonctionnement Général : 
+## Fonctionnement
 - Le jeu permettra aux joueurs de participer à des quiz interactifs. Ces quiz se composeront de diverses questions, et les joueurs répondront en sélectionnant parmi les réponses proposées. Ce jeu vise à fournir une plateforme éducative et divertissante, pour apprendre et tester des connaissances de manière ludique.
 ---
 ![Capture d'écran du projet](client/src/assets/images/defaultAvatars/Quiz4All.png)
@@ -9,18 +9,21 @@
 ---
 ## Table des matières
 
-- [Technologies utilisées](#technologies-utilisées)
-- [Configuration préalable](#configuration-préalable)
+- [Fonctionnement Général](#fonctionnement)
+- [Technologies utilisées](#technologies)
+- [Configuration préalable](#configuration)
 - [Installation](#installation)
-- [Fonctionnalités principales](#fonctionnalités-principales)
+- [Fonctionnalités principales](#principales)
 - [API Endpoints](#api-endpoints)
-- [Déploiement](#déploiement)
+- [Déploiement](#sommaire)
 - [Tests](#tests)
 - [Contribution](#contribution)
 - [Auteurs](#auteurs)
 - [Licence](#licence)
 
-## Technologies utilisées
+
+
+## Technologies
 
 ###  Langages de Programmation et Frameworks Principaux 
     - Java: Version 17
@@ -77,7 +80,7 @@
     - GitHub Actions : Pour l'automatisation des pipelines CI/CD (Intégration et Déploiement Continus)
 
 ---
-## Configuration Préalable
+## Configuration
 
 Avant de commencer à utiliser ou à contribuer à ce projet, assurez-vous que votre environnement est correctement configuré. Suivez ces étapes pour préparer votre système :
 
@@ -154,7 +157,8 @@ Suivez ces étapes pour assurer une configuration sans problème et commencer à
    ng serve
     ```
 ---
-## Fonctionnalités principales
+## Fonctionnalités
+###### principales
 
 - Dans ce projet, l'utilisateur aura la capacité de :
   - S'authentifier : Les utilisateurs pourront se connecter à leur compte personnel, garantissant un accès sécurisé et personnalisé. Ils pourront renouveller leur mot de passe.
@@ -171,19 +175,19 @@ Suivez ces étapes pour assurer une configuration sans problème et commencer à
 
 
 ---
-# Processus de Déploiement de l'Application
+## Déploiement
 
 Ce document décrit les étapes du processus de déploiement automatisé pour notre application, utilisant GitHub Actions, un VPS (Virtual Private Server), Docker, NGINX, et Caddy.
 
 ## Sommaire
 
-1. [Développement](#étape-1-développement)
-2. [Push sur GitHub et GitHub Actions](#étape-2-push-sur-github-et-github-actions)
-3. [Activation du Webhook et Script de Déploiement](#étape-3-activation-du-webhook-et-script-de-déploiement)
-4. [Docker Compose sur VPS](#étape-4-docker-compose-sur-vps)
-5. [Configuration NGINX](#étape-5-configuration-nginx)
-6. [Configuration de Caddy](#étape-6-configuration-de-caddy)
-7. [Exécution des Conteneurs](#étape-7-exécution-des-conteneurs)
+1. [Développement](#etape-1-developpement)
+2. [Push sur GitHub et GitHub Actions](#etpae-2-push-sur-github-et-github-actions)
+3. [Activation du Webhook et Script de Déploiement](#etpae-3-activation-du-webhook-et-script-de-deploiement)
+4. [Docker Compose sur VPS](#etpae-4-docker-compose-sur-vps)
+5. [Configuration NGINX](#etpae-5-configuration-nginx)
+6. [Configuration de Caddy](#etpae-6-configuration-de-caddy)
+7. [Exécution des Conteneurs](#etpae-7-execution-des-conteneurs)
 8. [Conclusion](#conclusion)
 
 ### Étape 1: Développement
@@ -228,7 +232,7 @@ Ce processus intègre le développement, les tests, GitHub Actions, DockerHub, u
 
 
 ---
-## Test
+## Tests
 
 #### Exécution des Tests du Backend
 
