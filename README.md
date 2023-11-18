@@ -69,7 +69,8 @@
     - SpringDoc OpenAPI Starter WebMvc UI: 2.1.0 : Pour la documentation interactive de API REST,  le test et l'intégration
 
 ### Testing et Assurance Qualité
-    - JUnit Jupiter : Pour le moteur de test JUnit 5
+    - JUnit Jupiter : Utilisé pour le moteur de test JUnit 5, permettant l'écriture et l'exécution de tests automatisés.
+    - JaCoCo : Intégré pour la mesure de la couverture de code, assurant une couverture de test (complète et de qualité).
 
 ### Utilitaires et Outils Divers
     - spring-boot-starter-mail : Pour les fonctionnalités de messagerie électronique
