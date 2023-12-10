@@ -12,13 +12,16 @@ export class QuizChooseCatComponent implements OnInit {
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.getAvailableCategories();
+    this.categoryService.getAllCategories().subscribe((data) => {
+      this.availableCategories = data;
+      console.log(this.availableCategories);
+    });
   }
 
-  getAvailableCategories(): void {
+  /*  getAvailableCategories(): void {
     this.categoryService.getAllCategories().subscribe((res) => {
       this.availableCategories = res;
       console.log(this.availableCategories);
     });
-  }
+  } */
 }
