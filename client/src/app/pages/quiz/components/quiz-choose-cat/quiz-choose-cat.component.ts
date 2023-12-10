@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizModel } from 'src/app/models/quiz.model';
+import { CategoryModel } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -8,15 +8,17 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./quiz-choose-cat.component.css'],
 })
 export class QuizChooseCatComponent implements OnInit {
-  availableCategories: QuizModel[] = [];
+  availableCategories: CategoryModel[] = [];
   constructor(private categoryService: CategoryService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.getAvailableCategories();
+  }
 
-  /* getAvailableCategories(): void {
+  getAvailableCategories(): void {
     this.categoryService.getAllCategories().subscribe((res) => {
       this.availableCategories = res;
       console.log(this.availableCategories);
     });
-  } */
+  }
 }
