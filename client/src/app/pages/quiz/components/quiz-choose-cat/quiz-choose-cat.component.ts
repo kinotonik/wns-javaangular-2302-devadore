@@ -17,11 +17,4 @@ export class QuizChooseCatComponent implements OnInit {
       console.log(this.availableCategories);
     });
   }
-
-  /*  getAvailableCategories(): void {
-    this.categoryService.getAllCategories().subscribe((res) => {
-      this.availableCategories = res;
-      console.log(this.availableCategories);
-    });
-  } */
 }
