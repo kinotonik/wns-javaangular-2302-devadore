@@ -17,4 +17,6 @@ export class QuizChooseCatComponent implements OnInit {
       console.log(this.availableCategories);
     });
   }
+
+  // Implement method to get random quiz by category
 }
