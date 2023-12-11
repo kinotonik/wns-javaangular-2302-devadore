@@ -1,7 +1,7 @@
 <div
   class="bg-cover bg-center text-white"
   style="
-    background-image: url(/assets/images/defaultAvatars/MidJourney-wizard-hall.jpg);
+    background-image: url(/assets/images/defaultAvatars/wizard.png);
   "
 >
   <app-toast
@@ -20,7 +20,7 @@
     <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data"
           class="bg-gray-900 text-gray-200 p-8 border-2 border-yellow-500 rounded w-2/3 mx-auto opacity-75 hover:opacity-100">
 
-      <h1 class="text-2xl font-bold mb-6 text-center">Modifie ton quiz "{{user?.username | uppercase}}" </h1>
+      <h1 class="text-2xl font-bold mb-6 text-center">Modifie ton quiz "{{ user?.username | uppercase }}" </h1>
       <div class="flex justify-center ">
         <div *ngIf="userImage" class="w-16 h-16 rounded-full overflow-hidden"
              (mouseover)="isHovered = true"
@@ -45,7 +45,7 @@
         <label for="category" class="block mb-2">Category</label>
         <select id="category" formControlName="categoryId"
                 class="w-1/4 bg-gray-800 border-2 border-yellow-500 rounded py-2">
-          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
         <div *ngIf="quizForm.get('categoryId')?.touched && !quizForm.get('categoryId')?.value"
              class="text-orange-600">

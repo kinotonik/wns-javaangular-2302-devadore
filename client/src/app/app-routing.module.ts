@@ -4,10 +4,12 @@ import {HomeComponent} from './pages/home/home.component';
 import {ResetPasswordComponent} from "./auth/reset-password/reset-password.component";
 import {ErrorComponent} from "./pages/error-rediction/error/error.component";
 import {UnauthorizedComponent} from "./pages/error-rediction/unauthorized/unauthorized.component";
+import {ContactComponent} from "./pages/contact/contact.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'contact', component: ContactComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {
     path: 'auth',
