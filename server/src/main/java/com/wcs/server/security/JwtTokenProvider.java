@@ -28,10 +28,13 @@ public class JwtTokenProvider {
     @Value("${jwt.expiration}")
     private long jwtExpiration;
 
+    @Value("${jwt.expirationresetpwd}")
+    private long expirationresetpwd;
+
     @Value("${jwt.refresh}")
-    private static long jwtRefresh;
-    private static SecretKey secretKey;
-    private ConcurrentHashMap<String, Boolean> invalidatedTokens = new ConcurrentHashMap<>();
+    private long jwtRefresh;
+    private SecretKey secretKey;
+    private final ConcurrentHashMap<String, Boolean> invalidatedTokens = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void initSecretKey() {
@@ -66,7 +69,6 @@ public class JwtTokenProvider {
                 .signWith(secretKey)
                 .compact();
     }
-
 
     /***
      * extraire le nom d'utilisateur à partir d'un token JWT.
@@ -140,7 +142,7 @@ public class JwtTokenProvider {
      * @param username
      * @return le refresh token JWT.
      */
-    public static String createRefreshToken(String username) {
+    public String createRefreshToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -156,15 +158,27 @@ public class JwtTokenProvider {
      * @param refreshToken
      * @return les revendications (informations contenues dans le token lui-même) du token si il est valide.
      */
-    public static Claims validateRefreshToken(String refreshToken) {
+    public Claims validateRefreshToken(String refreshToken) {
         try {
             return Jwts.parser()
                     .setSigningKey(secretKey)
                     .parseClaimsJws(refreshToken)
                     .getBody();
         } catch (Exception e) {
-            throw new IllegalStateException("Invalid refresh token");
+            throw new IllegalStateException("Invalid refresh token", e);
         }
+    }
+
+    public String createResetPasswordToken(String userEmail) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + expirationresetpwd); // 30 minutes
+
+        return Jwts.builder()
+                .setSubject(userEmail)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(secretKey)
+                .compact();
     }
 
     /***
@@ -182,5 +196,17 @@ public class JwtTokenProvider {
     public boolean isInvalidated(String token) {
         return invalidatedTokens.containsKey(token);
     }
+
+
+    public String getEmailFromJWT(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("email", String.class);  // Extract email claim from the token
+    }
+
 }
 

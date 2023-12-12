@@ -11,14 +11,15 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {SharedModule} from "../shared/shared.module";
-
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +30,7 @@ import {SharedModule} from "../shared/shared.module";
     MatInputModule,
     MatIconModule,
     NgOptimizedImage,
-    SharedModule
+    SharedModule,
   ]
 })
 export class AuthModule {
