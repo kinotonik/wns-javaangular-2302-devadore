@@ -11,7 +11,6 @@ import com.wcs.server.dto.QuestionDTO;
 import com.wcs.server.entity.User;
 import com.wcs.server.repository.UserRepository;
 
-import org.giavacms.catalogue.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
