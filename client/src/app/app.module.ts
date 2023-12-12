@@ -13,6 +13,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ToastService} from "./services/toastService";
 import {ErrorComponent} from './pages/error-rediction/error/error.component';
 import {UnauthorizedComponent} from './pages/error-rediction/unauthorized/unauthorized.component';
+import {RgpdComponent} from './pages/information/rgpd/rgpd.component';
+import {NgOptimizedImage} from "@angular/common";
+import {SharedModule} from "./shared/shared.module";
 
 
 @NgModule({
@@ -21,6 +24,7 @@ import {UnauthorizedComponent} from './pages/error-rediction/unauthorized/unauth
     HomeComponent,
     ErrorComponent,
     UnauthorizedComponent,
+    RgpdComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,8 @@ import {UnauthorizedComponent} from './pages/error-rediction/unauthorized/unauth
     MatCheckboxModule,
     MatTableModule,
     FontAwesomeModule,
+    NgOptimizedImage,
+    SharedModule,
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [
