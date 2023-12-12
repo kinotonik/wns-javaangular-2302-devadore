@@ -13,5 +13,5 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
     List<Quiz> findQuizzesByCreatedBy(User user);
 
     @Query("SELECT id FROM Quiz")
-    List<Integer> findAllIds();
+    List<Long> findAllIds();
 }
