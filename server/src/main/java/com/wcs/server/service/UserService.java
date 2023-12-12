@@ -48,7 +48,6 @@ public class UserService {
 
     @Autowired
     private ModelMapper modelMapper;
-    private static final String IMAGE_SUFFIX = "_image";
 
     @Autowired
     private EmailService emailService;
