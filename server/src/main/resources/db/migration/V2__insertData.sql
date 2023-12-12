@@ -52,14 +52,14 @@ VALUES (1, 'Science', 'Questions relatives à la science et aux concepts scienti
 INSERT INTO quizzforall.category (id, name, description, created_at, updated_at)
 VALUES (2, 'Géographie', 'Questions relatives à la géographie et aux régions du mondes', '2022-01-02', '2022-01-02');
 INSERT INTO quizzforall.category (id, name, description, created_at, updated_at)
-VALUES (3, 'Hstoire', 'Questions relatives à des événements et des personnages historiques', '2022-01-03',
+VALUES (3, 'Histoire', 'Questions relatives à des événements et des personnages historiques', '2022-01-03',
         '2022-01-03');
 
 -- quiz
 INSERT INTO quizzforall.quiz (id, title, description, category_id, created_by, created_at, updated_at)
 VALUES (1, 'Biologie', 'Un quiz sur les science biologiques', 1, 4, '2022-01-01', '2022-01-01');
 INSERT INTO quizzforall.quiz (id, title, description, category_id, created_by, created_at, updated_at)
-VALUES (2, 'Le coprs déchiffré', 'Ce ne sont que des chiffres mais souvent surprenant !!', 1, 4, '2023-11-09',
+VALUES (2, 'Le corps déchiffré', 'Ce ne sont que des chiffres mais souvent surprenant !!', 1, 4, '2023-11-09',
         '2023-11-09');
 INSERT INTO quizzforall.quiz (id, title, description, category_id, created_by, created_at, updated_at)
 VALUES (3, 'Anatomie Générale', 'QCM Anatomie Générale et Système nerveux', 1, 4, '2023-09-28', '2023-09-28');
