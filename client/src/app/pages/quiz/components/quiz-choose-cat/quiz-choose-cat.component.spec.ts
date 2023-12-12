@@ -13,13 +13,10 @@ describe('QuizChooseCatComponent', () => {
     const mockActivatedRoute = {};
 
     TestBed.configureTestingModule({
-      declarations: [ QuizChooseCatComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule ],
-      providers: [
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
-      ]
-    })
-    .compileComponents();
+      declarations: [QuizChooseCatComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [{ provide: ActivatedRoute, useValue: mockActivatedRoute }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
