@@ -46,7 +46,7 @@ public class QuizService {
         // Ce qui permet de récupérer un index aléatoire de la liste et retourner son id
 
         Random random = new Random();
-        int randomId = ids.get(random.nextInt(ids.size()));
+        long  randomId = ids.get(random.nextInt(ids.size()));
 
         Quiz quiz = quizRepository.findById(randomId)
                 .orElseThrow(() -> new NoSuchElementException("Le quiz avec l'id " + randomId + " n'existe pas ou n'est pas trouvé"));
@@ -54,10 +54,14 @@ public class QuizService {
         return convertQuizToDTO(quiz);
     }
 
-   /*  public QuizDTO getQuizByCatRandom(Long categoryId) {
+/*     public QuizDTO getRandomQuizByCat(Long categoryId) {
+
+
         
-        List<Integer> ids = quizRepository.findAllIdsByCat(categoryId);
-        return convertQuizToDTO(quiz);
+        List<Quiz> quizzes = quizRepository.findQuizzesByCategoryId(categoryId);
+
+        
+        return convertQuizToDTO(randomQuiz);
     } */
 
     public List<QuizDTO> getQuizzesByUser(User userId) {

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface QuizRepository extends JpaRepository<Quiz, Integer> {
+public interface QuizRepository extends JpaRepository<Quiz, Long> {
     List<Quiz> findByCreatedBy(User user);
 
     List<Quiz> findQuizzesByCreatedBy(User user);
