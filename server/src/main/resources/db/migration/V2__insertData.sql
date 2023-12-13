@@ -57,7 +57,7 @@ VALUES (3, 'Histoire', 'Questions relatives à des événements et des personnag
 
 -- quiz
 INSERT INTO quizzforall.quiz (id, title, description, category_id, created_by, created_at, updated_at)
-VALUES (1, 'Biologie', 'Un quiz sur les science biologiques', 1, 4, '2022-01-01', '2022-01-01');
+VALUES (1, 'Biologie', 'Un quiz sur les sciences biologiques', 1, 4, '2022-01-01', '2022-01-01');
 INSERT INTO quizzforall.quiz (id, title, description, category_id, created_by, created_at, updated_at)
 VALUES (2, 'Le corps déchiffré', 'Ce ne sont que des chiffres mais souvent surprenant !!', 1, 4, '2023-11-09',
         '2023-11-09');
@@ -158,7 +158,7 @@ VALUES (22, 'Quelle est la distance parcourue par un spermatozoïde, des testicu
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
 VALUES (23, 'A l’œil nu et par temps dégagé on peut voir à combien de kilomètre ?', 2, '2023-11-09', '2023-11-09');
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
-VALUES (24, 'Un os vie et se développe constamment, combien de fois se renouvelle t-il complètement pendant une vie ?',
+VALUES (24, 'Un os vit et se développe constamment, combien de fois se renouvelle t-il complètement pendant une vie ?',
         2, '2023-11-09', '2023-11-09');
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
 VALUES (25, 'Le cerveau pèse combien de % du poids du corps ?', 2, '2023-11-09', '2023-11-09');
@@ -188,7 +188,7 @@ VALUES (34, 'La mitochondrie est', 3, '2023-10-09', '2023-10-09');
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
 VALUES (35, 'Les quatre types fondamentaux de tissus sont :', 3, '2023-10-09', '2023-10-09');
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
-VALUES (36, 'De combien de système est fait un organisme ?', 3, '2023-10-09', '2023-10-09');
+VALUES (36, 'De combien de systèmes est constitué un organisme ?', 3, '2023-10-09', '2023-10-09');
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
 VALUES (37, 'Le système nerveux est fonctionnellement constitué du ', 3, '2023-10-09', '2023-10-09');
 INSERT INTO quizzforall.question (id, text, quiz_id, created_at, updated_at)
@@ -362,9 +362,9 @@ VALUES (44, 'environ 60 000 milliards à 100 000 milliards', 12, 1, '2023-11-09'
 INSERT INTO quizzforall.answer (id, text, question_id, is_correct, created_at, updated_at)
 VALUES (45, 'environ 6 000 milliards à 10 000 milliards', 12, 0, '2023-11-09', '2023-11-09');
 INSERT INTO quizzforall.answer (id, text, question_id, is_correct, created_at, updated_at)
-VALUES (46, 'vrai', 13, 0, '2023-11-09', '2023-11-09');
+VALUES (46, 'VRAI', 13, 0, '2023-11-09', '2023-11-09');
 INSERT INTO quizzforall.answer (id, text, question_id, is_correct, created_at, updated_at)
-VALUES (47, 'faux', 13, 1, '2023-11-09', '2023-11-09');
+VALUES (47, 'FAUX', 13, 1, '2023-11-09', '2023-11-09');
 INSERT INTO quizzforall.answer (id, text, question_id, is_correct, created_at, updated_at)
 VALUES (48, '100 000 à 150 000 cheveux', 14, 1, '2023-11-09', '2023-11-09');
 INSERT INTO quizzforall.answer (id, text, question_id, is_correct, created_at, updated_at)
