@@ -138,7 +138,7 @@ public class QuizController {
         }
     }
 
-    @Operation(summary = "permet de mettre à jour un quiz pas son ID")
+    @Operation(summary = "permet de mettre à jour un quiz par son ID")
     @PutMapping("/quiz/{id}")
     public ResponseEntity<String> updateQuiz(@PathVariable Long id, MultipartHttpServletRequest request) {
         try {

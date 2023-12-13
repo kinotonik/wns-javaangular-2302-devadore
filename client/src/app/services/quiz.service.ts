@@ -37,6 +37,12 @@ export class QuizService {
       .pipe(map((res) => res));
   }
 
+  getRandomQuizByCat(id: number): Observable<QuizModel> {
+    return this.http
+      .get<QuizModel>(`${this.apiUrl}/random/category/${id}`)
+      .pipe(map((res) => res));
+  }
+
   getTotalQuestionsForQuiz(quizId: number): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/${quizId}/totalQuestions`);
   }

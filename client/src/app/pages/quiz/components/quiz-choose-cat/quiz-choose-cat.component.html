@@ -20,6 +20,7 @@
       <h3>{{ category.description }}</h3>
       <div class="px-6 py-4">
         <button
+          (click)="getRandomQuizByCat(category.id)"
           class="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 font-lexend font-bold text-white hover:from-purple-600 hover:to-pink-600 focus:border-blue-300 focus:outline-none focus:ring"
         >
           Lancer un quiz {{ category.name }}

@@ -61,6 +61,7 @@ public class QuizService {
 
         Quiz quiz = quizRepository.findById(randomId)
                 .orElseThrow(() -> new NoSuchElementException("Le quiz avec l'id " + randomId + " n'existe pas ou n'est pas trouvé"));
+        
         return convertQuizToDTO(quiz);
     } 
  
