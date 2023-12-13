@@ -18,9 +18,8 @@ export class QuizChooseCatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe((data) => {
+    this.categoryService.getAllCategoriesNotEmpty().subscribe((data) => {
       this.availableCategories = data;
-      console.log(this.availableCategories);
     });
   }
 

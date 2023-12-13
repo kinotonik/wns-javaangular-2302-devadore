@@ -22,6 +22,12 @@ export class CategoryService {
     });
   }
 
+  getAllCategoriesNotEmpty(): Observable<CategoryModel[]> {
+    return this.http.get<CategoryModel[]>(`${this.apiUrl}/notempty`, {
+      headers: this.headerUtil.getHeaders(),
+    });
+  }
+
   getCategoryById(id: number): Observable<CategoryModel> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<CategoryModel>(url);
