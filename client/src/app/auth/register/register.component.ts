@@ -34,6 +34,16 @@ export class RegisterComponent {
     this.registerForm.get('email')!.setAsyncValidators(this.emailValidator.bind(this));
   }
 
+  get passwordErrors() {
+    const password = this.registerForm.get('password')?.value;
+    return {
+      isLongEnough: password.length >= 8,
+      hasUppercase: /[A-Z]/.test(password),
+      hasLowercase: /[a-z]/.test(password),
+      hasSpecialChar: /[^\w\s]/.test(password),
+      hasNumber: /\d/.test(password)
+    };
+  }
 
   usernameValidator(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     return this.userService.checkUsernameExistence(control.value).pipe(
@@ -74,14 +84,14 @@ export class RegisterComponent {
     const filenameDisplay = document.getElementById('selectedFilename');
 
     if (filenameDisplay) {
-      if (input.files && input.files[0]) {
+      if (input.files && input?.files[0]) {
         filenameDisplay.textContent = input.files[0].name;
       } else {
         filenameDisplay.textContent = 'Aucun fichier sélectionné';
       }
     }
     const file = (event.target as HTMLInputElement).files;
-    if (file && file.length) {
+    if (file?.length) {
       this.image = file[0];
       this.previewImage(this.image);
       // Mettre à jour le statut de validation pour le champ 'image'.
