@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ContactComponent} from './contact.component';
 import {LogoComponent} from "../../../shared/logo/logo.component";
+import {MatCardModule} from "@angular/material/card";
 
 describe('ContactComponent', () => {
   let component: ContactComponent;
@@ -9,7 +10,8 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactComponent, LogoComponent]
+      declarations: [ContactComponent, LogoComponent],
+      imports: [MatCardModule]
     })
       .compileComponents();
 
