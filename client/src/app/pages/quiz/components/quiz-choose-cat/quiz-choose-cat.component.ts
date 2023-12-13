@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { QuizService } from 'src/app/services/quiz.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-choose-cat',
@@ -12,7 +13,8 @@ export class QuizChooseCatComponent implements OnInit {
   availableCategories: CategoryModel[] = [];
   constructor(
     private categoryService: CategoryService,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class QuizChooseCatComponent implements OnInit {
 
   getRandomQuizByCat(id: number) {
     this.quizService.getRandomQuizByCat(id).subscribe((data) => {
-      console.log(data);
+      this.router.navigate(['/quiz/play', data.id]);
     });
   }
 }
