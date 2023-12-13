@@ -16,6 +16,8 @@ import {UnauthorizedComponent} from './pages/error-rediction/unauthorized/unauth
 import {RgpdComponent} from './pages/information/rgpd/rgpd.component';
 import {NgOptimizedImage} from "@angular/common";
 import {SharedModule} from "./shared/shared.module";
+import {ContactComponent} from "./pages/information/contact/contact.component";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import {SharedModule} from "./shared/shared.module";
     ErrorComponent,
     UnauthorizedComponent,
     RgpdComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import {SharedModule} from "./shared/shared.module";
     MatButtonModule,
     MatCheckboxModule,
     MatTableModule,
+    MatCardModule,
     FontAwesomeModule,
     NgOptimizedImage,
     SharedModule,
