@@ -14,4 +14,8 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
     @Query("SELECT id FROM Quiz")
     List<Long> findAllIds();
+
+    @Query("SELECT id FROM Quiz WHERE category = ?1")
+    List<Long> findAllIdsByCategory(Long categoryId);
 }
+    
