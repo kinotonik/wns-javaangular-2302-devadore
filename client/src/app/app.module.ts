@@ -18,7 +18,6 @@ import {NgOptimizedImage} from "@angular/common";
 import {SharedModule} from "./shared/shared.module";
 import {ContactComponent} from "./pages/information/contact/contact.component";
 import {MatCardModule} from "@angular/material/card";
-import {LogoComponent} from "./shared/logo/logo.component";
 
 
 @NgModule({
@@ -41,9 +40,9 @@ import {LogoComponent} from "./shared/logo/logo.component";
     FontAwesomeModule,
     NgOptimizedImage,
     SharedModule,
-    MatCardModule
+    MatCardModule,
   ],
-  exports: [MatButtonModule, MatCheckboxModule, LogoComponent],
+  exports: [MatButtonModule, MatCheckboxModule],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     ToastService,

@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RgpdComponent } from './rgpd.component';
+import {RgpdComponent} from './rgpd.component';
+import {LogoComponent} from "../../../shared/logo/logo.component";
 
 describe('RgpdComponent', () => {
   let component: RgpdComponent;
@@ -8,9 +9,9 @@ describe('RgpdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RgpdComponent ]
+      declarations: [RgpdComponent, LogoComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(RgpdComponent);
     component = fixture.componentInstance;
