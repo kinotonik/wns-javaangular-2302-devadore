@@ -54,16 +54,11 @@ public class QuizService {
         return convertQuizToDTO(quiz);
     }
 
-/*     public QuizDTO getRandomQuizByCat(Long categoryId) {
-
-
-        
+   /*  public QuizDTO getRandomQuizByCat(Long categoryId) {
         List<Quiz> quizzes = quizRepository.findQuizzesByCategoryId(categoryId);
-
-        
         return convertQuizToDTO(randomQuiz);
-    } */
-
+    } 
+ */
     public List<QuizDTO> getQuizzesByUser(User userId) {
         List<Quiz> quizzes = quizRepository.findQuizzesByCreatedBy(userId);
         return quizzes.stream()
