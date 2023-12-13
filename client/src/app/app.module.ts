@@ -6,16 +6,18 @@ import {AppComponent} from './app.component';
 import {AuthInterceptor} from "./auth/auth.interceptor";
 import {HomeComponent} from './pages/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ToastService} from "./services/toastService";
+import {NgOptimizedImage} from "@angular/common";
+import {SharedModule} from "./shared/shared.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ToastService} from "./services/toastService";
+import {MatCardModule} from "@angular/material/card";
 import {ErrorComponent} from './pages/error-rediction/error/error.component';
 import {UnauthorizedComponent} from './pages/error-rediction/unauthorized/unauthorized.component';
 import {RgpdComponent} from './pages/information/rgpd/rgpd.component';
-import {NgOptimizedImage} from "@angular/common";
-import {SharedModule} from "./shared/shared.module";
+import {ContactComponent} from "./pages/information/contact/contact.component";
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import {SharedModule} from "./shared/shared.module";
     ErrorComponent,
     UnauthorizedComponent,
     RgpdComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import {SharedModule} from "./shared/shared.module";
     FontAwesomeModule,
     NgOptimizedImage,
     SharedModule,
+    MatCardModule
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [

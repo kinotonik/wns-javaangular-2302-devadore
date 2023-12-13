@@ -6,8 +6,6 @@ import {SharedModule} from "../../../shared/shared.module";
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  standalone: true,
-  imports: [MatCardModule, SharedModule],
 })
 export class ContactComponent {
 
