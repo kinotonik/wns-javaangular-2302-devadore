@@ -84,7 +84,7 @@ export class RegisterComponent {
     const filenameDisplay = document.getElementById('selectedFilename');
 
     if (filenameDisplay) {
-      if (input.files && input?.files[0]) {
+      if (input.files && input.files[0]) {
         filenameDisplay.textContent = input.files[0].name;
       } else {
         filenameDisplay.textContent = 'Aucun fichier sélectionné';

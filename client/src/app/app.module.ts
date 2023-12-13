@@ -44,9 +44,9 @@ import {MatCardModule} from "@angular/material/card";
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, ToastService
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ToastService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
