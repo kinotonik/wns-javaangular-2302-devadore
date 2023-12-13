@@ -19,7 +19,6 @@ import {UnauthorizedComponent} from './pages/error-rediction/unauthorized/unauth
 import {RgpdComponent} from './pages/information/rgpd/rgpd.component';
 import {ContactComponent} from "./pages/information/contact/contact.component";
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,9 +43,9 @@ import {ContactComponent} from "./pages/information/contact/contact.component";
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, ToastService
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ToastService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
