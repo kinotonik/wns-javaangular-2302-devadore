@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
@@ -18,6 +18,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {SharedModule} from "./shared/shared.module";
 import {ContactComponent} from "./pages/information/contact/contact.component";
 import {MatCardModule} from "@angular/material/card";
+import {LogoComponent} from "./shared/logo/logo.component";
 
 
 @NgModule({
@@ -42,13 +43,12 @@ import {MatCardModule} from "@angular/material/card";
     SharedModule,
     MatCardModule
   ],
-  exports: [MatButtonModule, MatCheckboxModule],
+  exports: [MatButtonModule, MatCheckboxModule, LogoComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     ToastService,
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }
