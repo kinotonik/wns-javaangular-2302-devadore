@@ -8,6 +8,7 @@ import { Subject, Subscription, takeUntil, takeWhile, timer } from 'rxjs';
 import { User } from '../../../../models/user.model';
 import { UserProfileService } from '../../../../services/user-profile-service';
 import { QuizService } from '../../../../services/quiz.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-quiz-play',
@@ -31,6 +32,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
   userImage: any;
   user: User | null;
   totalQuestions: number;
+  sound: Boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +60,14 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
       });
     this.getPageInfos();
     this.quizMusicService.playMusic();
+  }
+  playSound() {
+    this.sound = !this.sound;
+    if (this.sound == true) {
+      this.quizMusicService.playMusic();
+    } else {
+      this.quizMusicService.stopMusic();
+    }
   }
 
   /**
