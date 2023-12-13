@@ -1,3 +1,4 @@
+
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -37,10 +38,10 @@ import {MatCardModule} from "@angular/material/card";
     MatButtonModule,
     MatCheckboxModule,
     MatTableModule,
-    MatCardModule,
     FontAwesomeModule,
     NgOptimizedImage,
     SharedModule,
+    MatCardModule
   ],
   exports: [MatButtonModule, MatCheckboxModule],
   providers: [

@@ -1,10 +1,16 @@
-import {Component} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {UserService} from "../../services/user.service";
-import {Router} from "@angular/router";
-import {emailValidator} from "../../validators/email.validator";
-import {passwordValidator} from "../../validators/password.validator";
-import {debounceTime, map, Observable} from "rxjs";
+import { Component } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { emailValidator } from '../../validators/email.validator';
+import { passwordValidator } from '../../validators/password.validator';
+import { debounceTime, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -142,7 +148,5 @@ export class RegisterComponent {
         }
       }
     );
-
   }
-
 }
