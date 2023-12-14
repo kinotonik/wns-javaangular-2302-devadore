@@ -8,7 +8,6 @@ import { Subject, Subscription, takeUntil, takeWhile, timer } from 'rxjs';
 import { User } from '../../../../models/user.model';
 import { UserProfileService } from '../../../../services/user-profile-service';
 import { QuizService } from '../../../../services/quiz.service';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-quiz-play',
