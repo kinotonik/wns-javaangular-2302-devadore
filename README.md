@@ -63,7 +63,7 @@
     - Hibernate Validator: 8.0.0.Final : Pour que les données de l'application respectent les contraintes définies.
 
 ### Gestion des Migrations de Base de Données
-    - Flyway MySQL : 9.8.1 : Pour gérer et appliquer les changements de schéma
+    - Flyway MySQL : Pour gérer et appliquer les changements de schéma
 
 ### Documentation API et UI
     - SpringDoc OpenAPI Starter WebMvc UI: 2.1.0 : Pour la documentation interactive de API REST,  le test et l'intégration
@@ -298,6 +298,7 @@ Si vous avez des questions sur le processus de contribution, n'hésitez pas à o
 - Mehdi Zidouni - [Profil GitHub](https://github.com/kinotonik)
 ---
 ## Licence
+
 Ce projet est réalisé dans un cadre éducatif pour l'obtention d'un diplôme français de concepteur développeur d'application. Il est sous licence Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) - voir le fichier [LICENSE.md](LICENSE.md) pour plus de détails.
 
 Cette licence permet à d'autres de remixer, adapter et construire à partir de ce travail de manière non-commerciale, tant qu'ils créditent votre contribution et licencient leurs nouvelles créations dans les mêmes conditions.
