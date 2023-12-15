@@ -236,7 +236,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
   }
 
   private showScoreBriefly(): void {
-    // Affiche le score pendant 3 secondes
+    // Affiche le score pendant 2 secondes
     if (this.excludeIds.length < this.totalQuestions) {
       setTimeout(() => {
         this.getNextQuestion();

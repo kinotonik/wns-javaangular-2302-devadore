@@ -249,8 +249,19 @@ Pour exécuter les tests du backend, suivez ces étapes :
     ```
 2. **Naviguer dans le répertoire du Frontend** :
    ###### Ouvrez un terminal et accédez au répertoire où se trouve le code du frontend.
-        cd client
+    ```bash
+    cd client
+    ```
+   exécuter dans le navigateur (Choisir un navigateur + START E2E Testing in...)
+    ```bash
+    npx cypress open
+    ```
+   ou dans le terminale
+    ```bash
+    npx cypress run
+    ```
 ---
+
 ## Contribution
 
 Nous accueillons chaleureusement les contributions à ce projet ! Si vous souhaitez contribuer, voici quelques lignes directrices à suivre :
