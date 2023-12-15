@@ -11,6 +11,7 @@ import { QuizService } from '../../../../services/quiz.service';
 import { MatIconModule } from '@angular/material/icon';
 import { QuizAttemptService } from 'src/app/services/quiz-attempt.service';
 import { QuizAttempt } from 'src/app/models/quiz-attempt';
+import { QuizModel } from 'src/app/models/quiz.model';
 
 @Component({
   selector: 'app-quiz-play',
@@ -392,7 +393,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     const endDateQuiz = new Date();
 
     const quizAttempt: QuizAttempt = {
-      quizId: this.quizId,
+      quiz: { id: this.quizId } as QuizModel,
       userId: this.user?.id,
       scorePoints: this.score,
       correctAnswers: this.totalCorrectAnswer,

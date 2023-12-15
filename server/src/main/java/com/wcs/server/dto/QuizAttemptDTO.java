@@ -6,7 +6,7 @@ public class QuizAttemptDTO {
     
     private Long id;
     private Long userId;
-    private Long quizId;
+    private QuizDTO quiz;
     private Integer scorePoints;
     private Integer correctAnswers;
     private Integer incorrectAnswers;
@@ -25,12 +25,6 @@ public class QuizAttemptDTO {
     }
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-    public Long getQuizId() {
-        return quizId;
-    }
-    public void setQuizId(Long quizId) {
-        this.quizId = quizId;
     }
     public Integer getScorePoints() {
         return scorePoints;
@@ -68,6 +62,11 @@ public class QuizAttemptDTO {
     public void setTotalTimeSpent(Integer totalTimeSpent) {
         this.totalTimeSpent = totalTimeSpent;
     }
-    
+    public QuizDTO getQuiz() {
+        return quiz;
+    }
+    public void setQuiz(QuizDTO quiz) {
+        this.quiz = quiz;
+    }
     
 }

@@ -9,6 +9,8 @@ import com.wcs.server.repository.QuizAttemptRepository;
 import com.wcs.server.repository.QuizRepository;
 import com.wcs.server.repository.UserRepository;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,7 @@ public class QuizAttemptService {
     public QuizAttemptDTO createQuizAttempt(QuizAttemptDTO quizAttemptDTO) {
         QuizAttempt quizAttempt = convertToEntity(quizAttemptDTO);
 
-        Quiz quiz = quizRepository.findById(quizAttemptDTO.getQuizId())
+        Quiz quiz = quizRepository.findById(quizAttemptDTO.getQuiz().getId())
                                 .orElseThrow(() -> new ResourceNotFoundException("Quiz not found"));
         User user = userRepository.findById(quizAttemptDTO.getUserId())
                                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -47,5 +49,13 @@ public class QuizAttemptService {
         quizAttempt = quizAttemptRepository.save(quizAttempt);
 
         return convertToDto(quizAttempt);
+    }
+
+    public List<QuizAttemptDTO> getAllQuizAttemptByUser(String username) {
+        
+        Long userId = userRepository.findByUsername(username).getId();
+        List<QuizAttempt> quizAttempts = quizAttemptRepository.findAllByUserId(userId);
+
+        return quizAttempts.stream().map(this::convertToDto).toList();
     }
 }

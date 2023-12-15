@@ -1,7 +1,9 @@
+import { QuizModel } from "./quiz.model";
+
 export interface QuizAttempt {
     id?: number;
     userId?: number;
-    quizId: number;
+    quiz: QuizModel;
     scorePoints: number;
     correctAnswers: number;
     incorrectAnswers: number;

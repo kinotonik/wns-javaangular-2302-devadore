@@ -1,0 +1,45 @@
+<div class="flex h-screen flex-col items-center justify-center shadow-md">
+  <h1 class="mb-2 font-koulen text-3xl text-gray-50">Historique des parties</h1>
+  <div class="overflow-y-auto max-h-80">
+    <table
+      class="text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400"
+    >
+      <thead
+        class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">Nom du quiz</th>
+          <th scope="col" class="px-6 py-3">Score</th>
+          <th scope="col" class="px-6 py-3">Réponses correctes</th>
+          <th scope="col" class="px-6 py-3">Réponses fausses</th>
+          <th scope="col" class="px-6 py-3">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let quizAttempt of quizAttempts"
+          class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+        >
+          <th
+            scope="row"
+            class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+          >
+            {{ quizAttempt.quiz.title }}
+          </th>
+          <td class="px-6 py-4">{{ quizAttempt.scorePoints }}</td>
+          <td class="px-6 py-4">{{ quizAttempt.correctAnswers }}</td>
+          <td class="px-6 py-4">{{ quizAttempt.incorrectAnswers }}</td>
+          <td class="px-6 py-4 text-right">
+            {{ quizAttempt.startTime | date : "dd/MM/YYYY" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button
+    class="mt-3 rounded-lg border-b-4 border-gray-500 bg-white px-5 py-1 font-lexend"
+    [routerLink]="['/user-detail/' + userId]"
+  >
+    Retour
+  </button>
+</div>
