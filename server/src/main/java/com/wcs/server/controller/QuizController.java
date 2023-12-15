@@ -54,13 +54,13 @@ public class QuizController {
         return ResponseEntity.ok(randomQuiz);
     }
 
-/*     @Operation(summary = "Retourne un quiz aléatoire par catégorie")
+     @Operation(summary = "Retourne un quiz aléatoire par catégorie")
     @GetMapping("/quiz/random/category/{categoryId}")
-    public ResponseEntity<QuizDTO> getRandomQuizByCatId(@PathVariable Category categoryId) {
-        QuizDTO randomQuiz = quizService.getQuizByRandomId();
+    public ResponseEntity<QuizDTO> getRandomQuizByCat(@PathVariable Long categoryId) {
+        QuizDTO randomQuiz = quizService.getRandomQuizByCat(categoryId);
         System.out.println("request quiz random at controller");
         return ResponseEntity.ok(randomQuiz);
-    } */
+    } 
 
     @Operation(summary = "Retourne la liste quiz par userId")
     @GetMapping("/quiz/{userId}")
@@ -138,7 +138,7 @@ public class QuizController {
         }
     }
 
-    @Operation(summary = "permet de mettre à jour un quiz pas son ID")
+    @Operation(summary = "permet de mettre à jour un quiz par son ID")
     @PutMapping("/quiz/{id}")
     public ResponseEntity<String> updateQuiz(@PathVariable Long id, MultipartHttpServletRequest request) {
         try {
