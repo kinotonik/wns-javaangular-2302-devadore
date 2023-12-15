@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="flex flex-row content-center justify-center">
-      <h1 class="p-10 text-center text-2xl font-bold">
+      <h1 (click)="onFinishQuiz()" class="p-10 text-center text-2xl font-bold">
         A toi de jouer {{ user?.username ?? "Mystérieux Inconnu" | uppercase }}
       </h1>
       <button (click)="playSound()">
@@ -63,7 +63,7 @@
           'hover:bg-gray-800': !isAnswered
         }"
         class="mb-2 cursor-pointer rounded p-2"
-        (click)="!question?.isAnswered && onAnswerSelected(answer)"
+        (click)="!question?.isAnswered && onAnswerSelected(answer) || onFinishQuiz()"
       >
         {{ answer.text }}
       </li>
