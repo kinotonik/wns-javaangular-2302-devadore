@@ -1,5 +1,5 @@
 <div>
-  <div class="flex content-start">
+  <div class="fixed flex content-start">
     <button
       class="ml-4 mt-4 rounded-lg border-b-4 border-gray-500 bg-white px-5 py-1 font-lexend"
       [routerLink]="['/']"
@@ -11,13 +11,21 @@
     class="m-auto grid h-screen grid-cols-3 place-items-center justify-center"
   >
     <div
-      class="flex w-9/12 flex-col items-center overflow-hidden rounded-lg border border-white bg-gray-900 p-12 text-white shadow-lg"
+      class="flex w-9/12 flex-col items-center overflow-hidden rounded-lg border border-white bg-gray-900 p-6 text-white shadow-lg"
       *ngFor="let category of availableCategories"
     >
       <h3 class="mb-2 font-lilita text-4xl font-bold">
         {{ category.name }}
       </h3>
       <h3>{{ category.description }}</h3>
+      <div class="px-6 py-4">
+        <button
+          (click)="getRandomQuizByCat(category.id)"
+          class="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 font-lexend font-bold text-white hover:from-purple-600 hover:to-pink-600 focus:border-blue-300 focus:outline-none focus:ring"
+        >
+          Lancer un quiz {{ category.name }}
+        </button>
+      </div>
     </div>
   </div>
 </div>

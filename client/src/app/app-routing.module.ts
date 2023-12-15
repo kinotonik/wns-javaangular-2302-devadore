@@ -4,10 +4,14 @@ import {HomeComponent} from './pages/home/home.component';
 import {ResetPasswordComponent} from "./auth/reset-password/reset-password.component";
 import {ErrorComponent} from "./pages/error-rediction/error/error.component";
 import {UnauthorizedComponent} from "./pages/error-rediction/unauthorized/unauthorized.component";
+import {ContactComponent} from "./pages/information/contact/contact.component";
+import {RgpdComponent} from "./pages/information/rgpd/rgpd.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'contact', component: ContactComponent},
+  {path: 'mention-legal', component: RgpdComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {
     path: 'auth',
