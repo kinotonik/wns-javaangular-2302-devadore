@@ -4,6 +4,18 @@ import { QuizHistoryComponent } from './quiz-history.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@Component({
+  selector: 'app-logo',
+  template: '<a [style.color]="textColor">Fake Logo</a>'
+})
+class AppLogoStubComponent {
+  @Input() textColor: string;
+}
 
 describe('QuizHistoryComponent', () => {
   let component: QuizHistoryComponent;
@@ -13,8 +25,8 @@ describe('QuizHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuizHistoryComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule ],
+      declarations: [ QuizHistoryComponent, AppLogoStubComponent ],
+      imports: [ HttpClientTestingModule, RouterTestingModule, MatPaginatorModule, MatTableModule, BrowserAnimationsModule ],
       providers: [ 
         { provide: ActivatedRoute, useValue: activatedRouteStub } 
       ]
