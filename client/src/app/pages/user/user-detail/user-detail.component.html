@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center px-6 py-8">
+<div class="flex flex-col items-center justify-center sm:px-6 sm:py-8">
   <app-toast
     *ngIf="showToast"
     [message]="toastMessage"
@@ -9,10 +9,13 @@
     (close)="showToast = false"
   >
   </app-toast>
+  <app-logo class="mb-4" [textColor]="'orange'"></app-logo>
+  <div class="sm:flex flex-row-reverse">>
   <div
-    class="mx-auto flex h-full flex-col items-center justify-center px-6 py-8"
+  class="mx-auto flex h-full flex-col items-center justify-center sm:px-6 py-8"
   >
-    <app-logo [textColor]="'orange'"></app-logo>
+  
+    
     <div class="flex w-full max-w-3xl rounded-lg bg-white p-6 shadow">
       <div class="w-1/2 border-r pr-4">
         <form
@@ -21,7 +24,7 @@
           enctype="multipart/form-data"
         >
           <div>
-            <h2 class="mb-4 text-2xl font-bold">Mise à jour du profil</h2>
+            <h2 class="mb-4 sm:text-2xl  text-1xl font-bold">Mise à jour du profil</h2>
             <div class="mb-4">
               <label for="username" class="mb-2 block"
                 >Nom d'utilisateur :</label
@@ -75,7 +78,7 @@
           enctype="multipart/form-data"
         >
           <div>
-            <h2 class="mb-4 text-2xl font-bold">Mise à jour de l'image</h2>
+            <h2 class="mb-4 sm:text-2xl  text-1xl font-bold">Mise à jour de l'image</h2>
 
             <div class="mb-4 flex">
               <div>
@@ -148,7 +151,7 @@
       Liste des utilisateurs
     </button>
   </div>
-  <div *ngIf="isUser" class="flex flex-col">
+  <div *ngIf="isUser" class="flex flex-col sm:mt-5">
     <button
       class="mt-4 w-full transform rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-white transition-transform duration-200 hover:scale-105"
       [routerLink]="'/quiz/create-quiz'"
@@ -156,7 +159,7 @@
       Créer son QUIZ
     </button>
     <button
-      class="mt-4 w-full transform rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-white transition-transform duration-200 hover:scale-105"
+      class="mt-4 sm:w-full  transform rounded-lg border-2 border-b-black px-5 py-2.5 font-medium text-white transition-transform duration-200 hover:scale-105"
       (click)="goToQuizlistUser()"
     >
       Liste de tes QUIZ
@@ -174,4 +177,5 @@
       Supprimer le profil
     </button>
   </div>
+</div>
 </div>
