@@ -367,6 +367,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     this.isQuizSubmitted = false;
     this.totalCorrectAnswer = 0;
     this.totalIncorrectAnswer = 0;
+    this.startDateQuiz = new Date();
     this.getPageInfos();
   }
 
@@ -400,9 +401,9 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
       incorrectAnswers: this.totalIncorrectAnswer,
       startTime: this.startDateQuiz,
       endTime: endDateQuiz,
-      totalTimeSpent: endDateQuiz.getSeconds() - this.startDateQuiz.getSeconds()
+      totalTimeSpent: (endDateQuiz.getTime() - this.startDateQuiz.getTime()) / 1000
     };
-  
+    
     this.quizAttemptService.createQuizAttempt(quizAttempt).subscribe();
   }
 
