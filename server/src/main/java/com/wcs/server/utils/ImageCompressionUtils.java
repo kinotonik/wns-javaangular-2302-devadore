@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 import java.util.zip.DataFormatException;
-import java.io.IOException;
 
 public class ImageCompressionUtils {
 
-    public static byte[] compress(byte[] data) throws IOException {
+    public static byte[] compress(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
         deflater.finish();
@@ -20,7 +19,7 @@ public class ImageCompressionUtils {
         return Arrays.copyOf(output, compressDataLength);
     }
 
-    public static byte[] decompress(byte[] data) throws DataFormatException, IOException {
+    public static byte[] decompress(byte[] data) throws DataFormatException {
         Inflater inflater = new Inflater();
         inflater.setInput(data);
 

@@ -2,6 +2,7 @@ package com.wcs.server.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,7 +12,6 @@ import com.wcs.server.dto.QuestionDTO;
 import com.wcs.server.entity.User;
 import com.wcs.server.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -30,12 +30,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @RequestMapping("/api")
 @Tag(name = "Quiz")
 public class QuizController {
+    Logger logger = Logger.getLogger(getClass().getName());
+    private final QuizService quizService;
 
-    @Autowired
-    private QuizService quizService;
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
+    public QuizController(QuizService quizService, UserRepository userRepository) {
+        this.quizService = quizService;
+        this.userRepository = userRepository;
+    }
  /*    @Autowired
     private CategoryRepository CategoryRepository; */
 
@@ -50,7 +53,7 @@ public class QuizController {
     @GetMapping("/quiz/random")
     public ResponseEntity<QuizDTO> getRandomQuiz() {
         QuizDTO randomQuiz = quizService.getQuizByRandomId();
-        System.out.println("request quiz random at controller");
+        logger.info("request quiz random at controller");
         return ResponseEntity.ok(randomQuiz);
     }
 

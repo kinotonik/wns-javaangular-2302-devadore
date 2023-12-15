@@ -1,14 +1,13 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AnswerModel } from 'src/app/models/answer.model';
-import { QuestionModel } from 'src/app/models/question.model';
-import { QuestionService } from 'src/app/services/question.service';
-import { QuizMusicService } from 'src/app/services/quiz-music.service';
-import { Subject, Subscription, takeUntil, takeWhile, timer } from 'rxjs';
-import { User } from '../../../../models/user.model';
-import { UserProfileService } from '../../../../services/user-profile-service';
-import { QuizService } from '../../../../services/quiz.service';
-import { MatIconModule } from '@angular/material/icon';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {AnswerModel} from 'src/app/models/answer.model';
+import {QuestionModel} from 'src/app/models/question.model';
+import {QuestionService} from 'src/app/services/question.service';
+import {QuizMusicService} from 'src/app/services/quiz-music.service';
+import {Subject, Subscription, takeUntil, takeWhile, timer} from 'rxjs';
+import {User} from '../../../../models/user.model';
+import {UserProfileService} from '../../../../services/user-profile-service';
+import {QuizService} from '../../../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz-play',
@@ -32,7 +31,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
   userImage: any;
   user: User | null;
   totalQuestions: number;
-  sound: Boolean = true;
+  sound: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +40,8 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private userProfileService: UserProfileService,
     private quizMusicService: QuizMusicService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.quizId = +this.route.snapshot.paramMap.get('id')!;
@@ -61,9 +61,10 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     this.getPageInfos();
     this.quizMusicService.playMusic();
   }
+
   playSound() {
     this.sound = !this.sound;
-    if (this.sound == true) {
+    if (this.sound) {
       this.quizMusicService.playMusic();
     } else {
       this.quizMusicService.stopMusic();
@@ -315,7 +316,7 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
 
   onSubmitAnswers(): void {
     if (!this.isAnswered && this.question) {
-      const { selected, correct } = this.getSelectedAndCorrectAnswers();
+      const {selected, correct} = this.getSelectedAndCorrectAnswers();
       if (this.checkAnswers(selected, correct)) {
         this.calculateScore(true, this.timeLeft);
       } else {
