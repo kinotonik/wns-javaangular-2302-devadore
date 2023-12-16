@@ -22,5 +22,5 @@ jobs:
           build: npm run build
           start: npm start
           browser: chrome
-          wait-on: 'http://localhost:4200/quiz/play/1'
+          wait-on: 'http://localhost:4200/'
           working-directory: ./client
