@@ -31,7 +31,4 @@ jobs:
         run: cd client && npm run build
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        with:
-          start: npm start
-          working-directory: ./client
 
