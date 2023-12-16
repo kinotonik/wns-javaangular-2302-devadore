@@ -14,7 +14,6 @@ import {UserProfileService} from '../../../../services/user-profile-service';
 import {CategoryModel} from '../../../../models/category.model';
 import {User} from '../../../../models/user.model';
 import {hasCorrectAnswerValidator} from '../../../../validators/question.validator';
-import {tap} from 'rxjs/operators';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
