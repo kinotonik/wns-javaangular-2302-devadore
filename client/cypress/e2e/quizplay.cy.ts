@@ -1,6 +1,7 @@
+/// <reference types="Cypress" />
 describe('Quiz Play Component Tests', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:4200/quiz/play/1');
+    cy.visit('/quiz/play/1');
   });
 
   it('charge la page du quiz (id = 1) avec les éléments initiaux', () => {
@@ -42,7 +43,6 @@ describe('Quiz Play Component Tests', () => {
 
   it('s\'occupe de la sélection et de la soumission des réponses', () => {
     cy.get('ul.answers li').first().click();
-    cy.wait(2000);
     cy.get('.question').should('be.visible');
     cy.get('ul.answers').find('li').should('have.length.at.least', 2);
   });
