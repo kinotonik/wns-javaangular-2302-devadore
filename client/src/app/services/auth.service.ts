@@ -35,7 +35,6 @@ export class AuthService {
 
     return this.http.post<any>(`${this.apiUrl}/authenticate`, loginData).pipe(
       tap((response) => {
-        console.log('authservice:', response);
         const token = response.token;
         const roles = response.roles;
         this.saveToken(token);
@@ -89,7 +88,6 @@ export class AuthService {
         .post(`${this.apiUrl}/logout`, {}, {headers: headers})
         .pipe(
           tap(() => {
-            console.log('Removing tokens...');
             localStorage.removeItem('jwtToken');
             localStorage.removeItem('refreshToken');
             this.router.navigate(['/home']);
@@ -126,7 +124,7 @@ export class AuthService {
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+    return this.http.post(`${this.apiUrl}/forgot-password`, {email});
   }
 
   resetPassword(newPassword: string, token: string | null): Observable<any> {

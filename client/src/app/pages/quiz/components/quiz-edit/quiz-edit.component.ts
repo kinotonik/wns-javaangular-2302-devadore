@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {
   FormGroup,
@@ -7,15 +7,15 @@ import {
   FormArray,
   AbstractControl,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QuizService } from '../../../../services/quiz.service';
-import { CategoryService } from '../../../../services/category.service';
-import { UserProfileService } from '../../../../services/user-profile-service';
-import { CategoryModel } from '../../../../models/category.model';
-import { User } from '../../../../models/user.model';
-import { hasCorrectAnswerValidator } from '../../../../validators/question.validator';
-import { tap } from 'rxjs/operators';
-import { DomSanitizer } from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {QuizService} from '../../../../services/quiz.service';
+import {CategoryService} from '../../../../services/category.service';
+import {UserProfileService} from '../../../../services/user-profile-service';
+import {CategoryModel} from '../../../../models/category.model';
+import {User} from '../../../../models/user.model';
+import {hasCorrectAnswerValidator} from '../../../../validators/question.validator';
+import {tap} from 'rxjs/operators';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quiz-edit',
@@ -47,7 +47,8 @@ export class QuizEditComponent implements OnInit {
     private categoryService: CategoryService,
     private userProfileService: UserProfileService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.quizForm = this.fb.group({
@@ -81,11 +82,8 @@ export class QuizEditComponent implements OnInit {
   loadQuizDetails(id: number): void {
     this.quizService
       .getQuizById(id)
-      .pipe(tap((data) => console.log('Data received in pipe:', data)))
       .subscribe((quizData) => {
-        console.log('Quiz Data:', quizData);
         this.categoryService.getAllCategories().subscribe((categories) => {
-          console.log(categories);
           this.categories = categories;
 
           let defaultCategoryId = quizData.categoryId ?? categories[0]?.id;
@@ -112,13 +110,7 @@ export class QuizEditComponent implements OnInit {
    * - image: string - Une image du quiz encodée en base64.
    */
   initializeFormWithQuizData(quizData: any): void {
-    console.log('Initializing form with quiz data:', quizData);
-    const { title, description, questions, image, mimeType } = quizData;
-
-    console.log('Title:', title);
-    console.log('Description:', description);
-    console.log('Questions:', questions);
-    console.log('Image:', image);
+    const {title, description, questions, image, mimeType} = quizData;
 
     if (image) {
       let imagePrefix: string;
@@ -167,7 +159,7 @@ export class QuizEditComponent implements OnInit {
             text: [questionData.text, Validators.required],
             answers: this.fb.array(answerFGs),
           },
-          { validators: [hasCorrectAnswerValidator()] }
+          {validators: [hasCorrectAnswerValidator()]}
         );
       }
     );
@@ -209,7 +201,7 @@ export class QuizEditComponent implements OnInit {
         text: [''],
         answers: this.fb.array([this.createAnswer()]),
       },
-      { validators: [hasCorrectAnswerValidator()] }
+      {validators: [hasCorrectAnswerValidator()]}
     );
   }
 

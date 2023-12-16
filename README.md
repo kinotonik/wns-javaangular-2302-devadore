@@ -141,6 +141,9 @@ Suivez ces étapes pour assurer une configuration sans problème et commencer à
 ### Backend (Spring Boot)
 
 1. Naviguez vers le dossier du backend.
+    ```bash
+   cd .\server
+    ```
 2. Construisez le projet : `mvn clean install`
 3. Exécutez le projet : 
     ```bash
@@ -253,7 +256,7 @@ Pour exécuter les tests du backend, suivez ces étapes :
 2. **Naviguer dans le répertoire du Frontend** :
    ###### Ouvrez un terminal et accédez au répertoire où se trouve le code du frontend.
     ```bash
-    cd client
+    cd .\client
     ```
    exécuter dans le navigateur (Choisir un navigateur + START E2E Testing in...)
     ```bash

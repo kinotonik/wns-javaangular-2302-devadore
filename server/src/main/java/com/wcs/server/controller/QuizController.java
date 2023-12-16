@@ -39,8 +39,6 @@ public class QuizController {
         this.quizService = quizService;
         this.userRepository = userRepository;
     }
- /*    @Autowired
-    private CategoryRepository CategoryRepository; */
 
     @Operation(summary = "Retourne la liste de tous les quizs")
     @GetMapping("/quiz")
@@ -56,14 +54,6 @@ public class QuizController {
         logger.info("request quiz random at controller");
         return ResponseEntity.ok(randomQuiz);
     }
-
-/*     @Operation(summary = "Retourne un quiz aléatoire par catégorie")
-    @GetMapping("/quiz/random/category/{categoryId}")
-    public ResponseEntity<QuizDTO> getRandomQuizByCatId(@PathVariable Category categoryId) {
-        QuizDTO randomQuiz = quizService.getQuizByRandomId();
-        System.out.println("request quiz random at controller");
-        return ResponseEntity.ok(randomQuiz);
-    } */
 
     @Operation(summary = "Retourne la liste quiz par userId")
     @GetMapping("/quiz/{userId}")

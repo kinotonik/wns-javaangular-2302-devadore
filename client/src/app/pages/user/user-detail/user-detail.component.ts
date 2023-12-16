@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../../models/user.model';
-import { UserService } from '../../../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Role } from '../../../models/role.model';
-import { forkJoin } from 'rxjs';
-import { AuthService } from '../../../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {User} from '../../../models/user.model';
+import {UserService} from '../../../services/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Role} from '../../../models/role.model';
+import {forkJoin} from 'rxjs';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -30,7 +30,8 @@ export class UserDetailComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0', 10);
@@ -42,17 +43,14 @@ export class UserDetailComponent implements OnInit {
       this.allRoles = roles;
       this.user = user;
       this.userRoles = user.roles;
-      console.log(user);
     });
     this.authService.checkAdminStatus();
     this.authService.isAdmin$.subscribe((isAdminValue) => {
       this.isAdmin = isAdminValue;
-      console.log('isAdminValue', isAdminValue);
     });
     this.authService.checkUserStatus();
     this.authService.isUser$.subscribe((isUserValue) => {
       this.isUser = isUserValue;
-      console.log('isUserValue', isUserValue);
     });
   }
 
@@ -69,6 +67,11 @@ export class UserDetailComponent implements OnInit {
       this.userRoles.splice(roleIndex, 1);
     } else {
       this.userRoles.push(role);
+    }
+    if (this.isAdmin) {
+      this.toastMessage = 'Vous devez vous reconnecter pour valider ce changement.';
+      this.toastType = 'warning';
+      this.showToast = true;
     }
   }
 
@@ -140,7 +143,6 @@ export class UserDetailComponent implements OnInit {
     this.userService.updateUser(this.user).subscribe({
       next: () => {
         if (this.isAdmin) {
-          console.log(this.isAdmin);
           this.toastMessage = 'Profil mise à jour avec succès';
           this.toastType = 'success';
           this.showToast = true;
@@ -201,20 +203,21 @@ export class UserDetailComponent implements OnInit {
   }
 
   logoutAfterDelete(): void {
-    console.log('Removing tokens...');
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('refreshToken');
     this.router.navigate(['/home']);
   }
 
   goToUserlist() {
-    this.router.navigateByUrl('user-list').then(() => {});
+    this.router.navigateByUrl('user-list').then(() => {
+    });
   }
 
   goToQuizlistUser() {
     if (this.user)
       this.router
         .navigateByUrl(`quiz/quiz-list-user/${this.user.id}`)
-        .then(() => {});
+        .then(() => {
+        });
   }
 }

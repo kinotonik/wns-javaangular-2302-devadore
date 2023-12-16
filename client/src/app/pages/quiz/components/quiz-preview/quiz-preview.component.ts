@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { QuizModel } from 'src/app/models/quiz.model';
-import { QuizService } from 'src/app/services/quiz.service';
+import {Component, OnInit} from '@angular/core';
+import {QuizModel} from 'src/app/models/quiz.model';
+import {QuizService} from 'src/app/services/quiz.service';
 
 @Component({
   selector: 'app-quiz-preview',
@@ -10,7 +10,9 @@ import { QuizService } from 'src/app/services/quiz.service';
 export class QuizPreviewComponent implements OnInit {
   randomQuiz: QuizModel;
   quizId: number;
-  constructor(private quizService: QuizService) {}
+
+  constructor(private quizService: QuizService) {
+  }
 
   ngOnInit(): void {
     this.getRandomQuiz();
@@ -20,7 +22,6 @@ export class QuizPreviewComponent implements OnInit {
     this.quizService.getRandomQuiz().subscribe((res) => {
       this.randomQuiz = res;
       this.quizId = this.randomQuiz.id;
-      console.log(this.randomQuiz, this.quizId);
     });
   }
 }

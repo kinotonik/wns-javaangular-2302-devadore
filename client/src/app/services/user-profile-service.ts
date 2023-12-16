@@ -46,9 +46,6 @@ export class UserProfileService {
                     this.userImageSubject.next(reader.result); // <-- Use the BehaviorSubject here
                   };
                   reader.readAsDataURL(imageData);
-                },
-                error: error => {
-                  console.log('Erreur lors de la récupération de l\'image :', error);
                 }
               });
             }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {passwordValidator} from '../../validators/password.validator';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  resetPasswordForm: FormGroup;
+  resetPasswordForm!: FormGroup;
   token: string | null;
 
   constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {
@@ -18,9 +19,20 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetPasswordForm = new FormGroup({
-      newPassword: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required])
+      newPassword: new FormControl('', [Validators.required, passwordValidator]),
+      confirmPassword: new FormControl('', [Validators.required, passwordValidator])
     }, {validators: this.matchPasswords});
+  }
+
+  get newPasswordErrors() {
+    const newPassword = this.resetPasswordForm.get('newPassword')?.value;
+    return {
+      isLongEnough: newPassword.length >= 8,
+      hasUppercase: /[A-Z]/.test(newPassword),
+      hasLowercase: /[a-z]/.test(newPassword),
+      hasSpecialChar: /[^\w\s]/.test(newPassword),
+      hasNumber: /\d/.test(newPassword)
+    };
   }
 
   matchPasswords(control: AbstractControl): null | object {
