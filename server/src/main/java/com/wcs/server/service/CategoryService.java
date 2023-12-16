@@ -27,6 +27,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+      public List<Category> getCategoriesNotEmpty() {
+        return categoryRepository.findAllCategoriesWithQuizzes();
+    }
+
     public void deleteCategory(Long categoryId) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new NoSuchElementException("Category with id " + categoryId + " not found"));
         categoryRepository.delete(category);

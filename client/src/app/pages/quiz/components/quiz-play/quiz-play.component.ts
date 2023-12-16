@@ -1,13 +1,17 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AnswerModel} from 'src/app/models/answer.model';
-import {QuestionModel} from 'src/app/models/question.model';
-import {QuestionService} from 'src/app/services/question.service';
-import {QuizMusicService} from 'src/app/services/quiz-music.service';
-import {Subject, Subscription, takeUntil, takeWhile, timer} from 'rxjs';
-import {User} from '../../../../models/user.model';
-import {UserProfileService} from '../../../../services/user-profile-service';
-import {QuizService} from '../../../../services/quiz.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AnswerModel } from 'src/app/models/answer.model';
+import { QuestionModel } from 'src/app/models/question.model';
+import { QuestionService } from 'src/app/services/question.service';
+import { QuizMusicService } from 'src/app/services/quiz-music.service';
+import { Subject, Subscription, takeUntil, takeWhile, timer } from 'rxjs';
+import { User } from '../../../../models/user.model';
+import { UserProfileService } from '../../../../services/user-profile-service';
+import { QuizService } from '../../../../services/quiz.service';
+import { MatIconModule } from '@angular/material/icon';
+import { QuizAttemptService } from 'src/app/services/quiz-attempt.service';
+import { QuizAttempt } from 'src/app/models/quiz-attempt';
+import { QuizModel } from 'src/app/models/quiz.model';
 
 @Component({
   selector: 'app-quiz-play',
@@ -31,7 +35,11 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
   userImage: any;
   user: User | null;
   totalQuestions: number;
-  sound: boolean = true;
+  sound: Boolean = true;
+  startDateQuiz: Date = new Date();
+  isQuizSubmitted: boolean = false;
+  totalIncorrectAnswer: number = 0;
+  totalCorrectAnswer: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,9 +47,9 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     private quizService: QuizService,
     private cdr: ChangeDetectorRef,
     private userProfileService: UserProfileService,
-    private quizMusicService: QuizMusicService
-  ) {
-  }
+    private quizMusicService: QuizMusicService,
+    private quizAttemptService: QuizAttemptService
+  ) {}
 
   ngOnInit(): void {
     this.quizId = +this.route.snapshot.paramMap.get('id')!;
@@ -170,7 +178,6 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
         // Sinon, le score de base (avec pénalités de temps).
         this.score += baseScore;
       }
-
       // Logique pour le calcul du score si toutes les réponses sélectionnées ne sont pas correctes.
       if (correctSelectedCount && totalCorrectCount && totalCorrectCount >= 1) {
         let scorePercentage = 0;
@@ -300,8 +307,13 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     if (!this.isAnswered && this.question) {
       const {selected, correct} = this.getSelectedAndCorrectAnswers();
       if (this.checkAnswers(selected, correct)) {
+
+        this.totalCorrectAnswer = this.totalCorrectAnswer +1;
         this.calculateScore(true, this.timeLeft);
+
       } else {
+
+        this.totalIncorrectAnswer = this.totalIncorrectAnswer +1;
         this.calculateScore(
           false,
           this.timeLeft,
@@ -349,6 +361,10 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     this.score = 0;
     this.isAnswered = false;
     this.excludeIds = [];
+    this.isQuizSubmitted = false;
+    this.totalCorrectAnswer = 0;
+    this.totalIncorrectAnswer = 0;
+    this.startDateQuiz = new Date();
     this.getPageInfos();
   }
 
@@ -369,4 +385,30 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
     // tous ses observateurs qu'ils peuvent se désabonner, car il n'y aura plus de valeurs émises.
     this.stopTimer$.complete();
   }
+
+  submitQuizAttempt(): void {
+
+    const endDateQuiz = new Date();
+
+    const quizAttempt: QuizAttempt = {
+      quiz: { id: this.quizId } as QuizModel,
+      userId: this.user?.id,
+      scorePoints: this.score,
+      correctAnswers: this.totalCorrectAnswer,
+      incorrectAnswers: this.totalIncorrectAnswer,
+      startTime: this.startDateQuiz,
+      endTime: endDateQuiz,
+      totalTimeSpent: (endDateQuiz.getTime() - this.startDateQuiz.getTime()) / 1000
+    };
+    
+    this.quizAttemptService.createQuizAttempt(quizAttempt).subscribe();
+  }
+
+  onFinishQuiz(): void {
+    if (this.excludeIds.length === this.totalQuestions && !this.isQuizSubmitted && this.user) {
+      this.submitQuizAttempt();
+      this.isQuizSubmitted = true;
+    }
+  }
+  
 }

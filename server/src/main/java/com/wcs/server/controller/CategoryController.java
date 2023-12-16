@@ -28,6 +28,11 @@ public class CategoryController {
         List<Category> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
+        @GetMapping("/notempty")
+    public ResponseEntity<List<Category>> getAllCategoriesNotEmpty() {
+        List<Category> categories = categoryService.getCategoriesNotEmpty();
+        return ResponseEntity.ok(categories);
+    }
 
     @Operation(summary = "Retourne categorie par Id")
     @GetMapping("/{id}")

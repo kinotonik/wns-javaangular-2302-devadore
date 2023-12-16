@@ -109,7 +109,7 @@ export class QuizEditComponent implements OnInit {
    * - image: string - Une image du quiz encodée en base64.
    */
   initializeFormWithQuizData(quizData: any): void {
-    const {title, description, questions, image, mimeType} = quizData;
+    const { title, description, questions, image, mimeType } = quizData;
 
     if (image) {
       let imagePrefix: string;

@@ -197,7 +197,6 @@ export class QuizCreateComponent implements OnInit {
       this.formData.append('questions', JSON.stringify(questions));
     }
 
-
     this.toastMessage = 'Voulez-vous vraiment enregistrer ce quiz?';
     this.toastType = 'confirm';
     this.canShowButton = true;

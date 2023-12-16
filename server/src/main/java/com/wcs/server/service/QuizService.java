@@ -61,6 +61,19 @@ public class QuizService {
         return convertQuizToDTO(quiz);
     }
 
+
+     public QuizDTO getRandomQuizByCat(Long categoryId) {
+        List<Long> ids = quizRepository.findAllIdsByCategory(categoryId);
+        Random random = new Random();
+        long  randomId = ids.get(random.nextInt(ids.size()));
+
+        Quiz quiz = quizRepository.findById(randomId)
+                .orElseThrow(() -> new NoSuchElementException("Le quiz avec l'id " + randomId + " n'existe pas ou n'est pas trouvé"));
+        
+        return convertQuizToDTO(quiz);
+    } 
+ 
+
     public List<QuizDTO> getQuizzesByUser(User userId) {
         List<Quiz> quizzes = quizRepository.findQuizzesByCreatedBy(userId);
         return quizzes.stream()
