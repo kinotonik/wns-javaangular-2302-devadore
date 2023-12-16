@@ -27,8 +27,7 @@ jobs:
           node-version: '18'
       - name: Install dependencies
         run: cd client && npm install
-      - name: Build App
-        run: cd client && npm run build
       - name: Cypress run
         uses: cypress-io/github-action@v6
-
+        with:
+          run: cd client && npm run cypress:run
