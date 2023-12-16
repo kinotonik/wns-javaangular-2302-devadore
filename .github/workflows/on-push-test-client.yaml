@@ -17,7 +17,7 @@ jobs:
       - name: Run tests
         run: cd client && npm run test:ci
       - name: Run Cypress e2e tests
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v2
         with:
           build: npm run build
           start: npm start
