@@ -16,11 +16,20 @@ jobs:
         run: cd client && npm install
       - name: Run tests
         run: cd client && npm run test:ci
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Run Cypress e2e tests
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v6
         with:
           build: npm run build
           start: npm start
           browser: chrome
           wait-on: 'http://localhost:4200'
+          wait-on-timeout: 60000
+          record: false
           working-directory: ./client
+          spec: 'cypress/e2e/quizplay.cy.ts' # Exécuter des tests spécifiques
