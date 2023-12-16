@@ -16,7 +16,13 @@ jobs:
         run: cd client && npm install
       - name: Run tests
         run: cd client && npm run test:ci
-      - name: Run Cypress e2e tests
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
+          build: npm run build
+          start: npm start
