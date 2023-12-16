@@ -46,6 +46,7 @@ export class UserProfileService {
                     this.userImageSubject.next(reader.result); // <-- Use the BehaviorSubject here
                   };
                   reader.readAsDataURL(imageData);
+                }
               });
             }
           });
