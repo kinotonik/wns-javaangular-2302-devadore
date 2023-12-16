@@ -206,7 +206,6 @@ export class QuizPlayComponent implements OnInit, OnDestroy {
   /**
    * Bascule l'état de sélection d'une réponse donnée.
    * Si la question n'est pas à choix multiple, arrête également le chronomètre et marque la question comme répondue.
-   *
    * @param answer - La réponse dont l'état de sélection doit être basculé.
    */
 
