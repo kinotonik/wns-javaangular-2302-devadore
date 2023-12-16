@@ -325,7 +325,7 @@ export class QuizEditComponent implements OnInit {
   onToastConfirmed() {
     this.canShowButton = false;
     this.quizService.updateQuiz(this.quizId, this.formData).subscribe(
-      (response) => {
+      () => {
         this.toastMessage =
           "L'enregistrement de ton quiz est réalisé avec succès";
         this.toastType = 'success';

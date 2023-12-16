@@ -208,7 +208,7 @@ export class QuizCreateComponent implements OnInit {
     this.canShowButton = false;
     // Une fois que l'utilisateur a confirmé
     this.quizService.createQuiz(this.formData).subscribe(
-      (data) => {
+      () => {
         this.toastMessage =
           "L'enregistrement de ton quiz est réalisé avec succès";
         this.toastType = 'success';

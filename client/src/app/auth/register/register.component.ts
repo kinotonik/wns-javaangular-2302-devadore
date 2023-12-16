@@ -1,11 +1,5 @@
 import {Component} from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators,} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {passwordValidator} from '../../validators/password.validator';
@@ -63,8 +57,7 @@ export class RegisterComponent {
     return this.userService.checkUsernameExistence(control.value).pipe(
       debounceTime(300),
       map(res => {
-        const error = res ? {usernameExists: true} : null;
-        return error;
+        return res ? {usernameExists: true} : null;
       })
     );
   }
@@ -73,8 +66,7 @@ export class RegisterComponent {
     return this.userService.checkMailExistence(control.value).pipe(
       debounceTime(300),
       map(res => {
-        const error = res ? {emailExists: true} : null;
-        return error;
+        return res ? {emailExists: true} : null;
       })
     );
   }
@@ -133,7 +125,7 @@ export class RegisterComponent {
       return;
     }
     this.userService.register(formData).subscribe(
-      response => {
+      () => {
         this.toastMessage = 'L\'enregistrement est réalisé avec succès';
         this.toastType = 'success';
         this.showToast = true;
