@@ -17,8 +17,9 @@ jobs:
       - name: Run tests
         run: cd client && npm run test:ci
       - name: Run Cypress e2e tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
-          run: cd client && npm run cypress:run
+          build: npm run build
+          start: npm start
           wait-on: 'http://localhost:4200'
           working-directory: ./client
