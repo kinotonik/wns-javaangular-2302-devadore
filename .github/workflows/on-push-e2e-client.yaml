@@ -21,7 +21,6 @@ jobs:
 
       - name: Start Spring Boot Application
         run: java -jar target/server-0.0.1-SNAPSHOT.jar
-        background: true
 
       - name: Wait for Spring Boot Application
         uses: eisenivan/wait-for-netlify-action@v1
