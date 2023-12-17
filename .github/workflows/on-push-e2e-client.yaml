@@ -18,6 +18,7 @@ jobs:
       - name: Build Spring Boot Application
         run: |
           cd server
+          chmod +x ./mvnw
           ./mvnw clean install
 
       - name: Start Spring Boot Application
