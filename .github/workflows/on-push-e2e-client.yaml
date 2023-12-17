@@ -3,9 +3,9 @@ name: client-e2e-workflow
 on: pull_request
 
 jobs:
-
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,13 +20,15 @@ jobs:
         run: ./mvnw clean install
 
       - name: Start Spring Boot Application
-        run: java -jar target/server-0.0.1-SNAPSHOT.jar
+        run: java -jar target/server-0.0.1-SNAPSHOT.jar &
+        background: true
 
       - name: Wait for Spring Boot Application
-        uses: eisenivan/wait-for-netlify-action@v1
-        with:
-          url: 'http://localhost:8080'
-          timeout: 60
+        run: |
+          until curl --output /dev/null --silent --head --fail http://localhost:8080; do
+            printf '.'
+            sleep 5
+          done
 
       - name: Install dependencies
         run: cd client && npm install
@@ -34,12 +36,10 @@ jobs:
       - name: Run Cypress e2e tests
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
           start: npm start
           browser: chrome
           wait-on: 'http://localhost:4200'
           wait-on-timeout: 60000
           record: false
           working-directory: ./client
-          spec: 'cypress/e2e/quizplay.cy.ts' # Exécuter des tests spécifiques
-
+          spec: 'cypress/e2e/quizplay.cy.ts'
