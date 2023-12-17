@@ -38,12 +38,7 @@ jobs:
           chmod +x ./mvnw
           ./mvnw clean install
 
-      - name: Start Spring Boot Application
-        run: |
-          cd server
-          java -jar target/server-0.0.1-SNAPSHOT.jar & 
-          echo "Spring Boot app started"
-          sleep 10
+
 
       - name: Install dependencies
         run: cd client && npm install
