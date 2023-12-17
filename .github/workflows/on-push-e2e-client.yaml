@@ -12,6 +12,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: devadore
           MYSQL_DATABASE: quizzforall
+          MYSQL_USER: lateam
         ports:
           - 3306:3306
         options: >-
