@@ -10,9 +10,9 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: devadore
-          MYSQL_DATABASE: quizzforall
-          MYSQL_USER: lateam
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
         ports:
           - 3306:3306
         options: >-
