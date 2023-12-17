@@ -12,9 +12,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: quizzforall
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          MYSQL_USER: lateam
+          MYSQL_PASSWORD: devadore
         ports:
           - 3306:3306
         options: >-
