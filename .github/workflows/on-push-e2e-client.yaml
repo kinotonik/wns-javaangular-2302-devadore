@@ -10,7 +10,7 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: devadore
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: quizzforall
         ports:
           - 3306:3306
