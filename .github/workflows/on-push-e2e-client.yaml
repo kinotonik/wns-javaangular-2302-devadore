@@ -15,6 +15,7 @@ jobs:
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+
         ports:
           - 3306:3306
         options: >-
