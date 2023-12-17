@@ -14,7 +14,7 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 
         ports:
           - 3306:3306
