@@ -24,6 +24,12 @@ jobs:
           working-directory: ./client
           spec: 'cypress/e2e/quizplay.cy.ts'
 
+      - name: Copy Test Results
+        if: always()
+        run: |
+          cp -Lpr /tmp/test-results test-results
+        shell: bash
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
