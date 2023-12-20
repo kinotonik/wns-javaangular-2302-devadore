@@ -8,11 +8,10 @@
     "types": [
       "cypress"
     ]
+  },
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "test-results/e2e-test-results-[hash].xml",
+    "toConsole": true
   }
-  /*,
-    "reporter": "junit",
-    "reporterOptions": {
-      "mochaFile": "reports/e2e-test-results-[hash].xml",
-      "toConsole": true
-    }*/
 }
