@@ -6,20 +6,6 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: quizzforall
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping --host=localhost --password=root --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,12 +16,6 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
 
-      - name: Build Spring Boot Application
-        run: |
-          cd server
-          chmod +x ./mvnw
-          ./mvnw clean install
-
       - name: Install dependencies
         run: cd client && npm install
 
@@ -44,7 +24,7 @@ jobs:
         with:
           start: npm start
           browser: chrome
-          wait-on: 'http://localhost:4200'
+          wait-on: 'https://dev.quizz4all.paris-1.wilders.dev/quiz/play/**'
           wait-on-timeout: 60000
           record: false
           working-directory: ./client
