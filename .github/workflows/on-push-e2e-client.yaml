@@ -10,8 +10,8 @@ jobs:
       mysql:
         image: mysql:8.1.0
         env:
-          MYSQL_ROOT_PASSWORD: mdp
-          MYSQL_DATABASE: blabla
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: quizzforall
         ports:
           - 3306:3306
         options: >-
