@@ -24,7 +24,7 @@ jobs:
         with:
           start: npm start
           browser: chrome
-          wait-on: 'https://preprod.quizz4all.example.com'
+          wait-on: 'https://dev.quizz4all.paris-1.wilders.dev'
           wait-on-timeout: 60000
           record: false
           working-directory: ./client
