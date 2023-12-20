@@ -1,8 +1,17 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": [
+    "**/*.ts"
+  ],
   "compilerOptions": {
     "sourceMap": false,
-    "types": ["cypress"]
+    "types": [
+      "cypress"
+    ]
+  },
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "downloads/e2e-test-results-[hash].xml",
+    "toConsole": true
   }
 }
