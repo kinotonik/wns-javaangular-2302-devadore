@@ -29,7 +29,10 @@ jobs:
         if: always()
         with:
           files: |
-            client/cypress/test-results/**/*.xml
-            client/cypress/test-results/**/*.trx
-            client/cypress/test-results/**/*.json
+            cypress/test-results/**/*.xml
           github_token: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
