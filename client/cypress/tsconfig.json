@@ -8,5 +8,9 @@
     "types": [
       "cypress"
     ]
+  },
+  "reporter": "mocha-junit-reporter",
+  "reporterOptions": {
+    "mochaFile": "cypress/test-results/test-output-[hash].xml"
   }
 }
