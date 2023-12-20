@@ -10,8 +10,8 @@ jobs:
       mysql:
         image: mysql:8.1.0
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: quizzforall
+          MYSQL_ROOT_PASSWORD: mdp
+          MYSQL_DATABASE: blabla
         ports:
           - 3306:3306
         options: >-
@@ -30,11 +30,22 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
 
+      # Debug: Print non-sensitive environment variables
+      - name: Print Environment Variables
+        run: |
+          echo "Database username: $DATABASE_USERNAME"
+          # Add other non-sensitive variables here
+
       - name: Build Spring Boot Application
         run: |
           cd server
           chmod +x ./mvnw
           ./mvnw clean install
+
+      # Debug: Check database connectivity
+      - name: Check Database Connectivity
+        run: |
+          mysql -h 127.0.0.1 -P 3306 -u root -p$MYSQL_ROOT_PASSWORD -e "SHOW DATABASES;"
 
       - name: Install dependencies
         run: cd client && npm install
