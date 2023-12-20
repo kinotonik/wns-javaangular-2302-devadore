@@ -8,16 +8,14 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.1.0
+        image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: quizzforall
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="root ping --host=localhost --password=password --silent"
+          --health-cmd="mysqladmin ping --host=localhost --password=root --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -32,24 +30,11 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
 
-      # Debug: Print non-sensitive environment variables
-      - name: Print Environment Variables
-        run: |
-          echo "Database username: $DATABASE_USERNAME"
-          echo "Database pass: DATABASE_PASSWORD"
-          echo "Database root_password: MYSQL_ROOT_PASSWORD"
-          echo "Database name: MYSQL_DATABASE"
-
       - name: Build Spring Boot Application
         run: |
           cd server
           chmod +x ./mvnw
           ./mvnw clean install
-
-      # Debug: Check database connectivity
-      - name: Check Database Connectivity
-        run: |
-          mysql -h 127.0.0.1 -P 3306 -u root -p$MYSQL_ROOT_PASSWORD -e "SHOW DATABASES;"
 
       - name: Install dependencies
         run: cd client && npm install
