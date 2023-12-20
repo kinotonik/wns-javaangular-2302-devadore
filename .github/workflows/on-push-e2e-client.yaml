@@ -10,8 +10,8 @@ jobs:
       mysql:
         image: mysql:8.1.0
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: quizzforall
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         ports:
@@ -36,7 +36,9 @@ jobs:
       - name: Print Environment Variables
         run: |
           echo "Database username: $DATABASE_USERNAME"
-          # Add other non-sensitive variables here
+          echo "Database pass: DATABASE_PASSWORD"
+          echo "Database root_password: MYSQL_ROOT_PASSWORD"
+          echo "Database name: MYSQL_DATABASE"
 
       - name: Build Spring Boot Application
         run: |
