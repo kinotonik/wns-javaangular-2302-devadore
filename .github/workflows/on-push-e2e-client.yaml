@@ -10,8 +10,8 @@ jobs:
       mysql:
         image: mysql:8.1.0
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: quizzforall
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }} # Replace with actual username or use secrets
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         ports:
           - 3306:3306
         options: >-
