@@ -15,12 +15,10 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping --host=localhost --password=root --silent"
+          --health-cmd="mysqladmin ping --host=localhost --password=password --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
-        volumes:
-          - quizzdb:/var/lib/mysql
 
     steps:
       - name: Checkout
