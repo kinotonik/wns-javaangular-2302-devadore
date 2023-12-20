@@ -55,7 +55,7 @@ describe('Quiz Play Component Tests', () => {
     cy.get('.question').should('be.visible');
   });
 
-  it('parcourt toutes les 11 questions du quiz', () => {
+  it('parcours toutes les 11 questions du quiz', () => {
 
     const totalQuestions = 11;
 

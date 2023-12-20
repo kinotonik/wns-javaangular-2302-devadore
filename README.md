@@ -121,9 +121,9 @@ Avant de commencer à utiliser ou à contribuer à ce projet, assurez-vous que v
 
 - Ouvrez un terminal ou une fenêtre de commande et tapez les commandes suivantes pour vérifier que les installations ont été réussies :
 
-  `mvn -version`
+  `mvn --version`
     ```bash 
-    java -version
+    java --version
     ```
     ```bash 
     node -v
