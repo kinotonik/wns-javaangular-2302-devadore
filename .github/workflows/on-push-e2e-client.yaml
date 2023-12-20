@@ -24,9 +24,3 @@ jobs:
           working-directory: ./client
           spec: 'cypress/e2e/quizplay.cy.ts'
 
-      - name: Publish Test Results
-        uses: mikepenz/action-junit-report@v2
-        if: always()
-        with:
-          report_paths: 'test-results/*.xml'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
