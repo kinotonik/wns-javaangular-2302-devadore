@@ -24,7 +24,7 @@ jobs:
         with:
           start: npm start
           browser: chrome
-          wait-on: 'https://preprod.quizz4all.example.com/quiz/play/**' # Remplacez par l'URL de préprod
+          wait-on: 'https://preprod.quizz4all.example.com'
           wait-on-timeout: 60000
           record: false
           working-directory: ./client
