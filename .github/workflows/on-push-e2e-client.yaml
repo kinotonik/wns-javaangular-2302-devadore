@@ -28,5 +28,5 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
-          report_paths: 'downloads/*.xml'
+          junit_files: 'cypress/reports/*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}

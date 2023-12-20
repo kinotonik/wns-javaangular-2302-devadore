@@ -11,7 +11,7 @@
   },
   "reporter": "junit",
   "reporterOptions": {
-    "mochaFile": "downloads/e2e-test-results-[hash].xml",
+    "mochaFile": "reports/e2e-test-results-[hash].xml",
     "toConsole": true
   }
 }
