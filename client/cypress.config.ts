@@ -10,7 +10,7 @@ export default defineConfig({
   },
 
   e2e: {
-    baseUrl: 'http://localhost:4200',
+    baseUrl: 'https://dev.quizz4all.paris-1.wilders.dev/',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     setupNodeEvents(on, config) {
       // implement node event listeners here
