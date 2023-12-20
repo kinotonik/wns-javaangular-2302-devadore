@@ -69,7 +69,7 @@ describe('Quiz Play Component Tests', () => {
         // Vérifiez que toutes les questions ont été répondues
         cy.get('.text-orange-600').should('contain', `0 / ${totalQuestions}`);
       }
-      cy.wait(2000);
+      cy.wait(3000);
 
       cy.get('.question').should('be.visible');
     }
