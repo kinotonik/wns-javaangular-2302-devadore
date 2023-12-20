@@ -25,8 +25,11 @@ jobs:
           spec: 'cypress/e2e/quizplay.cy.ts'
 
       - name: Publish Test Results
-        uses: mikepenz/action-junit-report@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          report_paths: 'test-results/*.xml'
+          files: |
+            client/cypress/test-results/**/*.xml
+            client/cypress/test-results/**/*.trx
+            client/cypress/test-results/**/*.json
           github_token: ${{ secrets.GITHUB_TOKEN }}

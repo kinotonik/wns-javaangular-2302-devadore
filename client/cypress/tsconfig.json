@@ -8,10 +8,5 @@
     "types": [
       "cypress"
     ]
-  },
-  "reporter": "junit",
-  "reporterOptions": {
-    "files": "test-results/e2e-test-results-[hash].xml",
-    "toConsole": true
   }
 }
