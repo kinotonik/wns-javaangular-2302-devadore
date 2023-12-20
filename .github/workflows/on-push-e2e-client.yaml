@@ -10,12 +10,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Si nécessaire, configurez Java ou d'autres dépendances ici
-      # ...
-
-      # Suppression de la construction de Spring Boot si on utilise le backend de préprod
-      # ...
-
       - name: Install dependencies
         run: cd client && npm install
 
