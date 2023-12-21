@@ -14,7 +14,7 @@ jobs:
         run: cd client && npm install
 
       - name: Build client for production
-        run: cd client && ng build --configuration production
+        run: cd client && npm run build-production
 
       - name: Run Cypress e2e tests
         uses: cypress-io/github-action@v6
