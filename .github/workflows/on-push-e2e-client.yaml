@@ -17,9 +17,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm start
-          wait-on: 'https://dev.quizz4all.paris-1.wilders.dev'
+          wait-on: "https://dev.quizz4all.paris-1.wilders.dev"
           wait-on-timeout: 60000
           record: false
           working-directory: ./client
-          spec: 'cypress/e2e/quizplay.cy.ts'
-
+          spec: "cypress/e2e/quizplay.cy.ts"
