@@ -12,6 +12,6 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '21'
-          distribution: 'Java 21'
+          distribution: 'temurin'
       - name: Run tests
         run: cd server && mvn test

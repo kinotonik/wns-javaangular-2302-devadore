@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "21"
-          distribution: "Java 21"
+          distribution: "temurin"
 
       # use a specific Dockerfile (deploy/Dockerfile-nginx-front) to build a specific image with a web server (nginx) and compiled front files
       - name: Build FRONT image PROD
