@@ -25,7 +25,7 @@
 ## Technologies
 
 ###  Langages de Programmation et Frameworks Principaux 
-    - Java: Version 19.0.1
+    - Java: Version 21
     - Apache Maven: Version 3.9.2
 ##### Spring Boot: Version 3.0.6
     - spring-boot-starter-data-jpa : Pour la couche de persistance des données en utilisant JPA (Java Persistence API).
@@ -56,7 +56,7 @@
     - jjwt-api: 0.11.2 : Pour la création et la vérification des JSON Web Tokens (JWT).
     - jjwt-impl: 0.11.2 : Pour la manipulation des JWT dans l'application.
     - jjwt-jackson: 0.11.2 : pour le traitement (sérialisation/désérialisation) des données JSON dans les JWT.
-    - jwt-decode: ^3.1.2 :Pour décoder les JWT côté client.
+    - jwt-decode: ^3.1.2 : Pour décoder les JWT côté client.
 
 ### Validation et Mappage de Données
     - ModelMapper: 3.1.1 : Pour le mappage entre les modèles de données.
@@ -71,7 +71,7 @@
 ### Testing et Assurance Qualité
     - JUnit Jupiter : Utilisé pour le moteur de test JUnit 5, permettant l'écriture et l'exécution de tests automatisés.
     - JaCoCo : Intégré pour la mesure de la couverture de code, assurant une couverture de test (complète et de qualité).
-    - Cypress : Utilisé comme framework de test JavaScript de bout en bout (e2e).
+    - Cypress : ^2.5.1 : Utilisé comme framework de test JavaScript de bout en bout (e2e).
 
 ### Utilitaires et Outils Divers
     - spring-boot-starter-mail : Pour les fonctionnalités de messagerie électronique.
