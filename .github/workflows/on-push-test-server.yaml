@@ -23,6 +23,7 @@ jobs:
           path: target/surefire-reports/*.xml
           reporter: java-junit
           fail-on-error: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       checks: write
       pull-requests: write
