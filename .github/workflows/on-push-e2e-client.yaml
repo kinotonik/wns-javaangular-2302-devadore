@@ -11,13 +11,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: npm install && npm run install-client
+        run: cd client && npm install
 
       - name: Run Cypress e2e tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm run start
-          wait-on: "http://localhost:8080"
+          start: ng build --configuration production && npm start
+          wait-on: "https://dev.quizz4all.paris-1.wilders.dev"
           wait-on-timeout: 60000
           record: false
           working-directory: ./client
