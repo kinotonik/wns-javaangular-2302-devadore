@@ -15,3 +15,14 @@ jobs:
           distribution: 'temurin'
       - name: Run tests
         run: cd server && mvn test
+      - name: Report
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          name: Maven Tests
+          path: target/surefire-reports/*.xml
+          reporter: java-junit
+          fail-on-error: true
+    permissions:
+      checks: write
+      pull-requests: write
