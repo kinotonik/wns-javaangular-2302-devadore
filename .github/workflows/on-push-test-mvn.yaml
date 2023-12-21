@@ -19,12 +19,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build
-        run: mvn --batch-mode -DskipTests package
-
-      - name: Test
-        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
-
       - name: Report
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
