@@ -1,6 +1,7 @@
+
+<app-toast *ngIf="showToast" [message]="toastMessage" [type]="toastType" (close)="showToast = false"></app-toast>
 <div class="flex h-screen flex-col justify-between sm:p-20 p-5 text-white">
- 
-  <div class="flex items-start flex-row justify-between ">
+  <div class="flex items-start flex-row justify-between">
     <img
       class=" w-1/2 sm:w-52 object-contain"
       src="assets/images/defaultAvatars/Quiz4All.png"
@@ -40,7 +41,7 @@
         >
           {{ isAuthenticated() ? "Logout" : "Login" }}
         </button>
-        <br />
+        <br/>
 
         <button
           *ngIf="isAdmin"

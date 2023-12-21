@@ -1,11 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
-import { UserProfileService } from '../../services/user-profile-service';
-import { environment } from 'src/environments/environment';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
+import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {User} from '../../models/user.model';
+import {UserProfileService} from '../../services/user-profile-service';
+
 
 @Component({
   selector: 'app-home',
@@ -22,13 +21,16 @@ export class HomeComponent implements OnInit {
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
   user: User | null;
   isMenuHovered: boolean = false;
+  showToast = false;
+  toastMessage = '';
+  toastType: 'confirm' | 'success' | 'error' | 'warning' = 'error';
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
     private router: Router,
     private userProfileService: UserProfileService
-  ) {}
+  ) {
+  }
 
   showDropdown() {
     this.isDropdownVisible = true;
@@ -77,25 +79,28 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  private displayToast(message: string, type: 'confirm' | 'success' | 'error' | 'warning'): void {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    
+    setTimeout(() => this.showToast = false, 3000); // Hides the toast after 3 seconds
+  }
+
   editUser(userId: number): void {
     if (!this.user) {
-      console.error('User data is missing.');
-      // TODO Gérer l'erreur en affichant un message à l'utilisateur
+      this.displayToast('Les données de l\'utilisateur sont manquantes.', 'error');
       return;
     }
 
     if (this.user.id !== userId) {
-      console.error(
-        `User ID mismatch. Expected ${this.user.id}, but got ${userId}.`
-      );
-      // TODO Gérer l'erreur en affichant un message à l'utilisateur
+      this.displayToast(`Erreur d'identification de l'utilisateur. On attend ${this.user.id}, mais on a obtenu ${userId}.`, 'error');
       return;
     }
 
     this.router.navigate(['/user-detail', userId]).then((success) => {
       if (!success) {
-        console.error('Failed to navigate to user detail page.');
-        // TODO Gérer l'erreur en affichant un message à l'utilisateur
+        this.displayToast('Échec de la navigation vers la page de détail de l\'utilisateur.', 'error');
       }
     });
   }
