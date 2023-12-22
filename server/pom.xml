@@ -15,7 +15,7 @@
     <name>server</name>
     <description>server</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <junit.jupiter.version>5.9.3</junit.jupiter.version>
         <junit.platform.version>1.9.1</junit.platform.version>
         <image.dockeruser></image.dockeruser>
@@ -183,7 +183,6 @@
                             <JAVA_TOOL_OPTIONS>-Xmx64m -XX:MaxMetaspaceSize=64M
                                 -XX:ReservedCodeCacheSize=64M
                             </JAVA_TOOL_OPTIONS>
-                            <BP_JVM_VERSION>21.*</BP_JVM_VERSION>
                         </env>
                     </image>
                     <jvmArguments>${argLine}
