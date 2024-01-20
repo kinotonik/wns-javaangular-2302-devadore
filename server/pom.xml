@@ -183,7 +183,6 @@
                             <JAVA_TOOL_OPTIONS>-Xmx64m -XX:MaxMetaspaceSize=64M
                                 -XX:ReservedCodeCacheSize=64M
                             </JAVA_TOOL_OPTIONS>
-                            <BP_JVM_VERSION>21.*</BP_JVM_VERSION>
                         </env>
                     </image>
                     <jvmArguments>${argLine}
